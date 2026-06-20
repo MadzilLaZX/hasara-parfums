@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" fill="none">
+  <text
+    x="50%"
+    y="55%"
+    dominant-baseline="middle"
+    text-anchor="middle"
+    font-family="'Cormorant Garamond', 'Georgia', serif"
+    font-size="110"
+    font-weight="300"
+    letter-spacing="28"
+    fill="currentColor"
+  >HASARA</text>
+  <text
+    x="74%"
+    y="84%"
+    dominant-baseline="middle"
+    text-anchor="middle"
+    font-family="'Cormorant Garamond', 'Georgia', serif"
+    font-size="18"
+    font-weight="300"
+    letter-spacing="6"
+    fill="currentColor"
+    opacity="0.75"
+  >BY ABID HASAN</text>
+</svg>
