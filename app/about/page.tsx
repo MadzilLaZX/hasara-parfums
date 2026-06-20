@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
@@ -30,17 +31,16 @@ export default function AboutPage() {
       <section className="bg-champagne-white py-24 lg:py-32 px-6 lg:px-12">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-            {/* Image placeholder — replace with founder photo */}
-            <div className="relative">
-              <div className="relative aspect-[3/4] overflow-hidden bg-stone-100">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <p className="font-sans text-stone-300 text-xs tracking-[0.3em] uppercase">Founder Photo</p>
-                    <p className="font-sans text-stone-300 text-xs mt-1">Coming Soon</p>
-                  </div>
-                </div>
-              </div>
-              <div className="absolute -bottom-6 -right-6 w-3/4 h-3/4 border border-champagne-gold/20 pointer-events-none" />
+            {/* Founder photo */}
+            <div className="relative aspect-[3/4] overflow-hidden">
+              <Image
+                src="/images/founder.png"
+                alt="Sardar Md Abid Hasan — Founder, Hasara Parfums"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
+              />
             </div>
 
             {/* Text */}

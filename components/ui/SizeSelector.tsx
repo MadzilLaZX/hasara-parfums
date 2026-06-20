@@ -68,7 +68,7 @@ export default function SizeSelector({ productName, sizes }: Props) {
         href={whatsAppLink}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-3 w-full py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-sm tracking-[0.25em] uppercase font-sans font-medium transition-all duration-300 cursor-pointer"
+        className="flex items-center justify-center gap-3 w-full py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-sm tracking-[0.25em] uppercase font-sans font-medium transition-all duration-300 cursor-pointer rounded-sm"
       >
         <WhatsappLogo size={18} weight="fill" />
         Contact on WhatsApp

@@ -393,19 +393,19 @@ export const collections = [
     id: "mens",
     label: "Men's",
     description: "Bold, commanding fragrances for the modern man.",
-    image: "/images/eternal-drive-1.jpg",
+    image: "/images/mens-collection.jpg",
   },
   {
     id: "womens",
     label: "Women's",
     description: "Elegant floral and oriental compositions for her.",
-    image: "/images/floral-muse-1.jpg",
+    image: "/images/womens-collection.jpg",
   },
   {
     id: "unisex",
     label: "Unisex",
     description: "Transcendent scents crafted for everyone.",
-    image: "/images/dawn-fever-1.jpg",
+    image: "/images/unisex-collection.jpg",
   },
 ];
 
