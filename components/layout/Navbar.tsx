@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { List, X, WhatsappLogo } from "@phosphor-icons/react";
 import { getWhatsAppLink } from "@/data/products";
+import AnnouncementBar from "@/components/ui/AnnouncementBar";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -19,12 +20,13 @@ export default function Navbar() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/fragrances", label: "Collections" },
-    { href: "/#story", label: "Our Story" },
+    { href: "/about", label: "Our Story" },
     { href: "/#contact", label: "Contact" },
   ];
 
   return (
     <>
+      <AnnouncementBar />
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled

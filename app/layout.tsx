@@ -1,6 +1,7 @@
 ﻿import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
+import { WishlistProvider } from "@/context/WishlistContext";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -111,7 +112,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-champagne-white text-primary-text font-sans antialiased overflow-x-hidden">
-        {children}
+        <WishlistProvider>{children}</WishlistProvider>
       </body>
     </html>
   );

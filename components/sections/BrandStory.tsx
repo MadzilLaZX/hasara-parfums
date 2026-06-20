@@ -1,8 +1,10 @@
 ﻿"use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { useReducedMotion } from "motion/react";
+import { ArrowRight } from "@phosphor-icons/react";
 
 export default function BrandStory() {
   const shouldReduce = useReducedMotion();
@@ -39,38 +41,38 @@ export default function BrandStory() {
             transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
             <p className="font-sans text-champagne-gold text-xs tracking-[0.4em] uppercase mb-8">
-              Our Story
+              Meet The Founder
             </p>
             <h2 className="font-serif text-champagne-white text-4xl lg:text-5xl xl:text-6xl font-light leading-tight mb-8 tracking-wide">
-              Scent is the{" "}
-              <span className="italic text-champagne-gold">language</span>
-              {" "}of the soul.
+              A Passion Turned{" "}
+              <span className="italic text-champagne-gold">Into Purpose</span>
             </h2>
             <div className="space-y-5 text-champagne-white/60 font-sans text-sm lg:text-base leading-relaxed">
               <p>
-                Hasara Parfums was born from a deep belief that fragrance is
-                more than a product. It is an expression of identity, a mark of
-                presence, a silent declaration of who you are.
+                Founded in August 2025 in Dhaka, Bangladesh, HASARA was established by Sardar Md Abid Hasan — a young entrepreneur whose passion for fragrance started in childhood.
               </p>
               <p>
-                Each of our fragrances is a carefully composed story, crafted
-                from the world's finest ingredients. From the ancient oud forests
-                of Southeast Asia to the rose valleys of Turkey, we source only
-                the most precious raw materials.
+                Long before creating the brand, he was captivated by the way a scent could evoke memories, express personality, and inspire confidence. What began as curiosity gradually evolved into a vision: to build a perfume house dedicated to quality, craftsmanship, and trust.
               </p>
               <p>
-                We believe that luxury should be felt, not just worn. Every
-                bottle of Hasara carries with it a promise of craftsmanship,
-                elegance, and an experience that transcends the ordinary.
+                The name HASARA is derived from the initials of his closest family members — a lasting tribute to the values that continue to inspire the brand.
               </p>
             </div>
+
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-2 mt-10 text-champagne-gold/70 hover:text-champagne-gold text-xs tracking-[0.25em] uppercase font-sans transition-colors duration-300"
+            >
+              Read the full story
+              <ArrowRight size={13} />
+            </Link>
 
             {/* Stats Row */}
             <div className="grid grid-cols-3 gap-6 mt-12 pt-12 border-t border-champagne-gold/20">
               {[
-                { value: "100%", label: "Premium Ingredients" },
+                { value: "40%", label: "Concentration" },
                 { value: "8+", label: "Hours Longevity" },
-                { value: "4", label: "Collections" },
+                { value: "11", label: "Fragrances" },
               ].map((stat) => (
                 <div key={stat.label}>
                   <p className="font-serif text-champagne-gold text-3xl font-light">

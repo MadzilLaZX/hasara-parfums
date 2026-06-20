@@ -36,8 +36,8 @@ export default function FeaturedCollections() {
           </Link>
         </motion.div>
 
-        {/* Collections Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+        {/* Collections Grid — 3 large premium cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
           {collections.map((col, i) => (
             <motion.div
               key={col.id}
@@ -46,44 +46,36 @@ export default function FeaturedCollections() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{
                 duration: 0.8,
-                delay: i * 0.1,
+                delay: i * 0.12,
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
               <Link
                 href={`/fragrances?collection=${col.id}`}
-                className="group block relative overflow-hidden cursor-pointer"
+                className="group block relative overflow-hidden cursor-pointer rounded-sm"
               >
-                {/* Image */}
-                <div className="relative aspect-[3/4] overflow-hidden bg-stone-900">
+                <div className="relative aspect-[2/3] overflow-hidden bg-stone-900">
                   <Image
                     src={col.image}
                     alt={col.label}
                     fill
-                    className="object-cover grayscale-[20%] group-hover:scale-105 transition-transform duration-700 ease-out"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover grayscale-[15%] group-hover:scale-105 transition-transform duration-700 ease-out"
+                    sizes="(max-width: 640px) 100vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-matte-black/80 via-transparent to-transparent" />
-                  <div className="absolute inset-0 bg-matte-black/0 group-hover:bg-matte-black/20 transition-colors duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-matte-black/90 via-matte-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-matte-black/0 group-hover:bg-matte-black/15 transition-colors duration-500" />
                 </div>
 
-                {/* Label */}
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div className="flex items-end justify-between">
-                    <div>
-                      <p className="font-serif text-champagne-white text-xl lg:text-2xl font-light tracking-wide">
-                        {col.label}
-                      </p>
-                      <p className="text-champagne-white/60 text-xs font-sans tracking-wider mt-1 max-w-[160px]">
-                        {col.description}
-                      </p>
-                    </div>
-                    <div className="w-8 h-8 border border-champagne-gold flex items-center justify-center group-hover:bg-champagne-gold transition-colors duration-300 flex-shrink-0 ml-3">
-                      <ArrowUpRight
-                        size={14}
-                        className="text-champagne-gold group-hover:text-matte-black transition-colors duration-300"
-                      />
-                    </div>
+                <div className="absolute bottom-0 left-0 right-0 p-8">
+                  <p className="font-sans text-champagne-gold text-xs tracking-[0.3em] uppercase mb-2">
+                    {col.description}
+                  </p>
+                  <p className="font-serif text-champagne-white text-4xl lg:text-5xl font-light tracking-widest uppercase">
+                    {col.label}
+                  </p>
+                  <div className="flex items-center gap-2 mt-4 text-champagne-white/50 group-hover:text-champagne-gold transition-colors duration-300">
+                    <span className="text-xs tracking-[0.2em] uppercase font-sans">Shop Now</span>
+                    <ArrowUpRight size={12} />
                   </div>
                 </div>
               </Link>

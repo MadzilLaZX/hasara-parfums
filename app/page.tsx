@@ -9,16 +9,22 @@ import Reviews from "@/components/sections/Reviews";
 import InstagramGallery from "@/components/sections/InstagramGallery";
 import ContactSection from "@/components/sections/ContactSection";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
+import ScratchCard from "@/components/ui/ScratchCard";
+import FAQSection from "@/components/sections/FAQSection";
+import TesterSection from "@/components/sections/TesterSection";
 
 export default function Home() {
   return (
     <main className="overflow-x-hidden w-full max-w-full">
+      <ScratchCard />
       <Navbar />
       <HeroSection />
       <FeaturedCollections />
-      <BrandStory />
       <BestSellers />
+      <TesterSection />
+      <BrandStory />
       <WhyHasara />
+      <FAQSection />
       <Reviews />
       <InstagramGallery />
       <ContactSection />

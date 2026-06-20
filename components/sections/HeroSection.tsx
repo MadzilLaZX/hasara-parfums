@@ -3,9 +3,8 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { WhatsappLogo, ArrowDown } from "@phosphor-icons/react";
+import { ArrowDown } from "@phosphor-icons/react";
 import { motion, useReducedMotion } from "motion/react";
-import { getWhatsAppLink } from "@/data/products";
 
 export default function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -44,25 +43,37 @@ export default function HeroSection() {
           initial={shouldReduce ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="mb-8"
+          className="mb-4"
         >
           <Image
             src="/logo.svg"
             alt="Hasara Parfums"
             width={420}
             height={140}
-            className="brightness-0 invert mx-auto w-64 sm:w-80 lg:w-96 xl:w-[420px]"
+            className="brightness-0 invert mx-auto w-56 sm:w-72 lg:w-88 xl:w-[380px]"
             priority
           />
+          <p className="font-serif text-champagne-gold/80 text-sm lg:text-base italic tracking-[0.2em] mt-3">
+            Every Scent Tells A Story
+          </p>
         </motion.div>
+
+        <motion.h1
+          initial={shouldReduce ? false : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.5 }}
+          className="font-serif text-champagne-white text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light tracking-wide leading-tight mb-5"
+        >
+          Find Your Signature Parfum
+        </motion.h1>
 
         <motion.p
           initial={shouldReduce ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="font-serif text-champagne-white/80 text-xl lg:text-2xl italic tracking-wide mb-12 font-light"
+          className="font-sans text-champagne-white/70 text-sm lg:text-base tracking-wide mb-12 font-light max-w-xl mx-auto leading-relaxed"
         >
-          Discover a scent that speaks before you do.
+          Experience premium Extrait de Parfum crafted to inspire confidence, elegance, and unforgettable impressions.
         </motion.p>
 
         <motion.div
@@ -73,19 +84,16 @@ export default function HeroSection() {
         >
           <Link
             href="/fragrances"
-            className="px-10 py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.25em] uppercase font-sans font-medium transition-all duration-300 min-w-[200px] text-center"
+            className="px-10 py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.25em] uppercase font-sans font-medium transition-all duration-300 min-w-[200px] text-center rounded-sm"
           >
-            Explore Collection
+            Shop Collection
           </Link>
-          <a
-            href={getWhatsAppLink()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 px-10 py-4 border border-champagne-white text-champagne-white hover:border-champagne-gold hover:text-champagne-gold text-xs tracking-[0.25em] uppercase font-sans transition-all duration-300 min-w-[200px]"
+          <Link
+            href="/fragrances"
+            className="flex items-center justify-center gap-2 px-10 py-4 border border-champagne-white text-champagne-white hover:border-champagne-gold hover:text-champagne-gold text-xs tracking-[0.25em] uppercase font-sans transition-all duration-300 min-w-[200px] rounded-sm"
           >
-            <WhatsappLogo size={14} weight="fill" />
-            Contact on WhatsApp
-          </a>
+            Explore by Occasion
+          </Link>
         </motion.div>
       </div>
 

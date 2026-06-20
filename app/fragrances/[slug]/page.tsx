@@ -1,14 +1,16 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import SizeSelector from "@/components/ui/SizeSelector";
 import ProductGallery from "@/components/ui/ProductGallery";
+import ProductTabs from "@/components/ui/ProductTabs";
 import { fragrances } from "@/data/products";
 import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
+import WishlistButton from "@/components/ui/WishlistButton";
 
 interface Props {
   params: { slug: string };
@@ -43,7 +45,7 @@ export default function ProductPage({ params }: Props) {
     <main className="overflow-x-hidden w-full max-w-full bg-champagne-white">
       <Navbar />
 
-      <div className="bg-matte-black pt-24 pb-6 px-6 lg:px-12">
+      <div className="bg-matte-black pt-28 pb-6 px-6 lg:px-12">
         <div className="max-w-7xl mx-auto">
           <Link
             href="/fragrances"
@@ -58,93 +60,71 @@ export default function ProductPage({ params }: Props) {
       <section className="bg-matte-black pb-20 px-6 lg:px-12">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-            {/* Product Gallery */}
-            <ProductGallery
-              cover={product.image}
-              gallery={product.gallery}
-              name={product.name}
-            />
+            <ProductGallery cover={product.image} gallery={product.gallery} name={product.name} />
 
-            {/* Product Details */}
-            <div className="lg:pt-12">
-              <p className="font-sans text-champagne-gold text-xs tracking-[0.4em] uppercase mb-4">
+            <div className="lg:pt-8">
+              <p className="font-sans text-champagne-gold text-xs tracking-[0.4em] uppercase mb-2">
                 {product.collectionLabel}
               </p>
-              <h1 className="font-serif text-champagne-white text-5xl lg:text-6xl font-light tracking-wide leading-tight mb-6">
-                {product.name}
-              </h1>
-              <p className="text-champagne-white/70 font-sans text-sm leading-relaxed mb-10">
-                {product.description}
+              <div className="flex items-start justify-between gap-4 mb-2">
+                <h1 className="font-serif text-champagne-white text-5xl lg:text-6xl font-light tracking-wide leading-tight">
+                  {product.name}
+                </h1>
+                <div className="mt-2 flex-shrink-0 bg-champagne-white/10 rounded-full p-2.5">
+                  <WishlistButton slug={product.slug} />
+                </div>
+              </div>
+              <p className="font-sans text-champagne-white/40 text-xs tracking-wider italic mb-8">
+                Inspired by {product.inspiredBy}
               </p>
 
-              {/* Product Meta */}
-              <div className="grid grid-cols-3 gap-4 mb-10 pb-10 border-b border-champagne-gold/20">
+              <div className="grid grid-cols-3 gap-4 mb-8 pb-8 border-b border-champagne-gold/20">
                 <div>
-                  <p className="text-champagne-white/40 text-xs tracking-wider uppercase font-sans mb-1">
-                    Longevity
-                  </p>
-                  <p className="text-champagne-white text-sm font-sans">
-                    {product.longevity}
-                  </p>
+                  <p className="text-champagne-white/40 text-xs tracking-wider uppercase font-sans mb-1">Longevity</p>
+                  <p className="text-champagne-white text-sm font-sans">{product.longevity}</p>
                 </div>
                 <div>
-                  <p className="text-champagne-white/40 text-xs tracking-wider uppercase font-sans mb-1">
-                    Gender
-                  </p>
-                  <p className="text-champagne-white text-sm font-sans">
-                    {product.gender}
-                  </p>
+                  <p className="text-champagne-white/40 text-xs tracking-wider uppercase font-sans mb-1">Gender</p>
+                  <p className="text-champagne-white text-sm font-sans">{product.gender}</p>
                 </div>
                 <div>
-                  <p className="text-champagne-white/40 text-xs tracking-wider uppercase font-sans mb-1">
-                    Best For
-                  </p>
-                  <p className="text-champagne-white text-sm font-sans">
-                    {product.occasion.split(",")[0]}
-                  </p>
+                  <p className="text-champagne-white/40 text-xs tracking-wider uppercase font-sans mb-1">When to Wear</p>
+                  <p className="text-champagne-white text-sm font-sans">{product.dayNight}</p>
                 </div>
               </div>
 
-              {/* Fragrance Pyramid */}
-              <div className="mb-10 pb-10 border-b border-champagne-gold/20">
-                <p className="text-champagne-white/40 text-xs tracking-[0.3em] uppercase font-sans mb-5">
-                  Fragrance Pyramid
-                </p>
-                <div className="space-y-4">
-                  {[
-                    { label: "Top Notes", notes: product.notes.top },
-                    { label: "Heart Notes", notes: product.notes.heart },
-                    { label: "Base Notes", notes: product.notes.base },
-                  ].map((tier) => (
-                    <div key={tier.label} className="flex items-start gap-4">
-                      <span className="text-champagne-gold/60 text-xs font-sans tracking-wider uppercase w-24 flex-shrink-0 pt-0.5">
-                        {tier.label}
-                      </span>
-                      <div className="flex flex-wrap gap-2">
-                        {tier.notes.map((note) => (
-                          <span
-                            key={note}
-                            className="px-3 py-1 border border-champagne-gold/30 text-champagne-white/70 text-xs font-sans tracking-wide"
-                          >
-                            {note}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+              <div className="mb-8 pb-8 border-b border-champagne-gold/20">
+                <p className="text-champagne-white/40 text-xs tracking-[0.3em] uppercase font-sans mb-4">Main Accords</p>
+                <div className="flex flex-wrap gap-2">
+                  {product.mainAccords.map((a) => (
+                    <span key={a} className="px-3 py-1.5 border border-champagne-gold/30 text-champagne-white/70 text-xs font-sans tracking-wide rounded-sm">
+                      {a}
+                    </span>
                   ))}
                 </div>
               </div>
 
-              {/* Size Selector + WhatsApp CTA */}
+              <div className="mb-8 pb-8 border-b border-champagne-gold/20">
+                <p className="text-champagne-white/40 text-xs tracking-[0.3em] uppercase font-sans mb-4">Best Seasons</p>
+                <div className="flex flex-wrap gap-2">
+                  {product.season.map((s) => (
+                    <span key={s} className="px-3 py-1.5 border border-champagne-gold/30 text-champagne-white/70 text-xs font-sans tracking-wide rounded-sm">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
               <SizeSelector productName={product.name} sizes={product.sizes} />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Related Products */}
+      <ProductTabs product={product} />
+
       {related.length > 0 && (
-        <section className="bg-champagne-white py-20 px-6 lg:px-12">
+        <section className="bg-champagne-white py-20 px-6 lg:px-12 border-t border-stone-100">
           <div className="max-w-7xl mx-auto">
             <p className="font-serif text-primary-text text-4xl font-light tracking-wide mb-12">
               You May Also Like
@@ -152,24 +132,13 @@ export default function ProductPage({ params }: Props) {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               {related.map((r) => (
                 <Link key={r.id} href={`/fragrances/${r.slug}`} className="group">
-                  <div className="relative aspect-[3/4] overflow-hidden bg-stone-900 mb-4">
-                    <Image
-                      src={r.image}
-                      alt={r.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                      sizes="33vw"
-                    />
+                  <div className="relative aspect-[3/4] overflow-hidden bg-stone-900 mb-4 rounded-sm">
+                    <Image src={r.image} alt={r.name} fill className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" sizes="33vw" />
                   </div>
-                  <p className="text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans mb-1">
-                    {r.collectionLabel}
-                  </p>
-                  <p className="font-serif text-primary-text text-xl font-medium group-hover:text-champagne-gold transition-colors duration-300">
-                    {r.name}
-                  </p>
-                  <p className="font-sans text-secondary-text text-xs tracking-wide mt-1">
-                    From ৳{r.sizes[0].price.toLocaleString()}
-                  </p>
+                  <p className="text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans mb-1">{r.collectionLabel}</p>
+                  <p className="font-serif text-primary-text text-xl font-medium group-hover:text-champagne-gold transition-colors duration-300">{r.name}</p>
+                  <p className="font-sans text-secondary-text text-xs tracking-wide mt-0.5 italic">Inspired by {r.inspiredBy}</p>
+                  <p className="font-sans text-secondary-text text-xs tracking-wide mt-1">From ৳{r.sizes[0].price.toLocaleString()}</p>
                 </Link>
               ))}
             </div>
