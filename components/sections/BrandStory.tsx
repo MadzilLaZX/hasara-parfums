@@ -23,8 +23,8 @@ export default function BrandStory() {
           >
             <div className="relative aspect-[3/4] overflow-hidden">
               <Image
-                src="/images/brand-story.jpg"
-                alt="Hasara Parfums - The Art of Fragrance"
+                src="/images/founder.png"
+                alt="Sardar Md Abid Hasan — Founder, Hasara Parfums"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
