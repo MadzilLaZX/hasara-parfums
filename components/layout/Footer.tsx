@@ -18,11 +18,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Image
-              src="/logo.svg"
+              src="/images/logo.png"
               alt="Hasara Parfums"
               width={200}
               height={66}
-              className="brightness-0 invert opacity-80 mb-6"
+              className="opacity-80 mb-6"
             />
             <p className="text-champagne-white/50 text-sm leading-relaxed max-w-sm font-sans">
               A luxury fragrance house dedicated to the art of scent. Each bottle
@@ -45,7 +45,7 @@ export default function Footer() {
               Collections
             </p>
             <ul className="space-y-3">
-              {["Signature Collection", "Men's Collection", "Women's Collection", "Oud Collection"].map(
+              {["Men's Collection", "Women's Collection", "Unisex Collection"].map(
                 (col) => (
                   <li key={col}>
                     <Link

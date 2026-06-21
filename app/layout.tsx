@@ -2,6 +2,7 @@
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import { WishlistProvider } from "@/context/WishlistContext";
+import { CartProvider } from "@/context/CartContext";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -112,7 +113,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-champagne-white text-primary-text font-sans antialiased overflow-x-hidden">
-        <WishlistProvider>{children}</WishlistProvider>
+        <CartProvider><WishlistProvider>{children}</WishlistProvider></CartProvider>
       </body>
     </html>
   );

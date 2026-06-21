@@ -115,7 +115,7 @@ export default function ProductPage({ params }: Props) {
                 </div>
               </div>
 
-              <SizeSelector productName={product.name} sizes={product.sizes} />
+              <SizeSelector productName={product.name} productSlug={product.slug} productImage={product.image} sizes={product.sizes} />
             </div>
           </div>
         </div>
