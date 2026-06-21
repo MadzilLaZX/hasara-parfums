@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -26,63 +26,66 @@ export default function Navbar() {
 
   return (
     <>
-      <AnnouncementBar />
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-matte-black/95 backdrop-blur-md border-b border-champagne-gold/20"
-            : "bg-transparent"
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center" aria-label="Hasara Parfums Home">
-            <Image
-              src="/images/logo.png"
-              alt="Hasara Parfums"
-              width={160}
-              height={60}
-              className="opacity-90 hover:opacity-100 transition-opacity duration-300"
-              priority
-            />
-          </Link>
+      {/* Fixed wrapper holds both announcement bar + nav together */}
+      <div className="fixed top-0 left-0 right-0 z-50">
+        <AnnouncementBar />
+        <header
+          className={`transition-all duration-500 ${
+            scrolled
+              ? "bg-matte-black/95 backdrop-blur-md border-b border-champagne-gold/20"
+              : "bg-transparent"
+          }`}
+        >
+          <div className="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+            {/* Logo */}
+            <Link href="/" className="flex items-center" aria-label="Hasara Parfums Home">
+              <Image
+                src="/images/logo.png"
+                alt="Hasara Parfums"
+                width={160}
+                height={60}
+                className="opacity-90 hover:opacity-100 transition-opacity duration-300"
+                priority
+              />
+            </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-10">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-champagne-white/80 hover:text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans transition-colors duration-300"
+            {/* Desktop Nav */}
+            <nav className="hidden lg:flex items-center gap-10">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-champagne-white/80 hover:text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans transition-colors duration-300"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+
+            {/* CTA */}
+            <div className="hidden lg:flex items-center gap-4">
+              <a
+                href={getWhatsAppLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-5 py-2.5 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-xs tracking-[0.15em] uppercase font-sans transition-all duration-300 rounded-full"
               >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+                <WhatsappLogo size={14} weight="fill" />
+                WhatsApp
+              </a>
+            </div>
 
-          {/* CTA */}
-          <div className="hidden lg:flex items-center gap-4">
-            <a
-              href={getWhatsAppLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2.5 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-xs tracking-[0.15em] uppercase font-sans transition-all duration-300 rounded-sm"
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="lg:hidden text-champagne-white hover:text-champagne-gold transition-colors duration-300 cursor-pointer p-2"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
             >
-              <WhatsappLogo size={14} weight="fill" />
-              WhatsApp
-            </a>
+              {menuOpen ? <X size={22} /> : <List size={22} />}
+            </button>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden text-champagne-white hover:text-champagne-gold transition-colors duration-300 cursor-pointer p-2"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-          >
-            {menuOpen ? <X size={22} /> : <List size={22} />}
-          </button>
-        </div>
-      </header>
+        </header>
+      </div>
 
       {/* Mobile Menu */}
       <div
@@ -105,7 +108,7 @@ export default function Navbar() {
           href={getWhatsAppLink()}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-6 flex items-center gap-2 px-8 py-3 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-sm tracking-[0.2em] uppercase font-sans transition-all duration-300 cursor-pointer rounded-sm"
+          className="mt-6 flex items-center gap-2 px-8 py-3 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-sm tracking-[0.2em] uppercase font-sans transition-all duration-300 cursor-pointer rounded-full"
         >
           <WhatsappLogo size={16} weight="fill" />
           Contact on WhatsApp

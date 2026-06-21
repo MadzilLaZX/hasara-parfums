@@ -27,7 +27,7 @@ export default function TesterSection() {
                 Try Before You Buy
               </p>
             </div>
-            <h2 className="font-serif text-champagne-white text-5xl lg:text-6xl font-light tracking-wide leading-tight mb-6">
+            <h2 className="font-sans text-champagne-white text-5xl lg:text-6xl font-light tracking-wide leading-tight mb-6">
               Try A 1ml Tester
             </h2>
             <p className="font-sans text-champagne-white/60 text-sm leading-relaxed mb-8 max-w-md">
