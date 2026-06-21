@@ -71,7 +71,7 @@ export default function ScratchCard() {
     for (let i = 3; i < imageData.data.length; i += 4) {
       if (imageData.data[i] === 0) cleared++;
     }
-    if (cleared / (canvas.width * canvas.height) > 0.18) {
+    if (cleared / (canvas.width * canvas.height) > 0.50) {
       setScratched(true);
     }
   }
@@ -141,7 +141,7 @@ export default function ScratchCard() {
                 {/* Revealed content */}
                 <div className="bg-champagne-gold/8 border border-champagne-gold/20 p-7 text-center rounded-xl">
                   <p className="font-sans text-champagne-white/50 text-[10px] tracking-[0.4em] uppercase mb-2">You&apos;ve unlocked</p>
-                  <p className="font-serif text-champagne-gold text-7xl font-light leading-none mb-1">10%</p>
+                  <p className="font-sans text-champagne-gold text-7xl font-light leading-none mb-1">10%</p>
                   <p className="font-sans text-champagne-white text-xs tracking-[0.3em] mb-5">OFF YOUR ORDER</p>
                   {/* Code box with one-click copy */}
                   <button
