@@ -24,6 +24,7 @@ export default function Navbar() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/fragrances", label: "Collections" },
+    { href: "/upcoming", label: "Coming Soon" },
     { href: "/about", label: "Our Story" },
     { href: "/#contact", label: "Contact" },
   ];

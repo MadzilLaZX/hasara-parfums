@@ -6,12 +6,14 @@ interface WishlistContextType {
   items: string[];
   toggle: (slug: string) => void;
   isWishlisted: (slug: string) => boolean;
+  clearAll: () => void;
 }
 
 const WishlistContext = createContext<WishlistContextType>({
   items: [],
   toggle: () => {},
   isWishlisted: () => false,
+  clearAll: () => {},
 });
 
 export function WishlistProvider({ children }: { children: ReactNode }) {
@@ -36,8 +38,13 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
     return items.includes(slug);
   }
 
+  function clearAll() {
+    setItems([]);
+    localStorage.removeItem("hasara_wishlist");
+  }
+
   return (
-    <WishlistContext.Provider value={{ items, toggle, isWishlisted }}>
+    <WishlistContext.Provider value={{ items, toggle, isWishlisted, clearAll }}>
       {children}
     </WishlistContext.Provider>
   );
