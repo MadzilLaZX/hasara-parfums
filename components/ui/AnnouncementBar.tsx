@@ -1,7 +1,7 @@
 "use client";
 
-const MESSAGE = "✨ 10% OFF TODAY ONLY  •  USE CODE HASARA10  •  LIMITED TIME OFFER ✨";
-const REPEATED = Array(8).fill(MESSAGE).join("     ");
+const MESSAGE = "✨    10% OFF TODAY ONLY    •    USE CODE HASARA10    •    LIMITED TIME OFFER    ✨";
+const REPEATED = Array(8).fill(MESSAGE).join("          ");
 
 export default function AnnouncementBar() {
   return (
