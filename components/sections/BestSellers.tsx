@@ -1,5 +1,6 @@
-﻿"use client";
+"use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "motion/react";
@@ -10,6 +11,12 @@ import { ArrowRight } from "@phosphor-icons/react";
 export default function BestSellers() {
   const shouldReduce = useReducedMotion();
   const bestsellers = fragrances.filter((f) => f.bestseller).slice(0, 4);
+
+  const [selectedSizes, setSelectedSizes] = useState<Record<string, number>>(() => {
+    const d: Record<string, number> = {};
+    bestsellers.forEach((f) => { d[f.slug] = f.sizes[1]?.ml ?? f.sizes[0].ml; });
+    return d;
+  });
 
   return (
     <section className="bg-champagne-white py-24 lg:py-36 px-6 lg:px-12">
@@ -39,61 +46,79 @@ export default function BestSellers() {
 
         {/* Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {bestsellers.map((product, i) => (
-            <motion.div
-              key={product.id}
-              initial={shouldReduce ? false : { opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{
-                duration: 0.8,
-                delay: i * 0.1,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="group"
-            >
-              {/* Image */}
-              <Link href={`/fragrances/${product.slug}`} className="block relative aspect-[3/4] overflow-hidden bg-stone-900 mb-5">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-                <div className="absolute inset-0 bg-matte-black/0 group-hover:bg-matte-black/10 transition-colors duration-500" />
-              </Link>
+          {bestsellers.map((product, i) => {
+            const selectedMl = selectedSizes[product.slug];
+            const selectedSizeObj = product.sizes.find((s) => s.ml === selectedMl) ?? product.sizes[0];
+            return (
+              <motion.div
+                key={product.id}
+                initial={shouldReduce ? false : { opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="group"
+              >
+                {/* Image */}
+                <Link href={`/fragrances/${product.slug}`} className="block relative aspect-[3/4] overflow-hidden bg-stone-900 mb-5">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                  <div className="absolute inset-0 bg-matte-black/0 group-hover:bg-matte-black/10 transition-colors duration-500" />
+                </Link>
 
-              {/* Info */}
-              <div>
+                {/* Collection label */}
                 <p className="text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans mb-1">
                   {product.collectionLabel}
                 </p>
+
+                {/* Fragrance name */}
                 <Link href={`/fragrances/${product.slug}`}>
-                  <h3 className="font-serif text-primary-text text-xl font-medium hover:text-champagne-gold transition-colors duration-300 cursor-pointer">
+                  <h3 className="font-serif text-primary-text text-xl font-medium hover:text-champagne-gold transition-colors duration-300 cursor-pointer leading-tight">
                     {product.name}
                   </h3>
                 </Link>
-                <p className="text-secondary-text text-sm font-sans mt-1 mb-3 line-clamp-2 leading-relaxed">
-                  {product.shortDescription}
+
+                {/* Dynamic price */}
+                <p className="font-serif text-champagne-gold text-2xl lg:text-3xl font-light tracking-wide mt-1.5 mb-1 transition-all duration-300">
+                  ৳{selectedSizeObj.price.toLocaleString()}
                 </p>
-                <div className="flex items-center justify-between">
-                  <p className="font-sans text-secondary-text text-xs tracking-wide">
-                    From{" "}
-                    <span className="font-serif text-primary-text text-lg font-medium">
-                      ৳{product.sizes[0].price.toLocaleString()}
-                    </span>
-                  </p>
-                  <Link
-                    href={`/fragrances/${product.slug}`}
-                    className="text-secondary-text hover:text-champagne-gold text-xs tracking-[0.15em] uppercase font-sans transition-colors duration-300"
-                  >
-                    Details
-                  </Link>
+
+                {/* Inspired by */}
+                <p className="text-secondary-text text-xs font-sans mb-4 italic">
+                  Inspired by {product.inspiredBy}
+                </p>
+
+                {/* Size selector */}
+                <div className="flex gap-2 flex-wrap mb-4">
+                  {product.sizes.map((s) => (
+                    <button
+                      key={s.ml}
+                      onClick={() => setSelectedSizes((prev) => ({ ...prev, [product.slug]: s.ml }))}
+                      className={`px-3 py-1.5 text-xs font-sans tracking-wider border rounded-sm transition-all duration-200 cursor-pointer ${
+                        selectedMl === s.ml
+                          ? "border-champagne-gold bg-champagne-gold text-matte-black font-medium"
+                          : "border-stone-200 text-secondary-text hover:border-champagne-gold hover:text-champagne-gold"
+                      }`}
+                    >
+                      {s.ml}ml
+                    </button>
+                  ))}
                 </div>
-              </div>
-            </motion.div>
-          ))}
+
+                {/* View details */}
+                <Link
+                  href={`/fragrances/${product.slug}`}
+                  className="text-secondary-text hover:text-champagne-gold text-xs tracking-[0.15em] uppercase font-sans transition-colors duration-300"
+                >
+                  View Details →
+                </Link>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

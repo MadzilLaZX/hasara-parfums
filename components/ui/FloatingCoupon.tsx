@@ -86,18 +86,17 @@ export default function FloatingCoupon() {
             )}
           </AnimatePresence>
 
-          {/* Button */}
-          <button
-            onClick={() => setOpen(!open)}
-            aria-label="View promo code"
-            className="relative w-12 h-12 bg-[#1a1208] border border-champagne-gold/40 hover:border-champagne-gold hover:bg-champagne-gold/10 flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer rounded-full group"
-          >
-            <Tag size={20} className="text-champagne-gold group-hover:scale-110 transition-transform duration-300" weight="fill" />
-            {/* Subtle pulse */}
-            <span className="absolute -top-1 -right-1 w-3 h-3 bg-champagne-gold rounded-full flex items-center justify-center">
-              <span className="font-sans text-matte-black text-[7px] font-bold">%</span>
-            </span>
-          </button>
+          {/* Button — same w-14 h-14 as FloatingWhatsApp */}
+          <div className="relative">
+            <span className="absolute inset-0 rounded-full bg-champagne-gold/20 animate-ping pointer-events-none" />
+            <button
+              onClick={() => setOpen(!open)}
+              aria-label="View promo code"
+              className="relative w-14 h-14 bg-[#1a1208] border border-champagne-gold/50 hover:border-champagne-gold hover:bg-champagne-gold/15 flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer rounded-full"
+            >
+              <Tag size={24} className="text-champagne-gold" weight="fill" />
+            </button>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
