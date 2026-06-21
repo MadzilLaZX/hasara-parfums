@@ -38,11 +38,11 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center" aria-label="Hasara Parfums Home">
             <Image
-              src="/logo.svg"
+              src="/images/logo.png"
               alt="Hasara Parfums"
-              width={140}
-              height={46}
-              className="brightness-0 invert opacity-90 hover:opacity-100 transition-opacity duration-300"
+              width={160}
+              height={60}
+              className="opacity-90 hover:opacity-100 transition-opacity duration-300"
               priority
             />
           </Link>
