@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { WhatsappLogo, ShoppingBag, CheckCircle } from "@phosphor-icons/react";
+import { WhatsappLogo, ShoppingBag, CheckCircle, TestTube } from "@phosphor-icons/react";
 import { type FragranceSize, WHATSAPP_NUMBER } from "@/data/products";
 import { useCart } from "@/context/CartContext";
+
+const TESTER: FragranceSize = { ml: 1, price: 220 };
 
 interface Props {
   productName: string;
@@ -14,16 +16,27 @@ interface Props {
 
 export default function SizeSelector({ productName, productSlug, productImage, sizes }: Props) {
   const [selectedSize, setSelectedSize] = useState<FragranceSize>(sizes[1]);
+  const [isTester, setIsTester] = useState(false);
   const [added, setAdded] = useState(false);
   const { addItem } = useCart();
 
+  const activeSize = isTester ? TESTER : selectedSize;
+
   const whatsAppLink = (() => {
-    const message = `Hello Hasara Parfums,\n\nI am interested in ${productName}.\n\nSize: ${selectedSize.ml}ml — ৳${selectedSize.price.toLocaleString()}\n\nPlease provide more information.`;
+    const sizeLabel = isTester ? "1ml Tester" : `${activeSize.ml}ml`;
+    const message = `Hello Hasara Parfums,\n\nI am interested in ${productName}.\n\nSize: ${sizeLabel} — ৳${activeSize.price.toLocaleString()}\n\nPlease provide more information.`;
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
   })();
 
   function handleAddToCart() {
-    addItem({ slug: productSlug, name: productName, image: productImage, ml: selectedSize.ml, price: selectedSize.price });
+    const label = isTester ? "1ml Tester" : `${activeSize.ml}ml`;
+    addItem({
+      slug: productSlug,
+      name: `${productName}${isTester ? " (Tester)" : ""}`,
+      image: productImage,
+      ml: activeSize.ml,
+      price: activeSize.price,
+    });
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   }
@@ -32,11 +45,12 @@ export default function SizeSelector({ productName, productSlug, productImage, s
     <div>
       <p className="text-champagne-white/40 text-xs tracking-[0.3em] uppercase font-sans mb-4">Select Size</p>
 
-      <div className="space-y-2 mb-8">
+      {/* Regular sizes */}
+      <div className="space-y-2 mb-3">
         {sizes.map((size) => {
-          const isSelected = selectedSize.ml === size.ml;
+          const isSelected = !isTester && selectedSize.ml === size.ml;
           return (
-            <button key={size.ml} onClick={() => setSelectedSize(size)}
+            <button key={size.ml} onClick={() => { setSelectedSize(size); setIsTester(false); }}
               className={`w-full flex items-center justify-between px-5 py-4 border transition-all duration-200 text-left cursor-pointer ${isSelected ? "border-champagne-gold bg-champagne-gold/8" : "border-champagne-white/15 hover:border-champagne-white/35"}`}
             >
               <div className="flex items-center gap-3">
@@ -48,6 +62,31 @@ export default function SizeSelector({ productName, productSlug, productImage, s
           );
         })}
       </div>
+
+      {/* Divider */}
+      <div className="flex items-center gap-3 my-4">
+        <div className="flex-1 h-px bg-champagne-gold/15" />
+        <span className="font-sans text-champagne-white/25 text-[10px] tracking-[0.3em] uppercase">Try Before You Buy</span>
+        <div className="flex-1 h-px bg-champagne-gold/15" />
+      </div>
+
+      {/* 1ml Tester */}
+      <button
+        onClick={() => setIsTester(true)}
+        className={`w-full flex items-center justify-between px-5 py-4 border transition-all duration-200 text-left cursor-pointer mb-8 ${isTester ? "border-champagne-gold bg-champagne-gold/8" : "border-champagne-white/15 hover:border-champagne-white/35"}`}
+      >
+        <div className="flex items-center gap-3">
+          <span className={`w-3.5 h-3.5 rounded-full border flex-shrink-0 transition-all duration-200 ${isTester ? "border-champagne-gold bg-champagne-gold" : "border-champagne-white/30"}`} />
+          <div>
+            <span className={`font-sans text-sm tracking-[0.1em] transition-colors duration-200 ${isTester ? "text-champagne-white" : "text-champagne-white/55"}`}>1ml Tester</span>
+            <span className="ml-2 font-sans text-[10px] tracking-wider text-champagne-gold/50 uppercase">Try the scent first</span>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <TestTube size={13} className={isTester ? "text-champagne-gold" : "text-champagne-white/25"} />
+          <span className={`font-serif text-xl font-light transition-colors duration-200 ${isTester ? "text-champagne-gold" : "text-champagne-white/40"}`}>৳220</span>
+        </div>
+      </button>
 
       {/* Add to Cart */}
       <button
