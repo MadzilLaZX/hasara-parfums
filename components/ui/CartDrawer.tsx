@@ -124,13 +124,21 @@ export default function CartDrawer({ open, onClose }: Props) {
                         className="w-full pl-9 pr-3 py-2.5 bg-white/5 border border-champagne-gold/20 text-champagne-white text-xs tracking-[0.15em] uppercase font-sans placeholder:text-champagne-white/20 focus:outline-none focus:border-champagne-gold/50 disabled:opacity-50"
                       />
                     </div>
-                    <button
-                      onClick={applyPromo}
-                      disabled={promoApplied}
-                      className="px-4 py-2.5 border border-champagne-gold/40 text-champagne-gold text-xs tracking-[0.15em] uppercase font-sans hover:bg-champagne-gold/10 transition-colors disabled:opacity-50 cursor-pointer"
-                    >
-                      Apply
-                    </button>
+                    {promoApplied ? (
+                      <button
+                        onClick={() => { setPromoApplied(false); setPromoCode(""); }}
+                        className="px-4 py-2.5 border border-red-500/40 text-red-400 text-xs tracking-[0.15em] uppercase font-sans hover:bg-red-500/10 transition-colors cursor-pointer"
+                      >
+                        Remove
+                      </button>
+                    ) : (
+                      <button
+                        onClick={applyPromo}
+                        className="px-4 py-2.5 border border-champagne-gold/40 text-champagne-gold text-xs tracking-[0.15em] uppercase font-sans hover:bg-champagne-gold/10 transition-colors cursor-pointer"
+                      >
+                        Apply
+                      </button>
+                    )}
                   </div>
                   {promoApplied && (
                     <p className="font-sans text-green-400 text-xs mt-1.5 flex items-center gap-1.5">
