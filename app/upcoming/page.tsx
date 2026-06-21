@@ -30,10 +30,10 @@ function UpcomingCard({ fragrance }: { fragrance: (typeof upcomingFragrances)[0]
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className="group flex flex-col"
     >
-      {/* Mystery card */}
-      <Link href={`/upcoming/${fragrance.slug}`} className="block relative aspect-[3/4] bg-[#0a0908] border border-champagne-gold/15 overflow-hidden mb-4 hover:border-champagne-gold/40 transition-all duration-500">
+      {/* Mystery card — dark card on light page, same visual weight as product images */}
+      <Link href={`/upcoming/${fragrance.slug}`} className="block relative aspect-[3/4] bg-[#0a0908] border border-stone-200 overflow-hidden mb-4 hover:border-champagne-gold/60 transition-all duration-500">
         <div className="absolute inset-0 bg-gradient-to-br from-champagne-gold/3 via-transparent to-champagne-gold/5 group-hover:from-champagne-gold/6 group-hover:to-champagne-gold/10 transition-all duration-700" />
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "linear-gradient(rgba(212,175,55,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.3) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+        <div className="absolute inset-0 opacity-8" style={{ backgroundImage: "linear-gradient(rgba(212,175,55,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.3) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
 
         {/* Corner ornaments */}
         <div className="absolute top-3 left-3 w-4 h-4 border-t border-l border-champagne-gold/40" />
@@ -46,33 +46,36 @@ function UpcomingCard({ fragrance }: { fragrance: (typeof upcomingFragrances)[0]
           <span className="font-sans text-champagne-gold/30 group-hover:text-champagne-gold/50 text-[9px] tracking-[0.5em] uppercase transition-all duration-500">Coming Soon</span>
         </div>
 
-        <div className="absolute inset-0 bg-champagne-gold/0 group-hover:bg-champagne-gold/3 transition-all duration-500" />
-
         <button
           onClick={(e) => { e.preventDefault(); toggle(`upcoming:${fragrance.slug}`); }}
-          className={`absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer z-10 ${wishlisted ? "bg-champagne-gold text-matte-black" : "bg-matte-black/60 backdrop-blur-sm text-champagne-white/50 hover:text-champagne-gold"}`}
+          className={`absolute top-3 right-3 rounded-full p-2 transition-all duration-300 cursor-pointer z-10 ${wishlisted ? "bg-champagne-gold text-matte-black" : "bg-matte-black/60 backdrop-blur-sm text-champagne-white/50 hover:text-champagne-gold"}`}
         >
           <Heart size={13} weight={wishlisted ? "fill" : "regular"} />
         </button>
       </Link>
 
-      {/* Info */}
+      {/* Info — using same text styles as fragrances page */}
+      <p className="text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans mb-1">
+        {fragrance.gender === "men" ? "Men's Collection" : "Women's Collection"} · Upcoming
+      </p>
       <Link href={`/upcoming/${fragrance.slug}`}>
-        <h3 className="font-serif text-champagne-white text-xl font-light hover:text-champagne-gold transition-colors duration-300 mb-0.5">{fragrance.name}</h3>
+        <h3 className="font-serif text-primary-text text-xl font-medium hover:text-champagne-gold transition-colors duration-300 cursor-pointer mb-0.5">{fragrance.name}</h3>
       </Link>
-      <p className="font-sans text-champagne-white/30 text-xs tracking-wide mb-3 italic">Inspired by {fragrance.inspiredBy}</p>
+      <p className="text-secondary-text text-xs font-sans italic mb-3">Inspired by {fragrance.inspiredBy}</p>
 
-      <div className="flex items-center gap-1 mb-1">
+      <div className="flex flex-wrap gap-1 mb-3">
         {fragrance.accords.slice(0, 2).map((a) => (
-          <span key={a} className="font-sans text-champagne-gold/40 text-[9px] tracking-[0.2em] uppercase border border-champagne-gold/15 px-1.5 py-0.5">{a}</span>
+          <span key={a} className="px-2 py-0.5 border border-stone-200 text-secondary-text text-[10px] font-sans tracking-wider rounded-sm">{a}</span>
         ))}
       </div>
 
-      <div className="flex items-center justify-between mt-2">
-        <span className="font-serif text-champagne-white/25 text-lg">৳ ???</span>
+      <div className="flex items-center justify-between">
+        <p className="font-sans text-secondary-text text-xs tracking-wide">
+          From <span className="font-serif text-primary-text text-lg font-medium">৳ ???</span>
+        </p>
         <button
           onClick={notifyWhatsApp}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-champagne-gold/10 hover:bg-champagne-gold text-champagne-gold hover:text-matte-black text-[10px] tracking-[0.15em] uppercase font-sans transition-all duration-300 cursor-pointer border border-champagne-gold/30 hover:border-champagne-gold rounded-sm"
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-champagne-gold/10 hover:bg-champagne-gold text-champagne-gold hover:text-matte-black text-[10px] tracking-[0.15em] uppercase font-sans transition-all duration-300 cursor-pointer border border-champagne-gold/40 hover:border-champagne-gold rounded-sm"
         >
           <WhatsappLogo size={11} weight="fill" />
           Notify Me
@@ -84,7 +87,6 @@ function UpcomingCard({ fragrance }: { fragrance: (typeof upcomingFragrances)[0]
 
 export default function UpcomingPage() {
   const [tab, setTab] = useState<"all" | "men" | "women">("all");
-
   const shown = tab === "men" ? upcomingMens : tab === "women" ? upcomingWomens : upcomingFragrances;
 
   function notifyAll() {
@@ -94,35 +96,27 @@ export default function UpcomingPage() {
   }
 
   return (
-    <main className="overflow-x-hidden w-full max-w-full bg-[#080705]">
+    <main className="overflow-x-hidden w-full max-w-full bg-champagne-white">
       <Navbar />
 
-      {/* Header */}
-      <section className="pt-44 pb-20 px-6 lg:px-12 relative">
-        {/* Subtle grid bg */}
-        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "linear-gradient(rgba(212,175,55,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.4) 1px, transparent 1px)", backgroundSize: "48px 48px" }} />
-
-        <div className="max-w-7xl mx-auto relative">
-          <Link href="/" className="inline-flex items-center gap-2 text-champagne-white/30 hover:text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans transition-colors mb-12">
+      {/* Dark header — matches other pages */}
+      <section className="bg-matte-black pt-44 pb-16 px-6 lg:px-12">
+        <div className="max-w-7xl mx-auto">
+          <Link href="/" className="inline-flex items-center gap-2 text-champagne-white/40 hover:text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans transition-colors mb-10">
             <ArrowLeft size={12} /> Back to Home
           </Link>
-
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
             <div>
-              <p className="font-sans text-champagne-gold text-[10px] tracking-[0.6em] uppercase mb-5">Exclusive Preview</p>
-              <h1 className="font-serif text-champagne-white text-6xl lg:text-7xl xl:text-8xl font-light tracking-wide leading-none mb-4">
+              <p className="font-sans text-champagne-gold text-xs tracking-[0.4em] uppercase mb-4">Exclusive Preview</p>
+              <h1 className="font-serif text-champagne-white text-6xl lg:text-7xl xl:text-8xl font-light tracking-wide leading-none">
                 Upcoming<br />
                 <span className="italic text-champagne-gold/80">Releases</span>
               </h1>
-              <div className="w-12 h-px bg-champagne-gold mt-6 mb-5" />
-              <p className="font-sans text-champagne-white/40 text-sm leading-relaxed max-w-md">
-                Each creation below is crafted in secret and revealed only when it is ready. Add your favourites to wishlist or express interest via WhatsApp to be among the first to know.
-              </p>
+              <div className="w-16 h-px bg-champagne-gold mt-8" />
             </div>
-
             <button
               onClick={notifyAll}
-              className="flex-shrink-0 flex items-center gap-2.5 px-8 py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.2em] uppercase font-sans font-semibold transition-all duration-300 cursor-pointer rounded-full"
+              className="flex-shrink-0 flex items-center gap-2.5 px-8 py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.2em] uppercase font-sans font-semibold transition-all duration-300 cursor-pointer rounded-full mb-2"
             >
               <WhatsappLogo size={16} weight="fill" />
               Be The First To Know
@@ -131,14 +125,16 @@ export default function UpcomingPage() {
         </div>
       </section>
 
-      {/* Tabs */}
-      <section className="px-6 lg:px-12 pb-6 border-b border-champagne-gold/10">
-        <div className="max-w-7xl mx-auto flex items-center gap-8">
+      {/* Filter tabs — matches fragrances page sticky bar */}
+      <section className="border-b border-stone-200 px-6 lg:px-12 bg-champagne-white/95 backdrop-blur-md sticky top-[88px] z-30">
+        <div className="max-w-7xl mx-auto flex items-center gap-2 py-3">
           {(["all", "men", "women"] as const).map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
-              className={`font-sans text-xs tracking-[0.3em] uppercase pb-3 border-b-2 transition-all duration-300 cursor-pointer ${tab === t ? "border-champagne-gold text-champagne-gold" : "border-transparent text-champagne-white/35 hover:text-champagne-white/60"}`}
+              className={`px-5 py-2 text-xs tracking-[0.2em] uppercase font-sans transition-all duration-300 rounded-sm cursor-pointer ${
+                tab === t ? "bg-champagne-gold text-matte-black" : "text-secondary-text hover:text-primary-text"
+              }`}
             >
               {t === "all" ? `All (${upcomingFragrances.length})` : t === "men" ? `Men's (${upcomingMens.length})` : `Women's (${upcomingWomens.length})`}
             </button>
@@ -147,24 +143,24 @@ export default function UpcomingPage() {
       </section>
 
       {/* Hype banner */}
-      <section className="px-6 lg:px-12 py-12">
+      <section className="px-6 lg:px-12 py-10 border-b border-stone-100">
         <div className="max-w-7xl mx-auto">
-          <div className="border border-champagne-gold/20 bg-champagne-gold/3 p-6 lg:p-8 text-center">
+          <div className="border border-stone-200 bg-stone-50 p-6 lg:p-8 text-center">
             <p className="font-sans text-champagne-gold text-[10px] tracking-[0.5em] uppercase mb-3">Be The First To Know</p>
-            <p className="font-serif text-champagne-white text-2xl lg:text-3xl font-light mb-3">
+            <p className="font-serif text-primary-text text-2xl lg:text-3xl font-light mb-2">
               Every fragrance below is arriving soon.
             </p>
-            <p className="font-sans text-champagne-white/40 text-sm tracking-wide">
-              Add them to your wishlist or tap Notify Me to send us a WhatsApp message — we&apos;ll reach out the moment they launch.
+            <p className="font-sans text-secondary-text text-sm tracking-wide">
+              Add them to your wishlist or tap Notify Me — we&apos;ll reach out the moment they launch.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Grid */}
-      <section className="px-6 lg:px-12 pb-24">
+      {/* Product grid — same padding as fragrances page */}
+      <section className="px-6 lg:px-12 py-16 lg:py-24">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-10">
             {shown.map((f) => (
               <UpcomingCard key={f.slug} fragrance={f} />
             ))}
