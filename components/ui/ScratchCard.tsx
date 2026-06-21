@@ -86,10 +86,22 @@ export default function ScratchCard() {
   }
 
   function copyCode() {
-    navigator.clipboard.writeText(DISCOUNT_CODE).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
+    const finish = () => { setCopied(true); setTimeout(() => setCopied(false), 2500); };
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(DISCOUNT_CODE).then(finish).catch(fallback);
+    } else {
+      fallback();
+    }
+    function fallback() {
+      const el = document.createElement("textarea");
+      el.value = DISCOUNT_CODE;
+      el.style.cssText = "position:fixed;opacity:0;top:0;left:0";
+      document.body.appendChild(el);
+      el.focus();
+      el.select();
+      try { document.execCommand("copy"); finish(); } catch {}
+      document.body.removeChild(el);
+    }
   }
 
   return (
@@ -152,7 +164,8 @@ export default function ScratchCard() {
                     ref={canvasRef}
                     width={320}
                     height={200}
-                    className="absolute inset-0 w-full h-full cursor-crosshair touch-none rounded-xl"
+                    className="absolute inset-0 w-full h-full touch-none rounded-xl"
+                    style={{ cursor: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23D4AF37' stroke-width='1.5' opacity='0.9'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23D4AF37'/%3E%3Cline x1='16' y1='1' x2='16' y2='8' stroke='%23D4AF37' stroke-width='1' opacity='0.6'/%3E%3Cline x1='16' y1='24' x2='16' y2='31' stroke='%23D4AF37' stroke-width='1' opacity='0.6'/%3E%3Cline x1='1' y1='16' x2='8' y2='16' stroke='%23D4AF37' stroke-width='1' opacity='0.6'/%3E%3Cline x1='24' y1='16' x2='31' y2='16' stroke='%23D4AF37' stroke-width='1' opacity='0.6'/%3E%3C/svg%3E") 16 16, crosshair` }}
                     onMouseDown={() => { isDrawing.current = true; }}
                     onMouseUp={() => { isDrawing.current = false; }}
                     onMouseLeave={() => { isDrawing.current = false; }}
