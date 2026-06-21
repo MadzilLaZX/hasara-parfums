@@ -55,14 +55,14 @@ export default function FloatingWhatsApp() {
           {/* Button */}
           <div className="relative">
             {/* Pulse ring */}
-            <span className="absolute inset-0 rounded-none bg-green-500/30 animate-ping pointer-events-none" />
+            <span className="absolute inset-0 rounded-full bg-green-500/30 animate-ping pointer-events-none" />
             <a
               href={getWhatsAppLink()}
               target="_blank"
               rel="noopener noreferrer"
               onMouseEnter={() => setTooltipOpen(true)}
               aria-label="Contact on WhatsApp"
-              className="relative w-14 h-14 bg-[#25D366] hover:bg-[#20bf5a] flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
+              className="relative w-14 h-14 bg-[#25D366] hover:bg-[#20bf5a] flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer rounded-full"
             >
               <WhatsappLogo size={26} weight="fill" className="text-white" />
             </a>

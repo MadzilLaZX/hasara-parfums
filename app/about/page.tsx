@@ -31,20 +31,21 @@ export default function AboutPage() {
       <section className="bg-champagne-white py-24 lg:py-32 px-6 lg:px-12">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-            {/* Founder photo */}
-            <div className="relative aspect-[3/4] overflow-hidden">
+
+            {/* Founder photo — taller, centered so full figure shows */}
+            <div className="relative w-full overflow-hidden rounded-sm" style={{ minHeight: "600px", height: "70vh", maxHeight: "800px" }}>
               <Image
                 src="/images/founder.png"
                 alt="Sardar Md Abid Hasan — Founder, Hasara Parfums"
                 fill
-                className="object-cover object-top"
+                className="object-cover object-center"
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 priority
               />
             </div>
 
             {/* Text */}
-            <div>
+            <div className="lg:pt-4">
               <p className="font-sans text-champagne-gold text-xs tracking-[0.4em] uppercase mb-6">
                 Hasara Parfums
               </p>
@@ -52,49 +53,51 @@ export default function AboutPage() {
                 A Passion Turned Into Purpose
               </h2>
 
-              <div className="space-y-6 text-secondary-text font-sans text-sm lg:text-base leading-relaxed">
-                <p>
+              <div className="space-y-5 mb-10">
+                <p className="font-serif text-primary-text/80 text-lg lg:text-xl italic leading-relaxed">
                   Some brands begin with market trends. HASARA Parfums began with a lifelong fascination.
                 </p>
-                <p>
-                  Founded in August 2025 in Dhaka, Bangladesh, HASARA was established by Sardar Md Abid Hasan, a young entrepreneur whose passion for fragrance started in childhood. Long before creating the brand, he was captivated by the way a scent could evoke memories, express personality, and inspire confidence. What began as curiosity gradually evolved into a vision: to build a perfume house dedicated to quality, craftsmanship, and trust.
+                <p className="font-sans text-secondary-text text-sm lg:text-base leading-relaxed">
+                  Founded in August 2025 in Dhaka, Bangladesh, HASARA was established by Sardar Md Abid Hasan — a young entrepreneur whose passion for fragrance started in childhood. Long before creating the brand, he was captivated by the way a scent could evoke memories, express personality, and inspire confidence.
+                </p>
+                <p className="font-sans text-secondary-text text-sm lg:text-base leading-relaxed">
+                  What began as curiosity gradually evolved into a vision: to build a perfume house dedicated to quality, craftsmanship, and trust.
                 </p>
               </div>
 
-              {/* Name meaning */}
-              <div className="mt-10 mb-10 p-8 border border-champagne-gold/20 bg-champagne-gold/5">
-                <p className="font-sans text-champagne-gold text-xs tracking-[0.3em] uppercase mb-4">
-                  The Meaning Behind the Name
+              {/* Name meaning — dark, fancy, rounded */}
+              <div className="mb-10 p-8 bg-matte-black rounded-2xl border border-champagne-gold/30 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-champagne-gold/50 to-transparent" />
+                <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-champagne-gold/30 to-transparent" />
+                <p className="font-sans text-champagne-gold text-xs tracking-[0.35em] uppercase mb-5">
+                  ✦ The Meaning Behind The Name ✦
                 </p>
-                <p className="font-sans text-secondary-text text-sm leading-relaxed mb-6">
-                  The story of HASARA is deeply personal. Rather than being a random brand name, HASARA is derived from the initials of the founder&apos;s closest family members:
+                <p className="font-serif text-champagne-white/70 text-sm leading-relaxed mb-6 italic">
+                  HASARA is not just a name — it is a tribute. Each letter carries the initials of those closest to the founder:
                 </p>
-                <div className="space-y-3">
+                <div className="space-y-4 mb-6">
                   {[
-                    { letters: "HA", meaning: "Sardar Md Khaled Bin Hasan, shared with the founder himself" },
-                    { letters: "SA", meaning: "His mother, Salma Kabir" },
-                    { letters: "RA", meaning: "His younger sister, Bushra Mehnaz" },
+                    { letters: "HA", meaning: "Sardar Md Khaled Bin Hasan — shared with the founder himself" },
+                    { letters: "SA", meaning: "Salma Kabir — his mother" },
+                    { letters: "RA", meaning: "Bushra Mehnaz — his younger sister" },
                   ].map((item) => (
-                    <div key={item.letters} className="flex items-start gap-4">
-                      <span className="font-serif text-champagne-gold text-xl font-light w-10 flex-shrink-0">{item.letters}</span>
-                      <p className="font-sans text-secondary-text text-sm leading-relaxed">{item.meaning}</p>
+                    <div key={item.letters} className="flex items-center gap-5 border-b border-champagne-gold/10 pb-4 last:border-0 last:pb-0">
+                      <span className="font-serif text-champagne-gold text-2xl font-light w-12 flex-shrink-0 tracking-widest">{item.letters}</span>
+                      <p className="font-sans text-champagne-white/60 text-sm leading-relaxed">{item.meaning}</p>
                     </div>
                   ))}
                 </div>
-                <p className="font-sans text-secondary-text text-sm leading-relaxed mt-6 italic">
-                  The name serves as a lasting tribute to the family values that continue to inspire the brand&apos;s journey.
+                <p className="font-serif text-champagne-gold/60 text-sm italic text-center">
+                  &ldquo;A name born from love, built for legacy.&rdquo;
                 </p>
               </div>
 
-              <div className="space-y-6 text-secondary-text font-sans text-sm lg:text-base leading-relaxed">
-                <p>
+              <div className="space-y-5">
+                <p className="font-sans text-secondary-text text-sm lg:text-base leading-relaxed">
                   From the very beginning, HASARA has focused on one simple principle: every customer deserves a fragrance they can wear with confidence.
                 </p>
-                <p>
-                  The brand carefully selects quality materials and pays close attention to every stage of creating its collection, with an emphasis on performance, elegance, and consistency. Alongside the fragrances themselves, customer satisfaction and honest service remain central to the HASARA experience.
-                </p>
-                <p>
-                  Rather than overwhelming customers with endless choices, the collection is thoughtfully organized by fragrance notes, seasons, and ideal occasions, making it easier to discover a scent that matches individual preferences and lifestyles.
+                <p className="font-sans text-secondary-text text-sm lg:text-base leading-relaxed">
+                  The brand carefully curates quality materials with an emphasis on performance, elegance, and consistency — because at HASARA, a fragrance is more than a scent. It is an experience, a statement, and a memory.
                 </p>
               </div>
             </div>
