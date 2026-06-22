@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!fragrance) return {};
   return {
     title: `${fragrance.name} — Coming Soon | Hasara Parfums`,
-    description: fragrance.description,
+    description: `${fragrance.name} — coming soon to Hasara Parfums.`,
   };
 }
 

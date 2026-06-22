@@ -15,14 +15,14 @@ function MysteryCard({ fragrance }: { fragrance: (typeof upcomingFragrances)[0] 
 
   function notifyWhatsApp(e: React.MouseEvent) {
     e.preventDefault();
-    const msg = `Hello Hasara Parfums,\n\nI am very interested in your upcoming fragrance:\n\n✦ ${fragrance.name} (Inspired by ${fragrance.inspiredBy})\n\nPlease notify me when it launches!\n\nThank you.`;
+    const msg = `Hello Hasara Parfums,\n\nI am very interested in your upcoming fragrance:\n\n✦ ${fragrance.name}\n\nPlease notify me when it launches!\n\nThank you.`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
   }
 
   return (
     <div className="group flex flex-col">
       {/* Mystery image area */}
-      <Link href={`/upcoming/${fragrance.slug}`} className="block relative aspect-[3/4] bg-[#0a0908] border border-champagne-gold/15 overflow-hidden mb-4 rounded-2xl hover:border-champagne-gold/40 transition-all duration-500">
+      <div className="relative aspect-[3/4] bg-[#0a0908] border border-champagne-gold/15 overflow-hidden mb-4 rounded-2xl hover:border-champagne-gold/40 transition-all duration-500">
         <div className="absolute inset-0 bg-gradient-to-br from-champagne-gold/3 via-transparent to-champagne-gold/5 group-hover:from-champagne-gold/6 group-hover:to-champagne-gold/10 transition-all duration-700" />
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "linear-gradient(rgba(212,175,55,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.3) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
 
@@ -53,30 +53,24 @@ function MysteryCard({ fragrance }: { fragrance: (typeof upcomingFragrances)[0] 
         </button>
 
         {/* Gender badge */}
-        <div className="absolute bottom-3 left-3 bg-matte-black/70 backdrop-blur-sm px-2.5 py-1">
+        <div className="absolute bottom-3 left-3 bg-matte-black/70 backdrop-blur-sm px-2.5 py-1 rounded-full">
           <span className="font-sans text-champagne-gold/60 text-[9px] tracking-[0.4em] uppercase">
             {fragrance.gender === "men" ? "Men's" : "Women's"}
           </span>
         </div>
-      </Link>
+      </div>
 
       {/* Card text */}
       <div className="px-0.5">
-        <Link href={`/upcoming/${fragrance.slug}`}>
-          <h3 className="font-serif text-champagne-white text-xl font-light hover:text-champagne-gold transition-colors duration-300 mb-0.5 leading-tight">{fragrance.name}</h3>
-        </Link>
-        <p className="font-sans text-champagne-white/30 text-xs tracking-wide mb-3 italic leading-snug">Inspired by {fragrance.inspiredBy}</p>
+        <h3 className="font-serif text-champagne-white text-xl font-light mb-3 leading-tight">{fragrance.name}</h3>
 
-        <div className="flex items-center justify-between">
-          <span className="font-serif text-champagne-white/25 text-lg">৳ ???</span>
-          <button
-            onClick={notifyWhatsApp}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-champagne-gold/10 hover:bg-champagne-gold text-champagne-gold hover:text-matte-black text-[10px] tracking-[0.15em] uppercase font-sans transition-all duration-300 cursor-pointer border border-champagne-gold/30 hover:border-champagne-gold rounded-full"
-          >
-            <WhatsappLogo size={11} weight="fill" />
-            Notify Me
-          </button>
-        </div>
+        <button
+          onClick={notifyWhatsApp}
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-champagne-gold/10 hover:bg-champagne-gold text-champagne-gold hover:text-matte-black text-[10px] tracking-[0.15em] uppercase font-sans transition-all duration-300 cursor-pointer border border-champagne-gold/30 hover:border-champagne-gold rounded-full"
+        >
+          <WhatsappLogo size={11} weight="fill" />
+          Notify Me
+        </button>
       </div>
     </div>
   );
@@ -104,7 +98,7 @@ export default function UpcomingSection() {
 
   function scroll(dir: "left" | "right") {
     if (!scrollRef.current) return;
-    const cardWidth = 224 + 16; // w-56 + gap-4
+    const cardWidth = 224 + 16;
     scrollRef.current.scrollBy({ left: dir === "left" ? -cardWidth * 2 : cardWidth * 2, behavior: "smooth" });
   }
 
@@ -112,7 +106,7 @@ export default function UpcomingSection() {
     <section className="bg-[#080705] py-24 lg:py-36 overflow-hidden relative">
       <div className="max-w-7xl mx-auto relative">
 
-        {/* ── Animated divider with centred label ── */}
+        {/* Animated divider */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -120,7 +114,6 @@ export default function UpcomingSection() {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-5 px-6 lg:px-12 mb-12 lg:mb-16"
         >
-          {/* Left line — expands from text outward, fades at edge */}
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
@@ -129,12 +122,9 @@ export default function UpcomingSection() {
             style={{ transformOrigin: "right" }}
             className="flex-1 h-px bg-gradient-to-l from-champagne-gold/55 via-champagne-gold/20 to-transparent"
           />
-
           <p className="font-sans text-champagne-gold text-[10px] tracking-[0.6em] uppercase flex-shrink-0 whitespace-nowrap">
             Exclusive Preview
           </p>
-
-          {/* Right line — expands from text outward, fades at edge */}
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
@@ -145,7 +135,7 @@ export default function UpcomingSection() {
           />
         </motion.div>
 
-        {/* ── Heading ── */}
+        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -162,9 +152,8 @@ export default function UpcomingSection() {
           </p>
         </motion.div>
 
-        {/* ── Carousel ── */}
+        {/* Carousel */}
         <div className="relative">
-          {/* Left arrow */}
           <button
             onClick={() => scroll("left")}
             className={`absolute left-2 lg:left-4 top-[45%] -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-matte-black/80 backdrop-blur-sm border border-champagne-gold/30 text-champagne-gold hover:bg-champagne-gold hover:text-matte-black transition-all duration-300 cursor-pointer shadow-xl ${canScrollLeft ? "opacity-100" : "opacity-0 pointer-events-none"}`}
@@ -172,8 +161,6 @@ export default function UpcomingSection() {
           >
             <CaretLeft size={16} weight="bold" />
           </button>
-
-          {/* Right arrow */}
           <button
             onClick={() => scroll("right")}
             className={`absolute right-2 lg:right-4 top-[45%] -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-matte-black/80 backdrop-blur-sm border border-champagne-gold/30 text-champagne-gold hover:bg-champagne-gold hover:text-matte-black transition-all duration-300 cursor-pointer shadow-xl ${canScrollRight ? "opacity-100" : "opacity-0 pointer-events-none"}`}
@@ -182,11 +169,9 @@ export default function UpcomingSection() {
             <CaretRight size={16} weight="bold" />
           </button>
 
-          {/* Fade edges */}
           <div className="absolute left-0 top-0 bottom-0 w-12 lg:w-16 bg-gradient-to-r from-[#080705] to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-12 lg:w-16 bg-gradient-to-l from-[#080705] to-transparent z-10 pointer-events-none" />
 
-          {/* Scrollable track */}
           <div
             ref={scrollRef}
             className="flex gap-4 overflow-x-auto pb-6 px-6 lg:px-12 no-scrollbar"
@@ -204,12 +189,10 @@ export default function UpcomingSection() {
           </div>
         </div>
 
-        {/* Scroll hint dots */}
         <p className="text-center font-sans text-champagne-white/20 text-[10px] tracking-[0.3em] uppercase mt-2 mb-10">
           Swipe to explore all {upcomingFragrances.length} upcoming releases
         </p>
 
-        {/* CTA */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

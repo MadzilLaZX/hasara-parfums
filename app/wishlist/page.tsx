@@ -38,7 +38,7 @@ export default function WishlistPage() {
       const sizeObj = p.sizes.find((s) => s.ml === ml) ?? p.sizes[0];
       return `• ${p.name} — ${sizeObj.ml}ml — ৳${sizeObj.price.toLocaleString()}`;
     });
-    const upcomingLines = wishlistUpcoming.map((f) => `• ${f.name} (Upcoming — Inspired by ${f.inspiredBy})`);
+    const upcomingLines = wishlistUpcoming.map((f) => `• ${f.name} (Upcoming)`);
     const allLines = [...regularLines, ...upcomingLines].join("\n");
     const msg = `Hello Hasara Parfums,\n\nHere is my wishlist:\n\n${allLines}\n\nI would love to know more about these fragrances and place an order. Please assist me!\n\nThank you.`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
@@ -175,8 +175,7 @@ export default function WishlistPage() {
                         <Link href={`/upcoming/${fragrance.slug}`}>
                           <h3 className="font-serif text-primary-text text-xl font-medium hover:text-champagne-gold transition-colors duration-300 cursor-pointer mb-1">{fragrance.name}</h3>
                         </Link>
-                        <p className="text-secondary-text text-xs font-sans italic mb-3">Inspired by {fragrance.inspiredBy}</p>
-                        <p className="font-serif text-secondary-text text-lg font-light">৳ ???</p>
+                        <p className="font-sans text-champagne-gold/60 text-[10px] tracking-[0.3em] uppercase">Coming Soon</p>
                       </div>
                     ))}
                   </div>

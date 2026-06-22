@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import { Play, Pause } from "@phosphor-icons/react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 
@@ -9,18 +10,21 @@ const TABS = [
     id: "signature",
     label: "Signature Moments",
     src: "/video/video-lifestyle.mp4",
+    cover: "/images/cover-signature.jpg",
     caption: "The Hasara experience in everyday life",
   },
   {
     id: "details",
     label: "Product Details",
     src: "/video/video-don.mp4",
+    cover: "/images/cover-product.jpg",
     caption: "A fragrance journey with Don Sumdany",
   },
   {
     id: "experience",
     label: "Customer Experience",
     src: "/video/video-shoumik.mp4",
+    cover: "/images/cover-customer.jpg",
     caption: "First impressions with Shoumik Ahmed",
   },
 ];
@@ -28,6 +32,7 @@ const TABS = [
 export default function VideoShowcase() {
   const [activeIdx, setActiveIdx] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const [coverVisible, setCoverVisible] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
   const shouldReduce = useReducedMotion();
 
@@ -37,6 +42,7 @@ export default function VideoShowcase() {
       videoRef.current.currentTime = 0;
     }
     setPlaying(false);
+    setCoverVisible(true);
     setActiveIdx(idx);
   }
 
@@ -46,16 +52,21 @@ export default function VideoShowcase() {
     if (playing) {
       v.pause();
       setPlaying(false);
+      // Keep cover hidden — show current frame when paused
     } else {
       v.play().catch(() => {});
       setPlaying(true);
+      setCoverVisible(false);
     }
   }
 
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    const onEnd = () => setPlaying(false);
+    const onEnd = () => {
+      setPlaying(false);
+      setCoverVisible(true);
+    };
     v.addEventListener("ended", onEnd);
     return () => v.removeEventListener("ended", onEnd);
   }, [activeIdx]);
@@ -129,10 +140,34 @@ export default function VideoShowcase() {
                 className="w-full aspect-[9/16] object-cover"
               />
 
+              {/* Cover image — fades out when play is pressed, back when tab switches or video ends */}
+              <AnimatePresence>
+                {coverVisible && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    className="absolute inset-0 z-[4]"
+                  >
+                    <Image
+                      src={TABS[activeIdx].cover}
+                      alt={TABS[activeIdx].caption}
+                      fill
+                      className="object-cover"
+                      sizes="384px"
+                      priority={activeIdx === 0}
+                    />
+                    {/* Subtle dark overlay so play button is legible */}
+                    <div className="absolute inset-0 bg-matte-black/25" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
               {/* Top gradient for button readability when playing */}
               <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/50 to-transparent pointer-events-none z-[6]" />
 
-              {/* Full-area tap-to-pause — only when playing, sits under button */}
+              {/* Full-area tap-to-pause — only when playing */}
               {playing && (
                 <div
                   onClick={togglePlay}

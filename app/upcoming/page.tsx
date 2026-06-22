@@ -18,7 +18,7 @@ function UpcomingCard({ fragrance }: { fragrance: (typeof upcomingFragrances)[0]
 
   function notifyWhatsApp(e: React.MouseEvent) {
     e.preventDefault();
-    const msg = `Hello Hasara Parfums,\n\nI am very interested in your upcoming fragrance:\n\n✦ ${fragrance.name}\n   Inspired by ${fragrance.inspiredBy}\n\nPlease notify me when it launches!\n\nThank you.`;
+    const msg = `Hello Hasara Parfums,\n\nI am very interested in your upcoming fragrance:\n\n✦ ${fragrance.name}\n\nPlease notify me when it launches!\n\nThank you.`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
   }
 
@@ -30,12 +30,10 @@ function UpcomingCard({ fragrance }: { fragrance: (typeof upcomingFragrances)[0]
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className="group flex flex-col"
     >
-      {/* Mystery card — dark card on light page, same visual weight as product images */}
-      <Link href={`/upcoming/${fragrance.slug}`} className="block relative aspect-[3/4] bg-[#0a0908] border border-stone-200 overflow-hidden mb-4 rounded-2xl hover:border-champagne-gold/60 transition-all duration-500">
+      <div className="relative aspect-[3/4] bg-[#0a0908] border border-stone-200 overflow-hidden mb-4 rounded-2xl hover:border-champagne-gold/60 transition-all duration-500">
         <div className="absolute inset-0 bg-gradient-to-br from-champagne-gold/3 via-transparent to-champagne-gold/5 group-hover:from-champagne-gold/6 group-hover:to-champagne-gold/10 transition-all duration-700" />
         <div className="absolute inset-0 opacity-8" style={{ backgroundImage: "linear-gradient(rgba(212,175,55,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.3) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
 
-        {/* Corner ornaments */}
         <div className="absolute top-3 left-3 w-4 h-4 border-t border-l border-champagne-gold/40" />
         <div className="absolute top-3 right-3 w-4 h-4 border-t border-r border-champagne-gold/40" />
         <div className="absolute bottom-3 left-3 w-4 h-4 border-b border-l border-champagne-gold/40" />
@@ -52,35 +50,20 @@ function UpcomingCard({ fragrance }: { fragrance: (typeof upcomingFragrances)[0]
         >
           <Heart size={13} weight={wishlisted ? "fill" : "regular"} />
         </button>
-      </Link>
+      </div>
 
-      {/* Info — using same text styles as fragrances page */}
       <p className="text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans mb-1">
         {fragrance.gender === "men" ? "Men's Collection" : "Women's Collection"} · Upcoming
       </p>
-      <Link href={`/upcoming/${fragrance.slug}`}>
-        <h3 className="font-serif text-primary-text text-xl font-medium hover:text-champagne-gold transition-colors duration-300 cursor-pointer mb-0.5">{fragrance.name}</h3>
-      </Link>
-      <p className="text-secondary-text text-xs font-sans italic mb-3">Inspired by {fragrance.inspiredBy}</p>
+      <h3 className="font-serif text-primary-text text-xl font-medium mb-3 leading-tight">{fragrance.name}</h3>
 
-      <div className="flex flex-wrap gap-1 mb-3">
-        {fragrance.accords.slice(0, 2).map((a) => (
-          <span key={a} className="px-2 py-0.5 border border-stone-200 text-secondary-text text-[10px] font-sans tracking-wider rounded-full">{a}</span>
-        ))}
-      </div>
-
-      <div className="flex items-center justify-between">
-        <p className="font-sans text-secondary-text text-xs tracking-wide">
-          From <span className="font-serif text-primary-text text-lg font-medium">৳ ???</span>
-        </p>
-        <button
-          onClick={notifyWhatsApp}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-champagne-gold/10 hover:bg-champagne-gold text-champagne-gold hover:text-matte-black text-[10px] tracking-[0.15em] uppercase font-sans transition-all duration-300 cursor-pointer border border-champagne-gold/40 hover:border-champagne-gold rounded-full"
-        >
-          <WhatsappLogo size={11} weight="fill" />
-          Notify Me
-        </button>
-      </div>
+      <button
+        onClick={notifyWhatsApp}
+        className="self-start flex items-center gap-1.5 px-3 py-1.5 bg-champagne-gold/10 hover:bg-champagne-gold text-champagne-gold hover:text-matte-black text-[10px] tracking-[0.15em] uppercase font-sans transition-all duration-300 cursor-pointer border border-champagne-gold/40 hover:border-champagne-gold rounded-full"
+      >
+        <WhatsappLogo size={11} weight="fill" />
+        Notify Me
+      </button>
     </motion.div>
   );
 }
@@ -90,7 +73,7 @@ export default function UpcomingPage() {
   const shown = tab === "men" ? upcomingMens : tab === "women" ? upcomingWomens : upcomingFragrances;
 
   function notifyAll() {
-    const names = shown.map((f) => `• ${f.name} (Inspired by ${f.inspiredBy})`).join("\n");
+    const names = shown.map((f) => `• ${f.name}`).join("\n");
     const msg = `Hello Hasara Parfums,\n\nI am interested in your upcoming collection! Please notify me when these fragrances launch:\n\n${names}\n\nThank you!`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
   }
@@ -99,7 +82,6 @@ export default function UpcomingPage() {
     <main className="overflow-x-hidden w-full max-w-full bg-champagne-white">
       <Navbar />
 
-      {/* Dark header — matches other pages */}
       <section className="bg-matte-black pt-44 pb-16 px-6 lg:px-12">
         <div className="max-w-7xl mx-auto">
           <Link href="/" className="inline-flex items-center gap-2 text-champagne-white/40 hover:text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans transition-colors mb-10">
@@ -125,7 +107,6 @@ export default function UpcomingPage() {
         </div>
       </section>
 
-      {/* Filter tabs — matches fragrances page sticky bar */}
       <section className="border-b border-stone-200 px-6 lg:px-12 bg-champagne-white/95 backdrop-blur-md sticky top-[88px] z-30">
         <div className="max-w-7xl mx-auto flex items-center gap-2 py-3">
           {(["all", "men", "women"] as const).map((t) => (
@@ -142,7 +123,6 @@ export default function UpcomingPage() {
         </div>
       </section>
 
-      {/* Hype banner */}
       <section className="px-6 lg:px-12 py-10 border-b border-stone-100">
         <div className="max-w-7xl mx-auto">
           <div className="border border-stone-200 bg-stone-50 p-6 lg:p-8 text-center rounded-2xl">
@@ -157,7 +137,6 @@ export default function UpcomingPage() {
         </div>
       </section>
 
-      {/* Product grid — same padding as fragrances page */}
       <section className="px-6 lg:px-12 py-16 lg:py-24">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-10">
