@@ -97,7 +97,7 @@ export default function ProductPage({ params }: Props) {
                 <p className="text-champagne-white/40 text-xs tracking-[0.3em] uppercase font-sans mb-4">Main Accords</p>
                 <div className="flex flex-wrap gap-2">
                   {product.mainAccords.map((a) => (
-                    <span key={a} className="px-3 py-1.5 border border-champagne-gold/30 text-champagne-white/70 text-xs font-sans tracking-wide rounded-sm">
+                    <span key={a} className="px-3 py-1.5 border border-champagne-gold/30 text-champagne-white/70 text-xs font-sans tracking-wide rounded-full">
                       {a}
                     </span>
                   ))}
@@ -108,7 +108,7 @@ export default function ProductPage({ params }: Props) {
                 <p className="text-champagne-white/40 text-xs tracking-[0.3em] uppercase font-sans mb-4">Best Seasons</p>
                 <div className="flex flex-wrap gap-2">
                   {product.season.map((s) => (
-                    <span key={s} className="px-3 py-1.5 border border-champagne-gold/30 text-champagne-white/70 text-xs font-sans tracking-wide rounded-sm">
+                    <span key={s} className="px-3 py-1.5 border border-champagne-gold/30 text-champagne-white/70 text-xs font-sans tracking-wide rounded-full">
                       {s}
                     </span>
                   ))}
@@ -132,7 +132,7 @@ export default function ProductPage({ params }: Props) {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               {related.map((r) => (
                 <Link key={r.id} href={`/fragrances/${r.slug}`} className="group">
-                  <div className="relative aspect-[3/4] overflow-hidden bg-stone-900 mb-4 rounded-sm">
+                  <div className="relative aspect-[3/4] overflow-hidden bg-stone-900 mb-4 rounded-2xl">
                     <Image src={r.image} alt={r.name} fill className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" sizes="33vw" />
                   </div>
                   <p className="text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans mb-1">{r.collectionLabel}</p>

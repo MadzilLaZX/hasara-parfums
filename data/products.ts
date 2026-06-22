@@ -51,8 +51,6 @@ export const fragrances: Fragrance[] = [
     gallery: [
       "/images/imperial-royale-1.jpg",
       "/images/imperial-royale-2.jpg",
-      "/images/imperial-royale-3.jpg",
-      "/images/imperial-royale-4.jpg",
     ],
     notes: {
       top: ["Saffron", "Pink Pepper", "Bergamot"],
@@ -83,8 +81,6 @@ export const fragrances: Fragrance[] = [
     gallery: [
       "/images/ocean-allure-1.jpg",
       "/images/ocean-allure-2.jpg",
-      "/images/ocean-allure-3.jpg",
-      "/images/ocean-allure-4.jpg",
     ],
     notes: {
       top: ["Sea Salt", "Bergamot", "Green Tea"],
@@ -114,8 +110,6 @@ export const fragrances: Fragrance[] = [
     image: "/images/velvet-ember.jpg",
     gallery: [
       "/images/velvet-ember-1.jpg",
-      "/images/velvet-ember-2.jpg",
-      "/images/velvet-ember-3.jpg",
     ],
     notes: {
       top: ["Cinnamon", "Cardamom", "Saffron"],
@@ -146,8 +140,6 @@ export const fragrances: Fragrance[] = [
     gallery: [
       "/images/sensual-mirage-1.jpg",
       "/images/sensual-mirage-2.jpg",
-      "/images/sensual-mirage-3.jpg",
-      "/images/sensual-mirage-4.jpg",
     ],
     notes: {
       top: ["Peach", "Saffron", "Bergamot"],
@@ -177,9 +169,6 @@ export const fragrances: Fragrance[] = [
     image: "/images/scarlet-bliss.jpg",
     gallery: [
       "/images/scarlet-bliss-1.jpg",
-      "/images/scarlet-bliss-2.jpg",
-      "/images/scarlet-bliss-3.jpg",
-      "/images/scarlet-bliss-4.jpg",
     ],
     notes: {
       top: ["Raspberry", "Pomegranate", "Citrus"],
@@ -210,7 +199,6 @@ export const fragrances: Fragrance[] = [
     gallery: [
       "/images/salient-vacation-1.jpg",
       "/images/salient-vacation-2.jpg",
-      "/images/salient-vacation-3.jpg",
     ],
     notes: {
       top: ["Coconut", "Pineapple", "Bergamot"],
@@ -241,8 +229,6 @@ export const fragrances: Fragrance[] = [
     gallery: [
       "/images/fresh-pulse-1.jpg",
       "/images/fresh-pulse-2.jpg",
-      "/images/fresh-pulse-3.jpg",
-      "/images/fresh-pulse-4.jpg",
     ],
     notes: {
       top: ["Mint", "Grapefruit", "Lemon"],
@@ -273,8 +259,6 @@ export const fragrances: Fragrance[] = [
     gallery: [
       "/images/floral-muse-1.jpg",
       "/images/floral-muse-2.jpg",
-      "/images/floral-muse-3.jpg",
-      "/images/floral-muse-4.jpg",
     ],
     notes: {
       top: ["Lychee", "Bergamot", "Pink Pepper"],
@@ -305,7 +289,6 @@ export const fragrances: Fragrance[] = [
     gallery: [
       "/images/eternal-drive-1.jpg",
       "/images/eternal-drive-2.jpg",
-      "/images/eternal-drive-3.jpg",
     ],
     notes: {
       top: ["Citrus", "Black Pepper", "Cardamom"],
@@ -336,8 +319,6 @@ export const fragrances: Fragrance[] = [
     gallery: [
       "/images/dawn-fever-1.jpg",
       "/images/dawn-fever-2.jpg",
-      "/images/dawn-fever-3.jpg",
-      "/images/dawn-fever-4.jpg",
     ],
     notes: {
       top: ["Mandarin", "Ginger", "Pink Pepper"],
@@ -368,8 +349,6 @@ export const fragrances: Fragrance[] = [
     gallery: [
       "/images/bloom-rush-1.jpg",
       "/images/bloom-rush-2.jpg",
-      "/images/bloom-rush-3.jpg",
-      "/images/bloom-rush-4.jpg",
     ],
     notes: {
       top: ["Green Apple", "Pear", "Melon"],

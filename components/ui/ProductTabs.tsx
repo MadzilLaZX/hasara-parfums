@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sun, Moon, Clock, Star, MapPin } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 import type { Fragrance } from "@/data/products";
@@ -10,18 +10,26 @@ const TABS = ["Story", "Notes", "Accords", "Wearability", "Inspired By"] as cons
 type Tab = (typeof TABS)[number];
 
 function AccordBar({ accord, intensity, index }: { accord: string; intensity: number; index: number }) {
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    const t = setTimeout(() => setWidth(intensity), index * 140 + 80);
+    return () => clearTimeout(t);
+  }, [intensity, index]);
+
   return (
     <div>
       <div className="flex items-center justify-between mb-2.5">
         <span className="font-sans text-primary-text text-sm tracking-wide">{accord}</span>
         <span className="font-serif text-champagne-gold text-base font-light">{intensity}%</span>
       </div>
-      <div className="h-px bg-stone-100 relative">
-        <motion.div
-          className="absolute top-0 left-0 h-full bg-gradient-to-r from-champagne-gold/40 to-champagne-gold"
-          initial={{ width: 0 }}
-          animate={{ width: `${intensity}%` }}
-          transition={{ duration: 1.1, delay: index * 0.14, ease: [0.16, 1, 0.3, 1] }}
+      <div className="h-0.5 bg-stone-100 relative overflow-hidden rounded-full">
+        <div
+          className="absolute top-0 left-0 h-full bg-gradient-to-r from-champagne-gold/50 to-champagne-gold rounded-full"
+          style={{
+            width: `${width}%`,
+            transition: `width 1.1s cubic-bezier(0.16,1,0.3,1)`,
+          }}
         />
       </div>
     </div>
@@ -29,22 +37,48 @@ function AccordBar({ accord, intensity, index }: { accord: string; intensity: nu
 }
 
 function SeasonBar({ season, active }: { season: string; active: boolean }) {
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    if (!active) return;
+    const t = setTimeout(() => setWidth(100), 80);
+    return () => clearTimeout(t);
+  }, [active]);
+
   return (
     <div className="flex items-center gap-4">
       <span className={`font-sans text-xs tracking-[0.15em] uppercase w-16 flex-shrink-0 ${active ? "text-primary-text" : "text-stone-300"}`}>{season}</span>
-      <div className="flex-1 h-px bg-stone-100 relative">
-        {active && (
-          <motion.div
-            className="absolute top-0 left-0 h-full bg-champagne-gold"
-            initial={{ width: 0 }}
-            animate={{ width: "100%" }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          />
-        )}
+      <div className="flex-1 h-0.5 bg-stone-100 relative overflow-hidden rounded-full">
+        <div
+          className="absolute top-0 left-0 h-full bg-champagne-gold rounded-full"
+          style={{
+            width: `${width}%`,
+            transition: "width 0.9s cubic-bezier(0.16,1,0.3,1)",
+          }}
+        />
       </div>
       <span className={`font-sans text-[10px] tracking-wider w-20 text-right flex-shrink-0 ${active ? "text-champagne-gold" : "text-stone-300"}`}>
         {active ? "Recommended" : "Not Ideal"}
       </span>
+    </div>
+  );
+}
+
+function LongevityBar({ longevity }: { longevity: string }) {
+  const target = longevity.includes("12+") ? 95 : longevity.includes("10-12") ? 80 : longevity.includes("8-10") ? 65 : 50;
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    const t = setTimeout(() => setWidth(target), 80);
+    return () => clearTimeout(t);
+  }, [target]);
+
+  return (
+    <div className="flex-1 h-0.5 bg-stone-100 relative overflow-hidden rounded-full">
+      <div
+        className="absolute top-0 left-0 h-full bg-champagne-gold rounded-full"
+        style={{ width: `${width}%`, transition: "width 1s cubic-bezier(0.16,1,0.3,1)" }}
+      />
     </div>
   );
 }
@@ -94,7 +128,7 @@ export default function ProductTabs({ product }: { product: Fragrance }) {
                     {extras.personality.map((trait, i) => (
                       <span
                         key={trait}
-                        className="px-4 py-2 font-sans text-xs tracking-[0.2em] uppercase border transition-all duration-300"
+                        className="px-4 py-2 font-sans text-xs tracking-[0.2em] uppercase border rounded-full transition-all duration-300"
                         style={{
                           borderColor: `rgba(212,175,55,${0.8 - i * 0.2})`,
                           color: `rgba(30,26,20,${0.85 - i * 0.15})`,
@@ -117,7 +151,7 @@ export default function ProductTabs({ product }: { product: Fragrance }) {
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {occasionTags.map((occ) => (
-                      <span key={occ} className="px-4 py-2 border border-stone-200 text-secondary-text text-xs font-sans tracking-wide rounded-sm">
+                      <span key={occ} className="px-4 py-2 border border-stone-200 text-secondary-text text-xs font-sans tracking-wide rounded-full">
                         {occ}
                       </span>
                     ))}
@@ -214,7 +248,7 @@ export default function ProductTabs({ product }: { product: Fragrance }) {
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {tier.notes.map((note) => (
-                        <span key={note} className={`px-4 py-2 text-xs font-sans tracking-wide rounded-sm border ${i === 0 ? "border-champagne-gold/40 text-primary-text bg-champagne-gold/5" : i === 1 ? "border-stone-200 text-primary-text" : "border-stone-100 text-secondary-text"}`}>
+                        <span key={note} className={`px-4 py-2 text-xs font-sans tracking-wide rounded-full border ${i === 0 ? "border-champagne-gold/40 text-primary-text bg-champagne-gold/5" : i === 1 ? "border-stone-200 text-primary-text" : "border-stone-100 text-secondary-text"}`}>
                           {note}
                         </span>
                       ))}
@@ -269,7 +303,7 @@ export default function ProductTabs({ product }: { product: Fragrance }) {
               )}
 
               {/* How it wears */}
-              <div className="p-5 border border-stone-100 bg-stone-50">
+              <div className="p-5 border border-stone-100 bg-stone-50 rounded-2xl">
                 <div className="flex items-center gap-2 mb-3">
                   <Star size={11} className="text-champagne-gold" weight="fill" />
                   <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-secondary-text">Character Summary</p>
@@ -305,7 +339,7 @@ export default function ProductTabs({ product }: { product: Fragrance }) {
                 ].map(({ label, icon, active }) => (
                   <div
                     key={label}
-                    className={`flex-1 flex flex-col items-center gap-3 py-8 border transition-colors ${active ? "border-champagne-gold bg-champagne-gold/5" : "border-stone-100 opacity-30"}`}
+                    className={`flex-1 flex flex-col items-center gap-3 py-8 border rounded-2xl transition-colors ${active ? "border-champagne-gold bg-champagne-gold/5" : "border-stone-100 opacity-30"}`}
                   >
                     <span className={active ? "text-champagne-gold" : "text-stone-300"}>{icon}</span>
                     <span className="font-sans text-sm tracking-[0.2em] uppercase text-primary-text">{label}</span>
@@ -323,14 +357,7 @@ export default function ProductTabs({ product }: { product: Fragrance }) {
               </p>
               <div className="flex items-center gap-5">
                 <span className="font-serif text-primary-text text-2xl font-light flex-shrink-0">{product.longevity}</span>
-                <div className="flex-1 h-px bg-stone-100 relative">
-                  <motion.div
-                    className="absolute top-0 left-0 h-full bg-champagne-gold"
-                    initial={{ width: 0 }}
-                    animate={{ width: product.longevity.includes("12+") ? "95%" : product.longevity.includes("10-12") ? "80%" : product.longevity.includes("8-10") ? "65%" : "50%" }}
-                    transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-                  />
-                </div>
+                <LongevityBar longevity={product.longevity} />
               </div>
               <p className="font-sans text-secondary-text text-xs mt-2 tracking-wide">Extrait de Parfum concentration for maximum longevity</p>
             </div>
@@ -343,7 +370,7 @@ export default function ProductTabs({ product }: { product: Fragrance }) {
               </p>
               <div className="flex flex-wrap gap-2">
                 {occasionTags.map((occ) => (
-                  <span key={occ} className="px-4 py-2 border border-stone-200 text-secondary-text text-xs font-sans tracking-wide rounded-sm">{occ}</span>
+                  <span key={occ} className="px-4 py-2 border border-stone-200 text-secondary-text text-xs font-sans tracking-wide rounded-full">{occ}</span>
                 ))}
               </div>
             </div>
@@ -378,14 +405,14 @@ export default function ProductTabs({ product }: { product: Fragrance }) {
                 { label: "Concentration", value: "Extrait de Parfum — often stronger than the original" },
                 { label: "Our guarantee", value: "Original composition, not a counterfeit" },
               ].map(({ label, value }) => (
-                <div key={label} className="p-4 border border-stone-100">
+                <div key={label} className="p-4 border border-stone-100 rounded-xl">
                   <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-secondary-text mb-1.5">{label}</p>
                   <p className="font-sans text-primary-text text-sm leading-snug">{value}</p>
                 </div>
               ))}
             </div>
 
-            <div className="p-5 border border-champagne-gold/25 bg-champagne-gold/4">
+            <div className="p-5 border border-champagne-gold/25 bg-champagne-gold/4 rounded-xl">
               <p className="font-sans text-secondary-text text-xs leading-relaxed">
                 <span className="text-champagne-gold font-medium">Note:</span> All HASARA fragrances are original
                 Extrait de Parfum compositions crafted with premium ingredients. &ldquo;Inspired by&rdquo; indicates

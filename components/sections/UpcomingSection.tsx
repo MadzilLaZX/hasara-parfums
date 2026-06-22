@@ -22,7 +22,7 @@ function MysteryCard({ fragrance }: { fragrance: (typeof upcomingFragrances)[0] 
   return (
     <div className="group flex flex-col">
       {/* Mystery image area */}
-      <Link href={`/upcoming/${fragrance.slug}`} className="block relative aspect-[3/4] bg-[#0a0908] border border-champagne-gold/15 overflow-hidden mb-4 hover:border-champagne-gold/40 transition-all duration-500">
+      <Link href={`/upcoming/${fragrance.slug}`} className="block relative aspect-[3/4] bg-[#0a0908] border border-champagne-gold/15 overflow-hidden mb-4 rounded-2xl hover:border-champagne-gold/40 transition-all duration-500">
         <div className="absolute inset-0 bg-gradient-to-br from-champagne-gold/3 via-transparent to-champagne-gold/5 group-hover:from-champagne-gold/6 group-hover:to-champagne-gold/10 transition-all duration-700" />
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "linear-gradient(rgba(212,175,55,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.3) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
 
@@ -71,7 +71,7 @@ function MysteryCard({ fragrance }: { fragrance: (typeof upcomingFragrances)[0] 
           <span className="font-serif text-champagne-white/25 text-lg">৳ ???</span>
           <button
             onClick={notifyWhatsApp}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-champagne-gold/10 hover:bg-champagne-gold text-champagne-gold hover:text-matte-black text-[10px] tracking-[0.15em] uppercase font-sans transition-all duration-300 cursor-pointer border border-champagne-gold/30 hover:border-champagne-gold rounded-sm"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-champagne-gold/10 hover:bg-champagne-gold text-champagne-gold hover:text-matte-black text-[10px] tracking-[0.15em] uppercase font-sans transition-all duration-300 cursor-pointer border border-champagne-gold/30 hover:border-champagne-gold rounded-full"
           >
             <WhatsappLogo size={11} weight="fill" />
             Notify Me

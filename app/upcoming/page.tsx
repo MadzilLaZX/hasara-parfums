@@ -31,7 +31,7 @@ function UpcomingCard({ fragrance }: { fragrance: (typeof upcomingFragrances)[0]
       className="group flex flex-col"
     >
       {/* Mystery card — dark card on light page, same visual weight as product images */}
-      <Link href={`/upcoming/${fragrance.slug}`} className="block relative aspect-[3/4] bg-[#0a0908] border border-stone-200 overflow-hidden mb-4 hover:border-champagne-gold/60 transition-all duration-500">
+      <Link href={`/upcoming/${fragrance.slug}`} className="block relative aspect-[3/4] bg-[#0a0908] border border-stone-200 overflow-hidden mb-4 rounded-2xl hover:border-champagne-gold/60 transition-all duration-500">
         <div className="absolute inset-0 bg-gradient-to-br from-champagne-gold/3 via-transparent to-champagne-gold/5 group-hover:from-champagne-gold/6 group-hover:to-champagne-gold/10 transition-all duration-700" />
         <div className="absolute inset-0 opacity-8" style={{ backgroundImage: "linear-gradient(rgba(212,175,55,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.3) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
 
@@ -65,7 +65,7 @@ function UpcomingCard({ fragrance }: { fragrance: (typeof upcomingFragrances)[0]
 
       <div className="flex flex-wrap gap-1 mb-3">
         {fragrance.accords.slice(0, 2).map((a) => (
-          <span key={a} className="px-2 py-0.5 border border-stone-200 text-secondary-text text-[10px] font-sans tracking-wider rounded-sm">{a}</span>
+          <span key={a} className="px-2 py-0.5 border border-stone-200 text-secondary-text text-[10px] font-sans tracking-wider rounded-full">{a}</span>
         ))}
       </div>
 
@@ -75,7 +75,7 @@ function UpcomingCard({ fragrance }: { fragrance: (typeof upcomingFragrances)[0]
         </p>
         <button
           onClick={notifyWhatsApp}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-champagne-gold/10 hover:bg-champagne-gold text-champagne-gold hover:text-matte-black text-[10px] tracking-[0.15em] uppercase font-sans transition-all duration-300 cursor-pointer border border-champagne-gold/40 hover:border-champagne-gold rounded-sm"
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-champagne-gold/10 hover:bg-champagne-gold text-champagne-gold hover:text-matte-black text-[10px] tracking-[0.15em] uppercase font-sans transition-all duration-300 cursor-pointer border border-champagne-gold/40 hover:border-champagne-gold rounded-full"
         >
           <WhatsappLogo size={11} weight="fill" />
           Notify Me
@@ -132,7 +132,7 @@ export default function UpcomingPage() {
             <button
               key={t}
               onClick={() => setTab(t)}
-              className={`px-5 py-2 text-xs tracking-[0.2em] uppercase font-sans transition-all duration-300 rounded-sm cursor-pointer ${
+              className={`px-5 py-2 text-xs tracking-[0.2em] uppercase font-sans transition-all duration-300 rounded-full cursor-pointer ${
                 tab === t ? "bg-champagne-gold text-matte-black" : "text-secondary-text hover:text-primary-text"
               }`}
             >
@@ -145,7 +145,7 @@ export default function UpcomingPage() {
       {/* Hype banner */}
       <section className="px-6 lg:px-12 py-10 border-b border-stone-100">
         <div className="max-w-7xl mx-auto">
-          <div className="border border-stone-200 bg-stone-50 p-6 lg:p-8 text-center">
+          <div className="border border-stone-200 bg-stone-50 p-6 lg:p-8 text-center rounded-2xl">
             <p className="font-sans text-champagne-gold text-[10px] tracking-[0.5em] uppercase mb-3">Be The First To Know</p>
             <p className="font-serif text-primary-text text-2xl lg:text-3xl font-light mb-2">
               Every fragrance below is arriving soon.

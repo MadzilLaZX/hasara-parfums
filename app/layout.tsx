@@ -1,8 +1,9 @@
 ﻿import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Cormorant_Garamond, Inter, Raleway } from "next/font/google";
 import "./globals.css";
 import { WishlistProvider } from "@/context/WishlistContext";
 import { CartProvider } from "@/context/CartContext";
+import SmoothScroll from "@/components/ui/SmoothScroll";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -16,6 +17,13 @@ const inter = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const raleway = Raleway({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-raleway",
   display: "swap",
 });
 
@@ -105,7 +113,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
+    <html lang="en" className={`${cormorant.variable} ${inter.variable} ${raleway.variable}`}>
       <head>
         <script
           type="application/ld+json"
@@ -113,6 +121,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-champagne-white text-primary-text font-sans antialiased overflow-x-hidden">
+        <SmoothScroll />
         <CartProvider><WishlistProvider>{children}</WishlistProvider></CartProvider>
       </body>
     </html>

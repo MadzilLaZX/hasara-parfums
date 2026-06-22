@@ -61,7 +61,7 @@ export default function InstagramGallery() {
                 delay: i * 0.08,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="group relative aspect-square overflow-hidden bg-stone-100 cursor-pointer"
+              className="group relative aspect-square overflow-hidden bg-stone-100 cursor-pointer rounded-2xl"
             >
               <Image
                 src={`https://picsum.photos/seed/${img.seed}/600/600`}
@@ -92,7 +92,7 @@ export default function InstagramGallery() {
             href="https://www.instagram.com/hasaraparfums"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3.5 border border-primary-text text-primary-text hover:bg-primary-text hover:text-champagne-white text-xs tracking-[0.2em] uppercase font-sans transition-all duration-300 cursor-pointer"
+            className="inline-flex items-center gap-2 px-8 py-3.5 border border-primary-text text-primary-text hover:bg-primary-text hover:text-champagne-white text-xs tracking-[0.2em] uppercase font-sans transition-all duration-300 cursor-pointer rounded-full"
           >
             <InstagramLogo size={14} />
             Follow on Instagram

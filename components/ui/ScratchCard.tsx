@@ -13,6 +13,7 @@ export default function ScratchCard() {
   const [scratched, setScratched] = useState(false);
   const [copied, setCopied] = useState(false);
   const isDrawing = useRef(false);
+  const strokeCount = useRef(0);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -53,6 +54,11 @@ export default function ScratchCard() {
     return { x: (e.clientX - rect.left) * scaleX, y: (e.clientY - rect.top) * scaleY };
   }
 
+  function reveal(canvas: HTMLCanvasElement) {
+    canvas.style.pointerEvents = "none";
+    setScratched(true);
+  }
+
   function scratch(e: React.MouseEvent | React.TouchEvent) {
     if (!isDrawing.current || scratched) return;
     const canvas = canvasRef.current;
@@ -61,18 +67,25 @@ export default function ScratchCard() {
     if (!ctx) return;
     const { x, y } = getPos(e, canvas);
     ctx.globalCompositeOperation = "destination-out";
-    // Large brush = easy scratch
     ctx.beginPath();
     ctx.arc(x, y, 55, 0, Math.PI * 2);
     ctx.fill();
-    // Check after every stroke — low threshold means 1-2 swipes reveals it
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    let cleared = 0;
-    for (let i = 3; i < imageData.data.length; i += 4) {
-      if (imageData.data[i] === 0) cleared++;
+    strokeCount.current++;
+    // Auto-reveal after ~15 scratch moves regardless of pixel count
+    if (strokeCount.current >= 15) {
+      reveal(canvas);
+      return;
     }
-    if (cleared / (canvas.width * canvas.height) > 0.50) {
-      setScratched(true);
+    // Pixel check every 3 strokes with a lower threshold
+    if (strokeCount.current % 3 === 0) {
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      let cleared = 0;
+      for (let i = 3; i < imageData.data.length; i += 4) {
+        if (imageData.data[i] === 0) cleared++;
+      }
+      if (cleared / (canvas.width * canvas.height) > 0.35) {
+        reveal(canvas);
+      }
     }
   }
 

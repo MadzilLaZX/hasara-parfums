@@ -27,7 +27,7 @@ export default function TesterSection() {
                 Try Before You Buy
               </p>
             </div>
-            <h2 className="font-sans text-champagne-white text-5xl lg:text-6xl font-light tracking-wide leading-tight mb-6">
+            <h2 className="font-display text-champagne-white text-5xl lg:text-6xl font-light tracking-wide leading-tight mb-6">
               Try A 1ml Tester
             </h2>
             <p className="font-sans text-champagne-white/60 text-sm leading-relaxed mb-8 max-w-md">
@@ -50,7 +50,7 @@ export default function TesterSection() {
               href={testerLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.25em] uppercase font-sans font-medium transition-all duration-300 rounded-sm"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.25em] uppercase font-sans font-medium transition-all duration-300 rounded-full"
             >
               <WhatsappLogo size={16} weight="fill" />
               Request a Tester
@@ -71,7 +71,7 @@ export default function TesterSection() {
               { label: "Receive your 1ml tester", step: "03" },
               { label: "Find your signature scent", step: "04" },
             ].map(({ label, step }) => (
-              <div key={step} className="flex items-center gap-6 border border-champagne-gold/10 px-6 py-5">
+              <div key={step} className="flex items-center gap-6 border border-champagne-gold/10 px-6 py-5 rounded-2xl">
                 <span className="font-serif text-champagne-gold/30 text-3xl font-light w-10 flex-shrink-0">
                   {step}
                 </span>

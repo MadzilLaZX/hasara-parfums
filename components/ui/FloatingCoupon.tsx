@@ -88,7 +88,7 @@ export default function FloatingCoupon() {
 
           {/* Button — same w-14 h-14 as FloatingWhatsApp */}
           <div className="relative">
-            <span className="absolute inset-0 rounded-full bg-champagne-gold/20 animate-ping pointer-events-none" />
+            <span className="absolute inset-0 rounded-full bg-champagne-gold/20 animate-ping-slow pointer-events-none" />
             <button
               onClick={() => setOpen(!open)}
               aria-label="View promo code"
@@ -96,6 +96,10 @@ export default function FloatingCoupon() {
             >
               <Tag size={24} className="text-champagne-gold" weight="fill" />
             </button>
+            {/* % badge */}
+            <span className="absolute -top-1 -right-1 w-4 h-4 bg-champagne-gold rounded-full flex items-center justify-center pointer-events-none z-10">
+              <span className="font-sans text-matte-black text-[8px] font-bold leading-none">%</span>
+            </span>
           </div>
         </motion.div>
       )}

@@ -52,7 +52,7 @@ export default function ContactSection() {
   const shouldReduce = useReducedMotion();
 
   return (
-    <section className="bg-[#0A0808] py-24 lg:py-36 px-6 lg:px-12" id="reach-us">
+    <section className="bg-matte-black py-24 lg:py-36 px-6 lg:px-12" id="reach-us">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left */}
@@ -75,7 +75,7 @@ export default function ContactSection() {
               href={getWhatsAppLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-10 py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-sm tracking-[0.2em] uppercase font-sans font-medium transition-all duration-300 cursor-pointer"
+              className="inline-flex items-center gap-3 px-10 py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-sm tracking-[0.2em] uppercase font-sans font-medium transition-all duration-300 cursor-pointer rounded-full"
             >
               <WhatsappLogo size={18} weight="fill" />
               Order via WhatsApp
@@ -108,7 +108,7 @@ export default function ContactSection() {
                   }}
                   className="flex items-center gap-5 p-5 border-b border-champagne-gold/10 hover:border-champagne-gold/40 hover:bg-champagne-gold/5 transition-all duration-300 group cursor-pointer"
                 >
-                  <div className="w-10 h-10 border border-champagne-gold/30 flex items-center justify-center flex-shrink-0 group-hover:bg-champagne-gold group-hover:border-champagne-gold transition-all duration-300">
+                  <div className="w-10 h-10 border border-champagne-gold/30 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-champagne-gold group-hover:border-champagne-gold transition-all duration-300">
                     <Icon
                       size={16}
                       weight={item.iconWeight ?? "regular"}

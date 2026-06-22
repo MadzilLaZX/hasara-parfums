@@ -64,7 +64,7 @@ export default function Reviews() {
                 delay: i * 0.15,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="border border-champagne-gold/20 p-8 hover:border-champagne-gold/50 transition-colors duration-500"
+              className="border border-champagne-gold/20 p-8 rounded-2xl hover:border-champagne-gold/50 transition-colors duration-500"
             >
               {/* Stars */}
               <div className="flex gap-1 mb-6">
@@ -85,7 +85,7 @@ export default function Reviews() {
 
               {/* Attribution */}
               <div className="flex items-center gap-3 pt-6 border-t border-champagne-gold/20">
-                <div className="w-10 h-10 bg-champagne-gold/20 border border-champagne-gold/40 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 bg-champagne-gold/20 border border-champagne-gold/40 rounded-xl flex items-center justify-center flex-shrink-0">
                   <span className="font-serif text-champagne-gold text-sm font-medium">
                     {review.initial}
                   </span>

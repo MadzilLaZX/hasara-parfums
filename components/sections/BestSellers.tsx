@@ -59,7 +59,7 @@ export default function BestSellers() {
                 className="group"
               >
                 {/* Image */}
-                <Link href={`/fragrances/${product.slug}`} className="block relative aspect-[3/4] overflow-hidden bg-stone-900 mb-5">
+                <Link href={`/fragrances/${product.slug}`} className="block relative aspect-[3/4] overflow-hidden bg-stone-900 mb-5 rounded-2xl">
                   <Image
                     src={product.image}
                     alt={product.name}
@@ -98,7 +98,7 @@ export default function BestSellers() {
                     <button
                       key={s.ml}
                       onClick={() => setSelectedSizes((prev) => ({ ...prev, [product.slug]: s.ml }))}
-                      className={`px-3 py-1.5 text-xs font-sans tracking-wider border rounded-sm transition-all duration-200 cursor-pointer ${
+                      className={`px-3 py-1.5 text-xs font-sans tracking-wider border rounded-full transition-all duration-200 cursor-pointer ${
                         selectedMl === s.ml
                           ? "border-champagne-gold bg-champagne-gold text-matte-black font-medium"
                           : "border-stone-200 text-secondary-text hover:border-champagne-gold hover:text-champagne-gold"

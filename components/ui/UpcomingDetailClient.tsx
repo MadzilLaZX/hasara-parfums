@@ -42,7 +42,7 @@ export default function UpcomingDetailClient({ fragrance }: { fragrance: Upcomin
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="relative aspect-[3/4] max-h-[75vh] bg-[#0a0908] border border-champagne-gold/20"
+              className="relative aspect-[3/4] max-h-[75vh] bg-[#0a0908] border border-champagne-gold/20 rounded-2xl overflow-hidden"
             >
               <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "linear-gradient(rgba(212,175,55,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.3) 1px, transparent 1px)", backgroundSize: "36px 36px" }} />
               <div className="absolute inset-0 bg-gradient-to-br from-champagne-gold/5 via-transparent to-champagne-gold/8" />
@@ -63,7 +63,7 @@ export default function UpcomingDetailClient({ fragrance }: { fragrance: Upcomin
               </div>
 
               {/* Coming soon badge */}
-              <div className="absolute top-5 left-1/2 -translate-x-1/2 bg-champagne-gold px-4 py-1.5">
+              <div className="absolute top-5 left-1/2 -translate-x-1/2 bg-champagne-gold px-4 py-1.5 rounded-full">
                 <span className="font-sans text-matte-black text-[9px] tracking-[0.4em] uppercase font-semibold">Coming Soon</span>
               </div>
 
@@ -113,7 +113,7 @@ export default function UpcomingDetailClient({ fragrance }: { fragrance: Upcomin
                 <p className="text-champagne-white/40 text-xs tracking-[0.3em] uppercase font-sans mb-4">Main Accords</p>
                 <div className="flex flex-wrap gap-2">
                   {fragrance.accords.map((a) => (
-                    <span key={a} className="px-3 py-1.5 border border-champagne-gold/30 text-champagne-white/70 text-xs font-sans tracking-wide rounded-sm">{a}</span>
+                    <span key={a} className="px-3 py-1.5 border border-champagne-gold/30 text-champagne-white/70 text-xs font-sans tracking-wide rounded-full">{a}</span>
                   ))}
                 </div>
               </div>
@@ -143,7 +143,7 @@ export default function UpcomingDetailClient({ fragrance }: { fragrance: Upcomin
               {/* CTAs */}
               <button
                 onClick={notifyWhatsApp}
-                className="flex items-center justify-center gap-3 w-full py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-sm tracking-[0.2em] uppercase font-sans font-semibold transition-all duration-300 cursor-pointer rounded-sm mb-3"
+                className="flex items-center justify-center gap-3 w-full py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-sm tracking-[0.2em] uppercase font-sans font-semibold transition-all duration-300 cursor-pointer rounded-xl mb-3"
               >
                 <WhatsappLogo size={18} weight="fill" />
                 Notify Me on WhatsApp
@@ -151,7 +151,7 @@ export default function UpcomingDetailClient({ fragrance }: { fragrance: Upcomin
 
               <button
                 onClick={() => toggle(`upcoming:${fragrance.slug}`)}
-                className={`flex items-center justify-center gap-3 w-full py-4 border text-sm tracking-[0.2em] uppercase font-sans font-medium transition-all duration-300 cursor-pointer rounded-sm ${
+                className={`flex items-center justify-center gap-3 w-full py-4 border text-sm tracking-[0.2em] uppercase font-sans font-medium transition-all duration-300 cursor-pointer rounded-xl ${
                   wishlisted
                     ? "border-champagne-gold bg-champagne-gold/10 text-champagne-gold"
                     : "border-champagne-gold/30 text-champagne-white/60 hover:border-champagne-gold hover:text-champagne-gold"
@@ -162,7 +162,7 @@ export default function UpcomingDetailClient({ fragrance }: { fragrance: Upcomin
               </button>
 
               {/* Note */}
-              <div className="mt-6 flex items-start gap-3 p-4 border border-champagne-gold/15">
+              <div className="mt-6 flex items-start gap-3 p-4 border border-champagne-gold/15 rounded-xl">
                 <Sparkle size={13} className="text-champagne-gold/50 flex-shrink-0 mt-0.5" />
                 <p className="font-sans text-champagne-white/35 text-xs leading-relaxed tracking-wide">
                   Early interest members receive first access and exclusive pre-launch pricing. Express your interest now to secure priority.

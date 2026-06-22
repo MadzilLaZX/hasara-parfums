@@ -33,7 +33,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
             {/* Founder photo — taller, centered so full figure shows */}
-            <div className="relative w-full overflow-hidden rounded-sm" style={{ minHeight: "600px", height: "70vh", maxHeight: "800px" }}>
+            <div className="relative w-full overflow-hidden rounded-2xl" style={{ minHeight: "600px", height: "70vh", maxHeight: "800px" }}>
               <Image
                 src="/images/founder.png"
                 alt="Sardar Md Abid Hasan — Founder, Hasara Parfums"

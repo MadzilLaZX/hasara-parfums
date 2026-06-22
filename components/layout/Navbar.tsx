@@ -82,13 +82,13 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`fixed inset-0 z-40 bg-matte-black transition-all duration-500 flex flex-col items-center justify-center gap-10 ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
+      <div className={`fixed inset-0 z-40 bg-matte-black transition-all duration-500 flex flex-col items-center justify-center gap-6 pt-20 pb-28 overflow-y-auto ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
         {navLinks.map((link, i) => (
-          <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)} className="font-serif text-champagne-white text-4xl tracking-widest uppercase hover:text-champagne-gold transition-colors duration-300" style={{ animationDelay: `${i * 80}ms` }}>
+          <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)} className="font-serif text-champagne-white text-2xl tracking-widest uppercase hover:text-champagne-gold transition-colors duration-300" style={{ animationDelay: `${i * 80}ms` }}>
             {link.label}
           </Link>
         ))}
-        <div className="flex items-center gap-6 mt-4">
+        <div className="flex items-center gap-6 mt-2">
           <Link href="/wishlist" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 text-champagne-white/60 hover:text-champagne-gold text-sm tracking-[0.2em] uppercase font-sans transition-colors">
             <Heart size={16} /> Wishlist
           </Link>
@@ -96,7 +96,7 @@ export default function Navbar() {
             <ShoppingBag size={16} /> Cart {count > 0 && `(${count})`}
           </button>
         </div>
-        <a href={getWhatsAppLink()} target="_blank" rel="noopener noreferrer" className="mt-2 flex items-center gap-2 px-8 py-3 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-sm tracking-[0.2em] uppercase font-sans transition-all duration-300 cursor-pointer rounded-full">
+        <a href={getWhatsAppLink()} target="_blank" rel="noopener noreferrer" className="mt-1 flex items-center gap-2 px-8 py-3 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-sm tracking-[0.2em] uppercase font-sans transition-all duration-300 cursor-pointer rounded-full">
           <WhatsappLogo size={16} weight="fill" />
           Contact on WhatsApp
         </a>

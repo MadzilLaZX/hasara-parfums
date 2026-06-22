@@ -97,7 +97,7 @@ function FragrancesPage() {
                 <button
                   key={opt.id}
                   onClick={() => setActiveCollection(opt.id)}
-                  className={`flex-shrink-0 px-5 py-2 text-xs tracking-[0.2em] uppercase font-sans transition-all duration-300 rounded-sm cursor-pointer ${
+                  className={`flex-shrink-0 px-5 py-2 text-xs tracking-[0.2em] uppercase font-sans transition-all duration-300 rounded-full cursor-pointer ${
                     activeCollection === opt.id
                       ? "bg-champagne-gold text-matte-black"
                       : "text-secondary-text hover:text-primary-text"
@@ -110,7 +110,7 @@ function FragrancesPage() {
 
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className={`flex-shrink-0 flex items-center gap-2 px-4 py-2 border text-xs tracking-[0.15em] uppercase font-sans transition-all duration-300 rounded-sm cursor-pointer ${
+              className={`flex-shrink-0 flex items-center gap-2 px-4 py-2 border text-xs tracking-[0.15em] uppercase font-sans transition-all duration-300 rounded-full cursor-pointer ${
                 showFilters || hasActiveFilters
                   ? "border-champagne-gold text-champagne-gold"
                   : "border-stone-300 text-secondary-text hover:border-champagne-gold hover:text-champagne-gold"
@@ -138,7 +138,7 @@ function FragrancesPage() {
                         <button
                           key={s}
                           onClick={() => setActiveSeason(s)}
-                          className={`px-3 py-1.5 text-xs tracking-wider uppercase font-sans rounded-sm transition-all duration-200 cursor-pointer ${
+                          className={`px-3 py-1.5 text-xs tracking-wider uppercase font-sans rounded-full transition-all duration-200 cursor-pointer ${
                             activeSeason === s
                               ? "bg-champagne-gold text-matte-black"
                               : "border border-stone-200 text-secondary-text hover:border-champagne-gold hover:text-champagne-gold"
@@ -157,7 +157,7 @@ function FragrancesPage() {
                         <button
                           key={d}
                           onClick={() => setActiveDayNight(d)}
-                          className={`px-3 py-1.5 text-xs tracking-wider uppercase font-sans rounded-sm transition-all duration-200 cursor-pointer ${
+                          className={`px-3 py-1.5 text-xs tracking-wider uppercase font-sans rounded-full transition-all duration-200 cursor-pointer ${
                             activeDayNight === d
                               ? "bg-champagne-gold text-matte-black"
                               : "border border-stone-200 text-secondary-text hover:border-champagne-gold hover:text-champagne-gold"
@@ -176,7 +176,7 @@ function FragrancesPage() {
                         <button
                           key={a}
                           onClick={() => setActiveAccord(a)}
-                          className={`px-3 py-1.5 text-xs tracking-wider uppercase font-sans rounded-sm transition-all duration-200 cursor-pointer ${
+                          className={`px-3 py-1.5 text-xs tracking-wider uppercase font-sans rounded-full transition-all duration-200 cursor-pointer ${
                             activeAccord === a
                               ? "bg-champagne-gold text-matte-black"
                               : "border border-stone-200 text-secondary-text hover:border-champagne-gold hover:text-champagne-gold"
@@ -229,7 +229,7 @@ function FragrancesPage() {
                     className="group"
                   >
                     {/* Image */}
-                    <Link href={`/fragrances/${product.slug}`} className="block relative aspect-[3/4] overflow-hidden bg-stone-900 mb-4 rounded-sm">
+                    <Link href={`/fragrances/${product.slug}`} className="block relative aspect-[3/4] overflow-hidden bg-stone-900 mb-4 rounded-2xl">
                       <Image
                         src={product.image}
                         alt={product.name}
@@ -270,7 +270,7 @@ function FragrancesPage() {
                         <button
                           key={s.ml}
                           onClick={(e) => { e.preventDefault(); setSelectedSizes((prev) => ({ ...prev, [product.slug]: s.ml })); }}
-                          className={`px-3 py-1.5 text-xs font-sans tracking-wider border rounded-sm transition-all duration-200 cursor-pointer ${
+                          className={`px-3 py-1.5 text-xs font-sans tracking-wider border rounded-full transition-all duration-200 cursor-pointer ${
                             selectedMl === s.ml
                               ? "border-champagne-gold bg-champagne-gold text-matte-black font-medium"
                               : "border-stone-200 text-secondary-text hover:border-champagne-gold hover:text-champagne-gold"

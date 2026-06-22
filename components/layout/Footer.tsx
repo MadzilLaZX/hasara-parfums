@@ -1,19 +1,35 @@
-﻿import Link from "next/link";
+"use client";
+
+import Link from "next/link";
 import Image from "next/image";
+import { motion } from "motion/react";
 import {
   WhatsappLogo,
   InstagramLogo,
   FacebookLogo,
   EnvelopeSimple,
   Phone,
-} from "@phosphor-icons/react/dist/ssr";
+} from "@phosphor-icons/react";
 import { getWhatsAppLink } from "@/data/products";
 
 export default function Footer() {
   return (
     <footer className="bg-matte-black text-champagne-white" id="contact">
+
+      {/* ── Animated golden entry line — expands from centre, fades to black ── */}
+      <div className="px-6 lg:px-12 pt-12">
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
+          style={{ transformOrigin: "center" }}
+          className="h-px bg-gradient-to-r from-transparent via-champagne-gold/55 to-transparent"
+        />
+      </div>
+
       {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-20 pb-12">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 pt-16 pb-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand */}
           <div className="lg:col-span-2">
@@ -32,7 +48,7 @@ export default function Footer() {
               href={getWhatsAppLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.2em] uppercase font-sans font-medium transition-all duration-300 cursor-pointer"
+              className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.2em] uppercase font-sans font-medium transition-all duration-300 cursor-pointer rounded-full"
             >
               <WhatsappLogo size={16} weight="fill" />
               Order via WhatsApp
@@ -122,10 +138,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Gold Divider */}
-      <div className="border-t border-champagne-gold/20" />
-
-      {/* Bottom Bar */}
+      {/* Bottom Bar — no border above it */}
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-champagne-white/30 text-xs font-sans tracking-widest uppercase">
           &copy; {new Date().getFullYear()} Hasara Parfums. All rights reserved.
@@ -161,10 +174,19 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Velor Signature */}
+      {/* ── Velor signature with animated expanding lines ── */}
       <div className="px-8 lg:px-20 py-6">
         <div className="flex items-center gap-8 lg:gap-12">
-          <div className="flex-1 h-px bg-champagne-gold/20" />
+          {/* Left line — expands from text outward, fades left */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            style={{ transformOrigin: "right" }}
+            className="flex-1 h-px bg-gradient-to-l from-champagne-gold/55 via-champagne-gold/20 to-transparent"
+          />
+
           <p className="flex-shrink-0 font-sans text-[11px] tracking-[0.22em] text-champagne-white/30 whitespace-nowrap">
             Designed &amp; Developed by{" "}
             <a
@@ -176,7 +198,16 @@ export default function Footer() {
               Velor
             </a>
           </p>
-          <div className="flex-1 h-px bg-champagne-gold/20" />
+
+          {/* Right line — expands from text outward, fades right */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            style={{ transformOrigin: "left" }}
+            className="flex-1 h-px bg-gradient-to-r from-champagne-gold/55 via-champagne-gold/20 to-transparent"
+          />
         </div>
       </div>
 

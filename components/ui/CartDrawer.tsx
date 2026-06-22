@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { X, Trash, WhatsappLogo, Tag, CheckCircle } from "@phosphor-icons/react";
+import { X, Trash, WhatsappLogo, Tag, CheckCircle, Minus, Plus } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "motion/react";
 import { useCart } from "@/context/CartContext";
 
@@ -16,7 +16,7 @@ interface Props {
 }
 
 export default function CartDrawer({ open, onClose }: Props) {
-  const { items, removeItem, clearCart, total } = useCart();
+  const { items, removeItem, updateQuantity, clearCart, total } = useCart();
   const [promoCode, setPromoCode] = useState("");
   const [promoApplied, setPromoApplied] = useState(false);
   const [promoError, setPromoError] = useState("");
@@ -35,7 +35,9 @@ export default function CartDrawer({ open, onClose }: Props) {
 
   function checkout() {
     if (items.length === 0) return;
-    const lines = items.map((i) => `• ${i.name} — ${i.ml}ml — ৳${i.price.toLocaleString()}`).join("\n");
+    const lines = items.map(
+      (i) => `• ${i.quantity}× ${i.name} — ${i.ml}ml — ৳${(i.price * i.quantity).toLocaleString()}`
+    ).join("\n");
     let msg = `Hello Hasara Parfums,\n\nI would like to place an order:\n\n${lines}\n\nSubtotal: ৳${total.toLocaleString()}`;
     if (promoApplied) {
       msg += `\nPromo Code: ${VALID_CODE} (10% OFF)\nDiscount: -৳${discountAmount.toLocaleString()}\nTotal: ৳${finalTotal.toLocaleString()}`;
@@ -45,6 +47,8 @@ export default function CartDrawer({ open, onClose }: Props) {
     msg += `\n\nPlease confirm my order. Thank you!`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
   }
+
+  const totalUnits = items.reduce((sum, i) => sum + i.quantity, 0);
 
   return (
     <AnimatePresence>
@@ -71,7 +75,9 @@ export default function CartDrawer({ open, onClose }: Props) {
             <div className="flex items-center justify-between px-6 py-5 border-b border-champagne-gold/15">
               <div>
                 <p className="font-serif text-champagne-white text-xl font-light tracking-wide">Your Cart</p>
-                <p className="font-sans text-champagne-white/40 text-xs tracking-wider mt-0.5">{items.length} item{items.length !== 1 ? "s" : ""}</p>
+                <p className="font-sans text-champagne-white/40 text-xs tracking-wider mt-0.5">
+                  {totalUnits} unit{totalUnits !== 1 ? "s" : ""}
+                </p>
               </div>
               <button onClick={onClose} className="text-champagne-white/40 hover:text-champagne-white transition-colors cursor-pointer">
                 <X size={20} />
@@ -87,21 +93,52 @@ export default function CartDrawer({ open, onClose }: Props) {
                 </div>
               ) : (
                 items.map((item, i) => (
-                  <div key={`${item.slug}-${item.ml}-${i}`} className="flex gap-4 border border-champagne-gold/10 p-4">
-                    <div className="relative w-16 h-20 flex-shrink-0 overflow-hidden bg-stone-900">
-                      <Image src={item.image} alt={item.name} fill className="object-cover" sizes="64px" />
+                  <div key={`${item.slug}-${item.ml}-${i}`} className="border border-champagne-gold/10 p-4 rounded-xl">
+                    <div className="flex gap-4">
+                      <div className="relative w-16 h-20 flex-shrink-0 overflow-hidden bg-stone-900 rounded-xl">
+                        <Image src={item.image} alt={item.name} fill className="object-cover" sizes="64px" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-serif text-champagne-white text-base font-light leading-snug">{item.name}</p>
+                        <p className="font-sans text-champagne-white/40 text-xs tracking-wider mt-1">{item.ml}ml</p>
+                        <p className="font-serif text-champagne-gold text-lg mt-1">
+                          ৳{(item.price * item.quantity).toLocaleString()}
+                        </p>
+                        {item.quantity > 1 && (
+                          <p className="font-sans text-champagne-white/25 text-[11px] mt-0.5">
+                            ৳{item.price.toLocaleString()} each
+                          </p>
+                        )}
+                      </div>
+                      <button
+                        onClick={() => removeItem(item.slug, item.ml)}
+                        className="text-champagne-white/20 hover:text-red-400 transition-colors cursor-pointer self-start mt-1 flex-shrink-0"
+                        aria-label="Remove item"
+                      >
+                        <Trash size={14} />
+                      </button>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="font-serif text-champagne-white text-base font-light leading-snug">{item.name}</p>
-                      <p className="font-sans text-champagne-white/40 text-xs tracking-wider mt-1">{item.ml}ml</p>
-                      <p className="font-serif text-champagne-gold text-lg mt-2">৳{item.price.toLocaleString()}</p>
+
+                    {/* Quantity controls */}
+                    <div className="flex items-center gap-0 mt-3 border border-champagne-gold/20 rounded-full w-fit overflow-hidden">
+                      <button
+                        onClick={() => updateQuantity(item.slug, item.ml, item.quantity - 1)}
+                        className="w-9 h-9 flex items-center justify-center text-champagne-gold hover:bg-champagne-gold/10 transition-colors cursor-pointer border-r border-champagne-gold/20"
+                        aria-label="Decrease quantity"
+                      >
+                        <Minus size={13} />
+                      </button>
+                      <span className="w-10 text-center font-sans text-champagne-white text-sm">
+                        {item.quantity}
+                      </span>
+                      <button
+                        onClick={() => updateQuantity(item.slug, item.ml, item.quantity + 1)}
+                        className="w-9 h-9 flex items-center justify-center text-champagne-gold hover:bg-champagne-gold/10 transition-colors cursor-pointer border-l border-champagne-gold/20"
+                        aria-label="Increase quantity"
+                      >
+                        <Plus size={13} />
+                      </button>
                     </div>
-                    <button
-                      onClick={() => removeItem(item.slug, item.ml)}
-                      className="text-champagne-white/25 hover:text-red-400 transition-colors cursor-pointer self-start mt-1"
-                    >
-                      <Trash size={15} />
-                    </button>
                   </div>
                 ))
               )}
@@ -121,20 +158,20 @@ export default function CartDrawer({ open, onClose }: Props) {
                         onChange={(e) => { setPromoCode(e.target.value); setPromoError(""); }}
                         placeholder="Promo code"
                         disabled={promoApplied}
-                        className="w-full pl-9 pr-3 py-2.5 bg-white/5 border border-champagne-gold/20 text-champagne-white text-xs tracking-[0.15em] uppercase font-sans placeholder:text-champagne-white/20 focus:outline-none focus:border-champagne-gold/50 disabled:opacity-50"
+                        className="w-full pl-9 pr-3 py-2.5 bg-white/5 border border-champagne-gold/20 rounded-full text-champagne-white text-xs tracking-[0.15em] uppercase font-sans placeholder:text-champagne-white/20 focus:outline-none focus:border-champagne-gold/50 disabled:opacity-50"
                       />
                     </div>
                     {promoApplied ? (
                       <button
                         onClick={() => { setPromoApplied(false); setPromoCode(""); }}
-                        className="px-4 py-2.5 border border-red-500/40 text-red-400 text-xs tracking-[0.15em] uppercase font-sans hover:bg-red-500/10 transition-colors cursor-pointer"
+                        className="px-4 py-2.5 border border-red-500/40 text-red-400 text-xs tracking-[0.15em] uppercase font-sans hover:bg-red-500/10 transition-colors cursor-pointer rounded-full"
                       >
                         Remove
                       </button>
                     ) : (
                       <button
                         onClick={applyPromo}
-                        className="px-4 py-2.5 border border-champagne-gold/40 text-champagne-gold text-xs tracking-[0.15em] uppercase font-sans hover:bg-champagne-gold/10 transition-colors cursor-pointer"
+                        className="px-4 py-2.5 border border-champagne-gold/40 text-champagne-gold text-xs tracking-[0.15em] uppercase font-sans hover:bg-champagne-gold/10 transition-colors cursor-pointer rounded-full"
                       >
                         Apply
                       </button>

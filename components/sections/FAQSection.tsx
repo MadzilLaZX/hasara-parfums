@@ -40,7 +40,7 @@ export default function FAQSection() {
           {FAQS.map((faq, i) => (
             <div
               key={i}
-              className={`border transition-all duration-300 ${
+              className={`border rounded-2xl overflow-hidden transition-all duration-300 ${
                 open === i
                   ? "border-champagne-gold/50 bg-champagne-gold/5"
                   : "border-champagne-gold/15 bg-white/[0.02] hover:border-champagne-gold/30"

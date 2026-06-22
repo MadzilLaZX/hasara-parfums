@@ -80,7 +80,7 @@ export default function WhyHasara() {
                 }}
                 className="text-center group"
               >
-                <div className="w-14 h-14 border border-champagne-gold/40 flex items-center justify-center mx-auto mb-5 group-hover:bg-champagne-gold group-hover:border-champagne-gold transition-all duration-300">
+                <div className="w-14 h-14 border border-champagne-gold/40 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:bg-champagne-gold group-hover:border-champagne-gold transition-all duration-300">
                   <Icon
                     size={22}
                     weight="light"

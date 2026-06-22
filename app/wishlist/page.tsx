@@ -117,7 +117,7 @@ export default function WishlistPage() {
                       const selectedSizeObj = product.sizes.find((s) => s.ml === selectedMl) ?? product.sizes[0];
                       return (
                         <div key={product.slug} className="group">
-                          <div className="relative aspect-[3/4] overflow-hidden bg-stone-900 mb-4 rounded-sm">
+                          <div className="relative aspect-[3/4] overflow-hidden bg-stone-900 mb-4 rounded-2xl">
                             <Link href={`/fragrances/${product.slug}`}>
                               <Image src={product.image} alt={product.name} fill className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
                             </Link>
@@ -133,7 +133,7 @@ export default function WishlistPage() {
                           <div className="flex gap-2 flex-wrap mb-3">
                             {product.sizes.map((s) => (
                               <button key={s.ml} onClick={() => setSizes((prev) => ({ ...prev, [product.slug]: s.ml }))}
-                                className={`px-3 py-1.5 text-xs font-sans tracking-wider border rounded-sm transition-all duration-200 cursor-pointer ${selectedMl === s.ml ? "border-champagne-gold bg-champagne-gold text-matte-black font-medium" : "border-stone-200 text-secondary-text hover:border-champagne-gold hover:text-champagne-gold"}`}>
+                                className={`px-3 py-1.5 text-xs font-sans tracking-wider border rounded-full transition-all duration-200 cursor-pointer ${selectedMl === s.ml ? "border-champagne-gold bg-champagne-gold text-matte-black font-medium" : "border-stone-200 text-secondary-text hover:border-champagne-gold hover:text-champagne-gold"}`}>
                                 {s.ml}ml
                               </button>
                             ))}
@@ -157,7 +157,7 @@ export default function WishlistPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                     {wishlistUpcoming.map((fragrance) => (
                       <div key={fragrance.slug} className="group">
-                        <Link href={`/upcoming/${fragrance.slug}`} className="block relative aspect-[3/4] bg-[#0a0908] border border-champagne-gold/20 overflow-hidden mb-4 hover:border-champagne-gold/40 transition-all duration-500">
+                        <Link href={`/upcoming/${fragrance.slug}`} className="block relative aspect-[3/4] bg-[#0a0908] border border-champagne-gold/20 overflow-hidden mb-4 rounded-2xl hover:border-champagne-gold/40 transition-all duration-500">
                           <div className="absolute inset-0 opacity-8" style={{ backgroundImage: "linear-gradient(rgba(212,175,55,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.3) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
                           <div className="absolute top-2 left-2 w-3 h-3 border-t border-l border-champagne-gold/40" />
                           <div className="absolute top-2 right-2 w-3 h-3 border-t border-r border-champagne-gold/40" />

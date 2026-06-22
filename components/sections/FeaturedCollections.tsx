@@ -52,7 +52,7 @@ export default function FeaturedCollections() {
             >
               <Link
                 href={`/fragrances?collection=${col.id}`}
-                className="group block relative overflow-hidden cursor-pointer rounded-sm"
+                className="group block relative overflow-hidden cursor-pointer rounded-2xl"
               >
                 <div className="relative aspect-[2/3] overflow-hidden bg-stone-900">
                   <Image

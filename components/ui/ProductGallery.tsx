@@ -16,7 +16,7 @@ export default function ProductGallery({ cover, gallery, name }: Props) {
   return (
     <div className="flex flex-col gap-4">
       {/* Main Image */}
-      <div className="relative aspect-[4/5] overflow-hidden bg-stone-900">
+      <div className="relative aspect-[4/5] overflow-hidden bg-stone-900 rounded-2xl">
         <Image
           key={active}
           src={all[active]}
@@ -35,7 +35,7 @@ export default function ProductGallery({ cover, gallery, name }: Props) {
             <button
               key={i}
               onClick={() => setActive(i)}
-              className={`relative flex-shrink-0 w-16 h-20 overflow-hidden transition-all duration-200 cursor-pointer ${
+              className={`relative flex-shrink-0 w-16 h-20 overflow-hidden rounded-xl transition-all duration-200 cursor-pointer ${
                 active === i
                   ? "ring-1 ring-champagne-gold opacity-100"
                   : "opacity-40 hover:opacity-70"

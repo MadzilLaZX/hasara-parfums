@@ -18,7 +18,7 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
-      {/* Video Background */}
+
       <video
         ref={videoRef}
         autoPlay
@@ -26,7 +26,6 @@ export default function HeroSection() {
         loop
         playsInline
         preload="auto"
-        poster="/images/imperial-royale.jpg"
         className="absolute inset-0 w-full h-full object-cover"
         aria-hidden="true"
       >
@@ -45,7 +44,6 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 0.3 }}
           className="mb-10"
         >
-          {/* Real logo PNG */}
           <Image
             src="/images/logo.png"
             alt="Hasara Parfums"
@@ -56,7 +54,6 @@ export default function HeroSection() {
           />
         </motion.div>
 
-        {/* Big tagline — main hero text */}
         <motion.p
           initial={shouldReduce ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

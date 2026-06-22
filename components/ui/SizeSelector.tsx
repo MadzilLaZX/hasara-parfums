@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { WhatsappLogo, ShoppingBag, CheckCircle, TestTube } from "@phosphor-icons/react";
+import { WhatsappLogo, ShoppingBag, Minus, Plus, TestTube } from "@phosphor-icons/react";
 import { type FragranceSize, WHATSAPP_NUMBER } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 
@@ -17,10 +17,12 @@ interface Props {
 export default function SizeSelector({ productName, productSlug, productImage, sizes }: Props) {
   const [selectedSize, setSelectedSize] = useState<FragranceSize>(sizes[1]);
   const [isTester, setIsTester] = useState(false);
-  const [added, setAdded] = useState(false);
-  const { addItem } = useCart();
+  const { addItem, updateQuantity, items } = useCart();
 
   const activeSize = isTester ? TESTER : selectedSize;
+
+  const cartItem = items.find((i) => i.slug === productSlug && i.ml === activeSize.ml);
+  const qty = cartItem?.quantity ?? 0;
 
   const whatsAppLink = (() => {
     const sizeLabel = isTester ? "1ml Tester" : `${activeSize.ml}ml`;
@@ -28,8 +30,7 @@ export default function SizeSelector({ productName, productSlug, productImage, s
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
   })();
 
-  function handleAddToCart() {
-    const label = isTester ? "1ml Tester" : `${activeSize.ml}ml`;
+  function handleAdd() {
     addItem({
       slug: productSlug,
       name: `${productName}${isTester ? " (Tester)" : ""}`,
@@ -37,8 +38,6 @@ export default function SizeSelector({ productName, productSlug, productImage, s
       ml: activeSize.ml,
       price: activeSize.price,
     });
-    setAdded(true);
-    setTimeout(() => setAdded(false), 2000);
   }
 
   return (
@@ -51,7 +50,7 @@ export default function SizeSelector({ productName, productSlug, productImage, s
           const isSelected = !isTester && selectedSize.ml === size.ml;
           return (
             <button key={size.ml} onClick={() => { setSelectedSize(size); setIsTester(false); }}
-              className={`w-full flex items-center justify-between px-5 py-4 border transition-all duration-200 text-left cursor-pointer ${isSelected ? "border-champagne-gold bg-champagne-gold/8" : "border-champagne-white/15 hover:border-champagne-white/35"}`}
+              className={`w-full flex items-center justify-between px-5 py-4 border rounded-xl transition-all duration-200 text-left cursor-pointer ${isSelected ? "border-champagne-gold bg-champagne-gold/8" : "border-champagne-white/15 hover:border-champagne-white/35"}`}
             >
               <div className="flex items-center gap-3">
                 <span className={`w-3.5 h-3.5 rounded-full border flex-shrink-0 transition-all duration-200 ${isSelected ? "border-champagne-gold bg-champagne-gold" : "border-champagne-white/30"}`} />
@@ -73,7 +72,7 @@ export default function SizeSelector({ productName, productSlug, productImage, s
       {/* 1ml Tester */}
       <button
         onClick={() => setIsTester(true)}
-        className={`w-full flex items-center justify-between px-5 py-4 border transition-all duration-200 text-left cursor-pointer mb-8 ${isTester ? "border-champagne-gold bg-champagne-gold/8" : "border-champagne-white/15 hover:border-champagne-white/35"}`}
+        className={`w-full flex items-center justify-between px-5 py-4 border rounded-xl transition-all duration-200 text-left cursor-pointer mb-8 ${isTester ? "border-champagne-gold bg-champagne-gold/8" : "border-champagne-white/15 hover:border-champagne-white/35"}`}
       >
         <div className="flex items-center gap-3">
           <span className={`w-3.5 h-3.5 rounded-full border flex-shrink-0 transition-all duration-200 ${isTester ? "border-champagne-gold bg-champagne-gold" : "border-champagne-white/30"}`} />
@@ -88,21 +87,41 @@ export default function SizeSelector({ productName, productSlug, productImage, s
         </div>
       </button>
 
-      {/* Add to Cart */}
-      <button
-        onClick={handleAddToCart}
-        className={`flex items-center justify-center gap-3 w-full py-4 border text-sm tracking-[0.2em] uppercase font-sans font-medium transition-all duration-300 cursor-pointer rounded-sm mb-3 ${
-          added
-            ? "border-green-500 text-green-400 bg-green-500/10"
-            : "border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black"
-        }`}
-      >
-        {added ? <><CheckCircle size={16} weight="fill" /> Added to Cart</> : <><ShoppingBag size={16} /> Add to Cart</>}
-      </button>
+      {/* Add to Cart / Quantity Counter */}
+      {qty > 0 ? (
+        <div className="flex items-center w-full border border-champagne-gold rounded-xl mb-3 overflow-hidden">
+          <button
+            onClick={() => updateQuantity(productSlug, activeSize.ml, qty - 1)}
+            className="flex-shrink-0 w-14 h-14 flex items-center justify-center text-champagne-gold hover:bg-champagne-gold/10 active:bg-champagne-gold/20 transition-colors cursor-pointer border-r border-champagne-gold/30"
+            aria-label="Remove one"
+          >
+            <Minus size={16} />
+          </button>
+          <div className="flex-1 flex flex-col items-center justify-center py-2">
+            <span className="font-serif text-champagne-gold text-2xl font-light leading-none">{qty}</span>
+            <span className="font-sans text-champagne-white/30 text-[10px] tracking-[0.2em] uppercase mt-0.5">in cart</span>
+          </div>
+          <button
+            onClick={handleAdd}
+            className="flex-shrink-0 w-14 h-14 flex items-center justify-center text-champagne-gold hover:bg-champagne-gold/10 active:bg-champagne-gold/20 transition-colors cursor-pointer border-l border-champagne-gold/30"
+            aria-label="Add one more"
+          >
+            <Plus size={16} />
+          </button>
+        </div>
+      ) : (
+        <button
+          onClick={handleAdd}
+          className="flex items-center justify-center gap-3 w-full py-4 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-sm tracking-[0.2em] uppercase font-sans font-medium transition-all duration-300 cursor-pointer rounded-xl mb-3"
+        >
+          <ShoppingBag size={16} />
+          Add to Cart
+        </button>
+      )}
 
       {/* Direct WhatsApp */}
       <a href={whatsAppLink} target="_blank" rel="noopener noreferrer"
-        className="flex items-center justify-center gap-3 w-full py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-sm tracking-[0.25em] uppercase font-sans font-medium transition-all duration-300 cursor-pointer rounded-sm"
+        className="flex items-center justify-center gap-3 w-full py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-sm tracking-[0.25em] uppercase font-sans font-medium transition-all duration-300 cursor-pointer rounded-xl"
       >
         <WhatsappLogo size={18} weight="fill" />
         Contact on WhatsApp

@@ -21,7 +21,7 @@ export default function BrandStory() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <div className="relative aspect-[3/4] overflow-hidden">
+            <div className="relative aspect-[3/4] overflow-hidden rounded-2xl">
               <Image
                 src="/images/founder.png"
                 alt="Sardar Md Abid Hasan — Founder, Hasara Parfums"
