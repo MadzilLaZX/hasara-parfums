@@ -7,18 +7,18 @@ import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 
 const TABS = [
   {
-    id: "signature",
-    label: "Signature Moments",
-    src: "/video/video-lifestyle.mp4",
-    cover: "/images/cover-signature.jpg",
-    caption: "The Hasara experience in everyday life",
-  },
-  {
     id: "details",
     label: "Product Details",
     src: "/video/video-don.mp4",
     cover: "/images/cover-product.jpg",
     caption: "A fragrance journey with Don Sumdany",
+  },
+  {
+    id: "signature",
+    label: "Signature Moments",
+    src: "/video/video-lifestyle.mp4",
+    cover: "/images/cover-signature.jpg",
+    caption: "The Hasara experience in everyday life",
   },
   {
     id: "experience",
