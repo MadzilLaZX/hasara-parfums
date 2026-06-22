@@ -11,6 +11,7 @@ const TABS = [
     label: "Product Details",
     src: "/video/video-don.mp4",
     cover: "/images/cover-product.jpg",
+    coverPosition: "center center",
     caption: "A fragrance journey with Don Sumdany",
   },
   {
@@ -18,6 +19,7 @@ const TABS = [
     label: "Signature Moments",
     src: "/video/video-lifestyle.mp4",
     cover: "/images/cover-signature.jpg",
+    coverPosition: "center center",
     caption: "The Hasara experience in everyday life",
   },
   {
@@ -25,6 +27,7 @@ const TABS = [
     label: "Customer Experience",
     src: "/video/video-shoumik.mp4",
     cover: "/images/cover-customer.jpg",
+    coverPosition: "20% center",
     caption: "First impressions with Shoumik Ahmed",
   },
 ];
@@ -155,6 +158,7 @@ export default function VideoShowcase() {
                       alt={TABS[activeIdx].caption}
                       fill
                       className="object-cover"
+                      style={{ objectPosition: TABS[activeIdx].coverPosition }}
                       sizes="384px"
                       priority={activeIdx === 0}
                     />
