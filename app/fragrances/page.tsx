@@ -12,7 +12,7 @@ import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import WishlistButton from "@/components/ui/WishlistButton";
 import { fragrances } from "@/data/products";
-import { upcomingFragrances, upcomingMens, upcomingWomens } from "@/data/upcoming";
+import { upcomingFragrances } from "@/data/upcoming";
 import { useWishlist } from "@/context/WishlistContext";
 
 const WHATSAPP_NUMBER = "8801767067130";
@@ -98,10 +98,7 @@ function FragrancesPage() {
   }, [searchParams]);
 
   const isUpcoming = activeCollection === "upcoming";
-
-  const upcomingFiltered = isUpcoming
-    ? upcomingFragrances
-    : [];
+  const isAll = activeCollection === "all";
 
   const filtered = isUpcoming ? [] : fragrances.filter((f) => {
     if (activeCollection !== "all" && f.collection !== activeCollection) return false;
@@ -267,8 +264,9 @@ function FragrancesPage() {
       <section className="px-6 lg:px-12 py-16 lg:py-24">
         <div className="max-w-7xl mx-auto">
           {isUpcoming ? (
+            // Dedicated upcoming-only view
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-10">
-              {upcomingFiltered.map((f, i) => (
+              {upcomingFragrances.map((f, i) => (
                 <motion.div
                   key={f.slug}
                   initial={shouldReduce ? false : { opacity: 0, y: 24 }}
@@ -279,7 +277,7 @@ function FragrancesPage() {
                 </motion.div>
               ))}
             </div>
-          ) : filtered.length === 0 ? (
+          ) : filtered.length === 0 && !isAll ? (
             <div className="text-center py-24">
               <p className="font-serif text-primary-text text-2xl mb-4">No parfums match your filters</p>
               <button onClick={clearFilters} className="text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans hover:underline cursor-pointer">
@@ -287,80 +285,108 @@ function FragrancesPage() {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-10">
-              {filtered.map((product, i) => {
-                const selectedMl = selectedSizes[product.slug];
-                const selectedSizeObj = product.sizes.find((s) => s.ml === selectedMl) ?? product.sizes[0];
-                return (
-                  <motion.div
-                    key={product.id}
-                    initial={shouldReduce ? false : { opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                    className="group"
-                  >
-                    <Link href={`/fragrances/${product.slug}`} className="block relative aspect-[3/4] overflow-hidden bg-stone-900 mb-4 rounded-2xl">
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      />
-                      <div className="absolute top-3 right-3 bg-matte-black/50 backdrop-blur-sm rounded-full p-2">
-                        <WishlistButton slug={product.slug} />
-                      </div>
-                    </Link>
+            <>
+              {/* Regular fragrances */}
+              {filtered.length > 0 && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-10">
+                  {filtered.map((product, i) => {
+                    const selectedMl = selectedSizes[product.slug];
+                    const selectedSizeObj = product.sizes.find((s) => s.ml === selectedMl) ?? product.sizes[0];
+                    return (
+                      <motion.div
+                        key={product.id}
+                        initial={shouldReduce ? false : { opacity: 0, y: 24 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                        className="group"
+                      >
+                        <Link href={`/fragrances/${product.slug}`} className="block relative aspect-[3/4] overflow-hidden bg-stone-900 mb-4 rounded-2xl">
+                          <Image
+                            src={product.image}
+                            alt={product.name}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                          />
+                          <div className="absolute top-3 right-3 bg-matte-black/50 backdrop-blur-sm rounded-full p-2">
+                            <WishlistButton slug={product.slug} />
+                          </div>
+                        </Link>
 
-                    <p className="mb-2">
-                      <span className="inline-flex items-center gap-1 px-3 py-[3px] border border-champagne-gold/50 bg-champagne-gold/[0.07] rounded-full font-sans text-[10px] tracking-[0.2em] uppercase">
-                        <span className="text-stone-500">Collection For</span>
-                        <span className="font-bold tracking-[0.3em]" style={{ WebkitTextStroke: "0.6px #000", color: "#C8A96B" }}>
-                          {product.collectionLabel.replace("Collection For ", "")}
-                        </span>
-                      </span>
-                    </p>
+                        <p className="mb-2">
+                          <span className="inline-flex items-center gap-1 px-3 py-[3px] border border-champagne-gold/50 bg-champagne-gold/[0.07] rounded-full font-sans text-[10px] tracking-[0.2em] uppercase">
+                            <span className="text-stone-500">Collection For</span>
+                            <span className="font-bold tracking-[0.3em]" style={{ WebkitTextStroke: "0.6px #000", color: "#C8A96B" }}>
+                              {product.collectionLabel.replace("Collection For ", "")}
+                            </span>
+                          </span>
+                        </p>
 
-                    <Link href={`/fragrances/${product.slug}`}>
-                      <h2 className="font-serif text-primary-text text-xl font-medium hover:text-champagne-gold transition-colors duration-300 cursor-pointer leading-tight">
-                        {product.name}
-                      </h2>
-                    </Link>
+                        <Link href={`/fragrances/${product.slug}`}>
+                          <h2 className="font-serif text-primary-text text-xl font-medium hover:text-champagne-gold transition-colors duration-300 cursor-pointer leading-tight">
+                            {product.name}
+                          </h2>
+                        </Link>
 
-                    <p className="font-sans text-champagne-gold text-2xl lg:text-3xl font-medium tracking-wide mt-1.5 mb-1 transition-all duration-300">
-                      ৳{selectedSizeObj.price.toLocaleString()}
-                    </p>
+                        <p className="font-sans text-champagne-gold text-2xl lg:text-3xl font-medium tracking-wide mt-1.5 mb-1 transition-all duration-300">
+                          ৳{selectedSizeObj.price.toLocaleString()}
+                        </p>
 
-                    <p className="text-secondary-text text-xs font-sans mb-4 italic">
-                      Inspired by {product.inspiredBy}
-                    </p>
+                        <p className="text-secondary-text text-xs font-sans mb-4 italic">
+                          Inspired by {product.inspiredBy}
+                        </p>
 
-                    <div className="flex gap-2 flex-wrap mb-4">
-                      {product.sizes.map((s) => (
-                        <button
-                          key={s.ml}
-                          onClick={(e) => { e.preventDefault(); setSelectedSizes((prev) => ({ ...prev, [product.slug]: s.ml })); }}
-                          className={`px-3 py-1.5 text-xs font-sans tracking-wider border rounded-full transition-all duration-200 cursor-pointer ${
-                            selectedMl === s.ml
-                              ? "border-champagne-gold bg-champagne-gold text-matte-black font-medium"
-                              : "border-stone-200 text-secondary-text hover:border-champagne-gold hover:text-champagne-gold"
-                          }`}
+                        <div className="flex gap-2 flex-wrap mb-4">
+                          {product.sizes.map((s) => (
+                            <button
+                              key={s.ml}
+                              onClick={(e) => { e.preventDefault(); setSelectedSizes((prev) => ({ ...prev, [product.slug]: s.ml })); }}
+                              className={`px-3 py-1.5 text-xs font-sans tracking-wider border rounded-full transition-all duration-200 cursor-pointer ${
+                                selectedMl === s.ml
+                                  ? "border-champagne-gold bg-champagne-gold text-matte-black font-medium"
+                                  : "border-stone-200 text-secondary-text hover:border-champagne-gold hover:text-champagne-gold"
+                              }`}
+                            >
+                              {s.ml}ml
+                            </button>
+                          ))}
+                        </div>
+
+                        <Link
+                          href={`/fragrances/${product.slug}`}
+                          className="text-secondary-text hover:text-champagne-gold text-xs tracking-[0.15em] uppercase font-sans transition-colors duration-300"
                         >
-                          {s.ml}ml
-                        </button>
-                      ))}
-                    </div>
+                          View Details →
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              )}
 
-                    <Link
-                      href={`/fragrances/${product.slug}`}
-                      className="text-secondary-text hover:text-champagne-gold text-xs tracking-[0.15em] uppercase font-sans transition-colors duration-300"
-                    >
-                      View Details →
-                    </Link>
-                  </motion.div>
-                );
-              })}
-            </div>
+              {/* Upcoming section — only visible in "All" view */}
+              {isAll && (
+                <div className="mt-16 lg:mt-20">
+                  <div className="flex items-center gap-6 mb-10">
+                    <div className="h-px flex-1 bg-stone-200" />
+                    <p className="font-sans text-secondary-text text-[10px] tracking-[0.4em] uppercase flex-shrink-0">Upcoming Releases</p>
+                    <div className="h-px flex-1 bg-stone-200" />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-10">
+                    {upcomingFragrances.map((f, i) => (
+                      <motion.div
+                        key={f.slug}
+                        initial={shouldReduce ? false : { opacity: 0, y: 24 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        <UpcomingCard fragrance={f} />
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>

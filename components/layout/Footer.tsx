@@ -62,6 +62,11 @@ export default function Footer() {
             </p>
             <ul className="space-y-3">
               <li>
+                <Link href="/fragrances" className="text-champagne-white/70 hover:text-champagne-gold text-sm font-sans transition-colors duration-300">
+                  Our Parfums
+                </Link>
+              </li>
+              <li>
                 <Link href="/fragrances?collection=mens" className="text-champagne-white/70 hover:text-champagne-gold text-sm font-sans transition-colors duration-300">
                   Collection For Him
                 </Link>
@@ -77,7 +82,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/fragrances?collection=upcoming" className="text-champagne-white/70 hover:text-champagne-gold text-sm font-sans transition-colors duration-300">
+                <Link href="/upcoming" className="text-champagne-white/70 hover:text-champagne-gold text-sm font-sans transition-colors duration-300">
                   Upcoming Releases
                 </Link>
               </li>
