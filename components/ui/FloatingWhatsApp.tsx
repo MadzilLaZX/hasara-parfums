@@ -58,7 +58,7 @@ export default function FloatingWhatsApp() {
               >
                 <p className="font-serif text-champagne-gold text-sm mb-1">Chat with us</p>
                 <p className="text-champagne-white/60 text-xs leading-snug">
-                  Order, inquire, or get fragrance advice via WhatsApp.
+                  Order, inquire, or get parfum advice via WhatsApp.
                 </p>
               </motion.div>
             )}

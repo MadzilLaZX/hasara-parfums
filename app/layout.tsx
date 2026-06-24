@@ -30,30 +30,30 @@ const raleway = Raleway({
 export const metadata: Metadata = {
   metadataBase: new URL("https://hasaraparfums.com"),
   title: {
-    default: "Hasara Parfums | Luxury Fragrance House",
+    default: "Hasara Parfums | Luxury Parfum House",
     template: "%s | Hasara Parfums",
   },
   description:
-    "Discover Hasara Parfums — a luxury fragrance house offering premium oud, signature, men's and women's collections. Exquisite scents crafted for those who speak before they speak. Order via WhatsApp.",
+    "Discover Hasara Parfums — a luxury parfum house offering premium oud, signature, men's and women's collections. Exquisite scents crafted for those who speak before they speak. Order via WhatsApp.",
   keywords: [
     "luxury perfume Bangladesh",
     "Hasara Parfums",
     "oud perfume BD",
-    "premium fragrance Bangladesh",
+    "premium parfum Bangladesh",
     "perfume shop Bangladesh",
-    "luxury fragrance house",
+    "luxury parfum house",
     "oud collection",
     "signature perfume",
     "best perfume BD",
-    "fragrance WhatsApp order",
+    "parfum WhatsApp order",
   ],
   authors: [{ name: "Hasara Parfums" }],
   creator: "Hasara Parfums",
   publisher: "Hasara Parfums",
   openGraph: {
-    title: "Hasara Parfums | Luxury Fragrance House",
+    title: "Hasara Parfums | Luxury Parfum House",
     description:
-      "Premium luxury fragrances crafted for those who speak before they speak. Explore our signature oud, men's and women's collections.",
+      "Premium luxury parfums crafted for those who speak before they speak. Explore our signature oud, men's and women's collections.",
     url: "https://hasaraparfums.com",
     siteName: "Hasara Parfums",
     locale: "en_US",
@@ -61,9 +61,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hasara Parfums | Luxury Fragrance House",
+    title: "Hasara Parfums | Luxury Parfum House",
     description:
-      "Premium luxury fragrances. Elegance in every drop. Order via WhatsApp.",
+      "Premium luxury parfums. Elegance in every drop. Order via WhatsApp.",
   },
   robots: {
     index: true,
@@ -92,7 +92,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   name: "Hasara Parfums",
-  description: "Luxury fragrance house offering premium oud and signature fragrances.",
+  description: "Luxury parfum house offering premium oud and signature parfums.",
   url: "https://hasaraparfums.com",
   telephone: "+8801767067130",
   email: "hasara.byabidhasan@gmail.com",

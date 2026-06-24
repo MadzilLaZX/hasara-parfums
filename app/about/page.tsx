@@ -111,7 +111,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             {[
               { value: "2025", label: "Founded" },
-              { value: "11", label: "Fragrances" },
+              { value: "11", label: "Parfums" },
               { value: "40%", label: "Concentration" },
               { value: "8+", label: "Hours Longevity" },
             ].map((stat) => (

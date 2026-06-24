@@ -18,7 +18,7 @@ function UpcomingCard({ fragrance }: { fragrance: (typeof upcomingFragrances)[0]
 
   function notifyWhatsApp(e: React.MouseEvent) {
     e.preventDefault();
-    const msg = `Hello Hasara Parfums,\n\nI am very interested in your upcoming fragrance:\n\n✦ ${fragrance.name}\n\nPlease notify me when it launches!\n\nThank you.`;
+    const msg = `Hello Hasara Parfums,\n\nI am very interested in your upcoming parfum:\n\n✦ ${fragrance.name}\n\nPlease notify me when it launches!\n\nThank you.`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
   }
 
@@ -74,7 +74,7 @@ export default function UpcomingPage() {
 
   function notifyAll() {
     const names = shown.map((f) => `• ${f.name}`).join("\n");
-    const msg = `Hello Hasara Parfums,\n\nI am interested in your upcoming collection! Please notify me when these fragrances launch:\n\n${names}\n\nThank you!`;
+    const msg = `Hello Hasara Parfums,\n\nI am interested in your upcoming collection! Please notify me when these parfums launch:\n\n${names}\n\nThank you!`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
   }
 
@@ -128,7 +128,7 @@ export default function UpcomingPage() {
           <div className="border border-stone-200 bg-stone-50 p-6 lg:p-8 text-center rounded-2xl">
             <p className="font-sans text-champagne-gold text-[10px] tracking-[0.5em] uppercase mb-3">Be The First To Know</p>
             <p className="font-serif text-primary-text text-2xl lg:text-3xl font-light mb-2">
-              Every fragrance below is arriving soon.
+              Every parfum below is arriving soon to the HASARA collection.
             </p>
             <p className="font-sans text-secondary-text text-sm tracking-wide">
               Add them to your wishlist or tap Notify Me — we&apos;ll reach out the moment they launch.

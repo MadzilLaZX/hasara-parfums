@@ -66,7 +66,7 @@ export default function ContactSection() {
               Let's Connect
             </p>
             <p className="text-champagne-white/55 font-sans text-sm lg:text-base leading-relaxed max-w-md mb-10">
-              We are available on WhatsApp for personalised fragrance
+              We are available on WhatsApp for personalised parfum
               consultations, orders, gifting advice, and any questions you may
               have about our collections.
             </p>

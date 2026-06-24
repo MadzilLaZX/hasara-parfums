@@ -16,7 +16,7 @@ export default function UpcomingDetailClient({ fragrance }: { fragrance: Upcomin
   const wishlisted = isWishlisted(`upcoming:${fragrance.slug}`);
 
   function notifyWhatsApp() {
-    const msg = `Hello Hasara Parfums,\n\nI am very interested in your upcoming fragrance:\n\n✦ ${fragrance.name}\n\nPlease add me to the early notification list. I would love to be among the first to try it!\n\nThank you.`;
+    const msg = `Hello Hasara Parfums,\n\nI am very interested in your upcoming parfum:\n\n✦ ${fragrance.name}\n\nPlease add me to the early notification list. I would love to be among the first to try it!\n\nThank you.`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
   }
 
@@ -57,7 +57,7 @@ export default function UpcomingDetailClient({ fragrance }: { fragrance: Upcomin
                     ?
                   </span>
                 </motion.div>
-                <p className="font-sans text-champagne-gold/40 text-[10px] tracking-[0.6em] uppercase">Mystery Fragrance</p>
+                <p className="font-sans text-champagne-gold/40 text-[10px] tracking-[0.6em] uppercase">Mystery Parfum</p>
               </div>
 
               <div className="absolute top-5 left-1/2 -translate-x-1/2 bg-champagne-gold px-4 py-1.5 rounded-full">
@@ -131,7 +131,7 @@ export default function UpcomingDetailClient({ fragrance }: { fragrance: Upcomin
             Be among the first to experience {fragrance.name}
           </p>
           <p className="font-sans text-secondary-text text-sm mb-8 max-w-md mx-auto leading-relaxed">
-            Express your interest and we&apos;ll personally notify you when this fragrance is ready to launch.
+            Express your interest and we&apos;ll personally notify you when this parfum is ready to launch.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button

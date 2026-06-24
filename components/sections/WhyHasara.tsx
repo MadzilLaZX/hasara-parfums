@@ -13,7 +13,7 @@ import {
 const features = [
   {
     icon: Star,
-    title: "Premium Fragrances",
+    title: "Premium Parfums",
     description:
       "Every scent is crafted from the world's finest raw materials, sourced from the most prestigious regions.",
   },
@@ -33,7 +33,7 @@ const features = [
     icon: Gift,
     title: "Elegant Packaging",
     description:
-      "Each bottle is a work of art, presented in luxurious packaging worthy of the fragrance it holds.",
+      "Each bottle is a work of art, presented in luxurious packaging worthy of the parfum it holds.",
   },
   {
     icon: ShieldCheck,

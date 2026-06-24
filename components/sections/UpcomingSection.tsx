@@ -15,7 +15,7 @@ function MysteryCard({ fragrance }: { fragrance: (typeof upcomingFragrances)[0] 
 
   function notifyWhatsApp(e: React.MouseEvent) {
     e.preventDefault();
-    const msg = `Hello Hasara Parfums,\n\nI am very interested in your upcoming fragrance:\n\n✦ ${fragrance.name}\n\nPlease notify me when it launches!\n\nThank you.`;
+    const msg = `Hello Hasara Parfums,\n\nI am very interested in your upcoming parfum:\n\n✦ ${fragrance.name}\n\nPlease notify me when it launches!\n\nThank you.`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
   }
 

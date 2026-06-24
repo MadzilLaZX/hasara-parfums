@@ -123,7 +123,7 @@ export default function ProductTabs({ product }: { product: Fragrance }) {
               {/* Personality */}
               {extras?.personality && (
                 <div className="mb-10">
-                  <p className="font-sans text-secondary-text text-[10px] tracking-[0.4em] uppercase mb-4">Fragrance Personality</p>
+                  <p className="font-sans text-secondary-text text-[10px] tracking-[0.4em] uppercase mb-4">Parfum Personality</p>
                   <div className="flex flex-wrap gap-2">
                     {extras.personality.map((trait, i) => (
                       <span
@@ -195,7 +195,7 @@ export default function ProductTabs({ product }: { product: Fragrance }) {
         {active === "Notes" && (
           <div className="max-w-3xl">
             <p className="font-sans text-secondary-text text-sm leading-relaxed mb-12">
-              The fragrance pyramid reveals how a scent evolves — from the bright opening to the enduring base that defines your lasting impression.
+              The parfum pyramid reveals how a scent evolves — from the bright opening to the enduring base that defines your lasting impression.
             </p>
 
             <div className="space-y-0">
@@ -214,7 +214,7 @@ export default function ProductTabs({ product }: { product: Fragrance }) {
                   notes: product.notes.heart,
                   width: "80%",
                   icon: "◆◆",
-                  desc: "The true character of the fragrance emerges here.",
+                  desc: "The true character of the parfum emerges here.",
                 },
                 {
                   label: "Base Notes",
@@ -266,7 +266,7 @@ export default function ProductTabs({ product }: { product: Fragrance }) {
             <div>
               <p className="font-sans text-secondary-text text-[10px] tracking-[0.4em] uppercase mb-2">Accord Intensity</p>
               <p className="font-sans text-secondary-text text-sm leading-relaxed mb-10">
-                The dominant olfactory characters that define this fragrance&apos;s identity, ranked by presence and intensity.
+                The dominant olfactory characters that define this parfum&apos;s identity, ranked by presence and intensity.
               </p>
 
               <div className="space-y-7">
@@ -284,7 +284,7 @@ export default function ProductTabs({ product }: { product: Fragrance }) {
               {/* Personality */}
               {extras?.personality && (
                 <div className="mb-10">
-                  <p className="font-sans text-secondary-text text-[10px] tracking-[0.4em] uppercase mb-5">Fragrance Personality</p>
+                  <p className="font-sans text-secondary-text text-[10px] tracking-[0.4em] uppercase mb-5">Parfum Personality</p>
                   <div className="space-y-3">
                     {extras.personality.map((trait, i) => (
                       <motion.div
@@ -392,7 +392,7 @@ export default function ProductTabs({ product }: { product: Fragrance }) {
             </div>
 
             <p className="font-sans text-secondary-text text-base leading-relaxed mb-8">
-              {product.name} draws its creative spirit from the celebrated fragrance{" "}
+              {product.name} draws its creative spirit from the celebrated parfum{" "}
               <span className="text-primary-text font-medium">{product.inspiredBy}</span>.
               Rather than an imitation, it is our own interpretation — reimagined with premium ingredients
               and crafted to offer a similar olfactory journey at an accessible price point, without compromise on quality.
@@ -414,7 +414,7 @@ export default function ProductTabs({ product }: { product: Fragrance }) {
 
             <div className="p-5 border border-champagne-gold/25 bg-champagne-gold/4 rounded-xl">
               <p className="font-sans text-secondary-text text-xs leading-relaxed">
-                <span className="text-champagne-gold font-medium">Note:</span> All HASARA fragrances are original
+                <span className="text-champagne-gold font-medium">Note:</span> All HASARA parfums are original
                 Extrait de Parfum compositions crafted with premium ingredients. &ldquo;Inspired by&rdquo; indicates
                 a shared olfactory direction — not a copy or counterfeit product. We celebrate the artistry of the
                 originals while offering our own distinct interpretation.

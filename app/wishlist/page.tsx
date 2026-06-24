@@ -40,7 +40,7 @@ export default function WishlistPage() {
     });
     const upcomingLines = wishlistUpcoming.map((f) => `• ${f.name} (Upcoming)`);
     const allLines = [...regularLines, ...upcomingLines].join("\n");
-    const msg = `Hello Hasara Parfums,\n\nHere is my wishlist:\n\n${allLines}\n\nI would love to know more about these fragrances and place an order. Please assist me!\n\nThank you.`;
+    const msg = `Hello Hasara Parfums,\n\nHere is my wishlist:\n\n${allLines}\n\nI would love to know more about these parfums and place an order. Please assist me!\n\nThank you.`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
   }
 

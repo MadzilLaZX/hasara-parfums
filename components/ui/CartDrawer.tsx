@@ -89,7 +89,7 @@ export default function CartDrawer({ open, onClose }: Props) {
               {items.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center">
                   <p className="font-serif text-champagne-white/30 text-2xl font-light mb-3">Your cart is empty</p>
-                  <p className="font-sans text-champagne-white/20 text-xs tracking-wide">Add fragrances to begin your order</p>
+                  <p className="font-sans text-champagne-white/20 text-xs tracking-wide">Add parfums to begin your order</p>
                 </div>
               ) : (
                 items.map((item, i) => (

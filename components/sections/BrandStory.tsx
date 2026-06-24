@@ -72,7 +72,7 @@ export default function BrandStory() {
               {[
                 { value: "40%", label: "Concentration" },
                 { value: "8+", label: "Hours Longevity" },
-                { value: "11", label: "Fragrances" },
+                { value: "11", label: "Parfums" },
               ].map((stat) => (
                 <div key={stat.label}>
                   <p className="font-sans text-champagne-gold text-3xl font-medium">

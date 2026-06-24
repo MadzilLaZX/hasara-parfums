@@ -12,7 +12,7 @@ const TABS = [
     src: "/video/video-don.mp4",
     cover: "/images/cover-product.jpg",
     coverPosition: "center center",
-    caption: "A fragrance journey with Don Sumdany",
+    caption: "A parfum journey with Don Sumdany",
   },
   {
     id: "signature",

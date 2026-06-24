@@ -400,6 +400,6 @@ export function getWhatsAppLink(productName?: string, size?: string): string {
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
   }
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-    "Hello Hasara Parfums, I would like to learn more about your fragrances."
+    "Hello Hasara Parfums, I would like to learn more about your parfums."
   )}`;
 }

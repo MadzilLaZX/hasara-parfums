@@ -31,11 +31,11 @@ export default function TesterSection() {
               Try A 1ml Tester
             </h2>
             <p className="font-sans text-champagne-white/60 text-sm leading-relaxed mb-8 max-w-md">
-              Not sure which fragrance speaks to you? Explore any scent from our collection with a 1ml tester before committing to a full bottle. Experience how it evolves on your skin throughout the day.
+              Not sure which parfum speaks to you? Explore any scent from our collection with a 1ml tester before committing to a full bottle. Experience how it evolves on your skin throughout the day.
             </p>
             <ul className="space-y-3 mb-10">
               {[
-                "Try any fragrance from our full collection",
+                "Try any parfum from our full collection",
                 "Experience how it evolves on your skin",
                 "Available for all bottle sizes",
                 "Order via WhatsApp — quick and easy",
@@ -66,7 +66,7 @@ export default function TesterSection() {
             className="flex flex-col gap-4"
           >
             {[
-              { label: "Select your fragrance", step: "01" },
+              { label: "Select your parfum", step: "01" },
               { label: "Contact us on WhatsApp", step: "02" },
               { label: "Receive your 1ml tester", step: "03" },
               { label: "Find your signature scent", step: "04" },
