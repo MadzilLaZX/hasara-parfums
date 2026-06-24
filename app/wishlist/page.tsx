@@ -125,7 +125,10 @@ export default function WishlistPage() {
                               <Trash size={15} />
                             </button>
                           </div>
-                          <p className="text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans mb-1">{product.collectionLabel}</p>
+                          <p className="text-xs tracking-[0.2em] uppercase font-sans mb-1">
+                            <span className="text-champagne-gold/40">Collection For </span>
+                            <span className="text-champagne-gold font-bold tracking-[0.35em]">{product.collectionLabel.replace("Collection For ", "")}</span>
+                          </p>
                           <Link href={`/fragrances/${product.slug}`}>
                             <h3 className="font-serif text-primary-text text-xl font-medium hover:text-champagne-gold transition-colors duration-300 cursor-pointer mb-1">{product.name}</h3>
                           </Link>

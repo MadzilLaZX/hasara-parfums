@@ -312,8 +312,9 @@ function FragrancesPage() {
                       </div>
                     </Link>
 
-                    <p className="text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans mb-1">
-                      {product.collectionLabel}
+                    <p className="text-xs tracking-[0.2em] uppercase font-sans mb-1">
+                      <span className="text-champagne-gold/40">Collection For </span>
+                      <span className="text-champagne-gold font-bold tracking-[0.35em]">{product.collectionLabel.replace("Collection For ", "")}</span>
                     </p>
 
                     <Link href={`/fragrances/${product.slug}`}>

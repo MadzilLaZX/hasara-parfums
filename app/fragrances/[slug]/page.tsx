@@ -63,8 +63,9 @@ export default function ProductPage({ params }: Props) {
             <ProductGallery cover={product.image} gallery={product.gallery} name={product.name} />
 
             <div className="lg:pt-8">
-              <p className="font-sans text-champagne-gold text-xs tracking-[0.4em] uppercase mb-2">
-                {product.collectionLabel}
+              <p className="font-sans text-xs tracking-[0.4em] uppercase mb-2">
+                <span className="text-champagne-gold/40">Collection For </span>
+                <span className="text-champagne-gold font-bold tracking-[0.45em]">{product.collectionLabel.replace("Collection For ", "")}</span>
               </p>
               <div className="flex items-start justify-between gap-4 mb-2">
                 <h1 className="font-serif text-champagne-white text-5xl lg:text-6xl font-light tracking-wide leading-tight">
@@ -135,7 +136,10 @@ export default function ProductPage({ params }: Props) {
                   <div className="relative aspect-[3/4] overflow-hidden bg-stone-900 mb-4 rounded-2xl">
                     <Image src={r.image} alt={r.name} fill className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" sizes="33vw" />
                   </div>
-                  <p className="text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans mb-1">{r.collectionLabel}</p>
+                  <p className="text-xs tracking-[0.2em] uppercase font-sans mb-1">
+                    <span className="text-champagne-gold/40">Collection For </span>
+                    <span className="text-champagne-gold font-bold tracking-[0.35em]">{r.collectionLabel.replace("Collection For ", "")}</span>
+                  </p>
                   <p className="font-serif text-primary-text text-xl font-medium group-hover:text-champagne-gold transition-colors duration-300">{r.name}</p>
                   <p className="font-sans text-secondary-text text-xs tracking-wide mt-0.5 italic">Inspired by {r.inspiredBy}</p>
                   <p className="font-sans text-secondary-text text-xs tracking-wide mt-1">From ৳{r.sizes[0].price.toLocaleString()}</p>

@@ -70,8 +70,18 @@ export default function FeaturedCollections() {
                   <p className="font-sans text-champagne-gold text-xs tracking-[0.3em] uppercase mb-2">
                     {col.description}
                   </p>
-                  <p className="font-serif text-champagne-white text-4xl lg:text-5xl font-light tracking-widest uppercase">
-                    {col.label}
+                  <p className="font-serif text-4xl lg:text-5xl font-light tracking-widest uppercase">
+                    <span className="text-champagne-white/50">For </span>
+                    <span
+                      className="font-bold"
+                      style={{
+                        WebkitTextStroke: "1.5px #C8A96B",
+                        color: "transparent",
+                        textShadow: "0 0 24px rgba(200,169,107,0.18)",
+                      }}
+                    >
+                      {col.label.split(" ")[1]}
+                    </span>
                   </p>
                   <div className="flex items-center gap-2 mt-4 text-champagne-white/50 group-hover:text-champagne-gold transition-colors duration-300">
                     <span className="text-xs tracking-[0.2em] uppercase font-sans">Shop Now</span>
