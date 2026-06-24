@@ -8,7 +8,7 @@ const reviews = [
     name: "Nadim Mahmud",
     role: "Velvet Ember",
     review:
-      "The scent opens softly but soon settles into a rich, sophisticated aroma. It's exactly the kind of fragrance that makes people stop and ask what you're wearing. Absolutely worth every taka.",
+      "The scent opens softly but soon settles into a rich, sophisticated aroma that feels both comforting and luxurious. It carries the depth of high-end perfumes, yet remains affordable and easy to wear every day. If you love perfumes that are smooth, velvety, and timeless, Velvet Ember is definitely worth trying.",
     stars: 5,
     initial: "N",
   },
@@ -16,7 +16,7 @@ const reviews = [
     name: "Quashfia Binte Ashfaque",
     role: "Sensual Mirage · Floral Muse",
     review:
-      "I bought both Sensual Mirage and Floral Muse and I haven't stopped reaching for them since. Truly recommend Hasara Parfums to everyone who wants a luxurious scent at an honest price.",
+      "Truly recommend Hasara Purfums to everyone looking for high quality and long lasting fragrance. Both Sensual Mirage and Floral Muse are absolutely fantastic. The fragrances are definitely a must haves for everyone!!",
     stars: 5,
     initial: "Q",
   },
@@ -24,7 +24,7 @@ const reviews = [
     name: "Saddam Hossain",
     role: "Bloom Rush",
     review:
-      "Got my wife a majestic perfume — Bloom Rush. She absolutely loves it. The packaging felt premium and the scent lasted all day. She said it's the best gift I've ever given her.",
+      "Got my wife a magestic perfume \"Bloom Rush\". She really loved it and enjoying it on her daily basis use.",
     stars: 5,
     initial: "S",
   },

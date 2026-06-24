@@ -63,10 +63,12 @@ export default function ProductPage({ params }: Props) {
             <ProductGallery cover={product.image} gallery={product.gallery} name={product.name} />
 
             <div className="lg:pt-8">
-              <p className="text-champagne-gold font-sans text-xs tracking-[0.4em] uppercase mb-2">
-                Collection For{" "}
-                <span className="font-bold tracking-[0.45em]" style={{ WebkitTextStroke: "1px #C8A96B", color: "transparent" }}>
-                  {product.collectionLabel.replace("Collection For ", "")}
+              <p className="mb-3">
+                <span className="inline-flex items-center gap-1 px-3 py-[3px] border border-champagne-gold/30 bg-champagne-gold/10 rounded-full font-sans text-[10px] tracking-[0.2em] uppercase">
+                  <span className="text-champagne-gold/60">Collection For</span>
+                  <span className="font-bold tracking-[0.3em]" style={{ WebkitTextStroke: "1px #C8A96B", color: "transparent" }}>
+                    {product.collectionLabel.replace("Collection For ", "")}
+                  </span>
                 </span>
               </p>
               <div className="flex items-start justify-between gap-4 mb-2">
@@ -138,10 +140,12 @@ export default function ProductPage({ params }: Props) {
                   <div className="relative aspect-[3/4] overflow-hidden bg-stone-900 mb-4 rounded-2xl">
                     <Image src={r.image} alt={r.name} fill className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" sizes="33vw" />
                   </div>
-                  <p className="text-stone-500 text-xs tracking-[0.2em] uppercase font-sans mb-1">
-                    Collection For{" "}
-                    <span className="font-bold tracking-[0.35em]" style={{ WebkitTextStroke: "0.6px #000", color: "#C8A96B" }}>
-                      {r.collectionLabel.replace("Collection For ", "")}
+                  <p className="mb-2">
+                    <span className="inline-flex items-center gap-1 px-3 py-[3px] border border-champagne-gold/50 bg-champagne-gold/[0.07] rounded-full font-sans text-[10px] tracking-[0.2em] uppercase">
+                      <span className="text-stone-500">Collection For</span>
+                      <span className="font-bold tracking-[0.3em]" style={{ WebkitTextStroke: "0.6px #000", color: "#C8A96B" }}>
+                        {r.collectionLabel.replace("Collection For ", "")}
+                      </span>
                     </span>
                   </p>
                   <p className="font-serif text-primary-text text-xl font-medium group-hover:text-champagne-gold transition-colors duration-300">{r.name}</p>

@@ -116,7 +116,7 @@ export default function AboutPage() {
               { value: "8+", label: "Hours Longevity" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
-                <p className="font-serif text-champagne-gold text-4xl lg:text-5xl font-light mb-2">{stat.value}</p>
+                <p className="font-sans text-champagne-gold text-4xl lg:text-5xl font-medium mb-2">{stat.value}</p>
                 <p className="font-sans text-champagne-white/40 text-xs tracking-[0.2em] uppercase">{stat.label}</p>
               </div>
             ))}

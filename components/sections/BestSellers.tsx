@@ -71,10 +71,12 @@ export default function BestSellers() {
                 </Link>
 
                 {/* Collection label */}
-                <p className="text-stone-500 text-xs tracking-[0.2em] uppercase font-sans mb-1">
-                  Collection For{" "}
-                  <span className="font-bold tracking-[0.35em]" style={{ WebkitTextStroke: "0.6px #000", color: "#C8A96B" }}>
-                    {product.collectionLabel.replace("Collection For ", "")}
+                <p className="mb-2">
+                  <span className="inline-flex items-center gap-1 px-3 py-[3px] border border-champagne-gold/50 bg-champagne-gold/[0.07] rounded-full font-sans text-[10px] tracking-[0.2em] uppercase">
+                    <span className="text-stone-500">Collection For</span>
+                    <span className="font-bold tracking-[0.3em]" style={{ WebkitTextStroke: "0.6px #000", color: "#C8A96B" }}>
+                      {product.collectionLabel.replace("Collection For ", "")}
+                    </span>
                   </span>
                 </p>
 

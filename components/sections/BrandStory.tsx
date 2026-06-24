@@ -75,7 +75,7 @@ export default function BrandStory() {
                 { value: "11", label: "Fragrances" },
               ].map((stat) => (
                 <div key={stat.label}>
-                  <p className="font-serif text-champagne-gold text-3xl font-light">
+                  <p className="font-sans text-champagne-gold text-3xl font-medium">
                     {stat.value}
                   </p>
                   <p className="font-sans text-champagne-white/40 text-xs tracking-wider mt-1 uppercase">
