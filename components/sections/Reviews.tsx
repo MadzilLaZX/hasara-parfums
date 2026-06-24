@@ -59,7 +59,7 @@ export default function Reviews() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.8, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="border border-champagne-gold/20 p-8 rounded-2xl hover:border-champagne-gold/50 transition-colors duration-500"
+              className="border border-champagne-gold/20 p-8 rounded-2xl hover:border-champagne-gold/50 transition-colors duration-500 flex flex-col"
             >
               <div className="flex gap-1 mb-6">
                 {Array.from({ length: review.stars }).map((_, j) => (
@@ -67,7 +67,7 @@ export default function Reviews() {
                 ))}
               </div>
 
-              <p className="font-serif text-champagne-white/85 text-lg italic font-light leading-relaxed mb-8">
+              <p className="font-serif text-champagne-white/85 text-lg italic font-light leading-relaxed mb-8 flex-1">
                 &ldquo;{review.review}&rdquo;
               </p>
 
