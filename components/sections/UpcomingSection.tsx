@@ -55,7 +55,7 @@ function MysteryCard({ fragrance }: { fragrance: (typeof upcomingFragrances)[0] 
         {/* Gender badge */}
         <div className="absolute bottom-3 left-3 bg-matte-black/70 backdrop-blur-sm px-2.5 py-1 rounded-full">
           <span className="font-sans text-champagne-gold/60 text-[9px] tracking-[0.4em] uppercase">
-            {fragrance.gender === "men" ? "Men's" : "Women's"}
+            {fragrance.gender === "men" ? "For Him" : "For Her"}
           </span>
         </div>
       </div>
@@ -148,7 +148,7 @@ export default function UpcomingSection() {
             <span className="italic text-champagne-gold/80">Releases</span>
           </h2>
           <p className="font-sans text-champagne-white/40 text-sm tracking-wide max-w-md mx-auto leading-relaxed">
-            A glimpse into what&apos;s arriving next. Each creation is crafted in secret, revealed only when ready.
+            A glimpse into what&apos;s arriving next. Each parfum is being perfected in secret, revealed only when ready.
           </p>
         </motion.div>
 
@@ -190,7 +190,7 @@ export default function UpcomingSection() {
         </div>
 
         <p className="text-center font-sans text-champagne-white/20 text-[10px] tracking-[0.3em] uppercase mt-2 mb-10">
-          Swipe to explore all {upcomingFragrances.length} upcoming releases
+          Swipe to explore all {upcomingFragrances.length} upcoming parfums
         </p>
 
         <motion.div
@@ -204,7 +204,7 @@ export default function UpcomingSection() {
             href="/upcoming"
             className="inline-flex items-center gap-3 px-10 py-4 border border-champagne-gold/40 text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-xs tracking-[0.3em] uppercase font-sans transition-all duration-500 rounded-full group"
           >
-            View All {upcomingFragrances.length} Upcoming Fragrances
+            View All {upcomingFragrances.length} Upcoming Parfums
             <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
           </Link>
           <p className="font-sans text-champagne-white/20 text-xs mt-4 tracking-wide">Be the first to know when they launch</p>

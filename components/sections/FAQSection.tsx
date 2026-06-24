@@ -5,15 +5,15 @@ import { motion, AnimatePresence } from "motion/react";
 import { Plus, Minus } from "@phosphor-icons/react";
 
 const FAQS = [
-  { q: "What concentration are HASARA perfumes?", a: "All HASARA fragrances are crafted as Extrait de Parfum with an approximate 40% fragrance concentration, carefully balanced to deliver excellent performance while remaining well-suited to Bangladesh's climate." },
-  { q: "How long do HASARA perfumes last?", a: "On average, HASARA perfumes last 6–8 hours on the skin, depending on factors such as skin chemistry, weather, and application. Fragrances with stronger woody or floral characteristics may linger on clothing for more than 24 hours." },
-  { q: "How should I apply perfume for the best performance?", a: "Spray on pulse points such as the wrists, neck, and behind the ears. Applying to moisturized skin and avoiding rubbing the fragrance after spraying helps preserve the scent's natural development." },
+  { q: "What concentration are HASARA parfums?", a: "All HASARA parfums are crafted as Extrait de Parfum with an approximate 40% fragrance concentration, carefully balanced to deliver excellent performance while remaining well-suited to Bangladesh's climate." },
+  { q: "How long do HASARA parfums last?", a: "On average, HASARA parfums last 6–8 hours on the skin, depending on factors such as skin chemistry, weather, and application. Parfums with stronger woody or floral characteristics may linger on clothing for more than 24 hours." },
+  { q: "How should I apply parfum for the best performance?", a: "Spray on pulse points such as the wrists, neck, and behind the ears. Applying to moisturized skin and avoiding rubbing the parfum after spraying helps preserve the scent's natural development." },
   { q: "How long does delivery take?", a: "Inside Dhaka: 1–3 business days. Outside Dhaka: 2–4 business days. Orders are shipped through Steadfast Courier." },
   { q: "Do you offer Cash on Delivery (COD)?", a: "Yes, Cash on Delivery is available in most serviceable areas across Bangladesh." },
-  { q: "How can I choose the right fragrance?", a: "Our website includes a filter system allowing you to browse by gender, season, time of day, occasion, and fragrance notes — making it easy to find your perfect match." },
-  { q: "Are HASARA perfumes suitable for daily wear?", a: "Absolutely. Our collection includes fragrances for everyday use, office settings, casual outings, special occasions, and evening wear." },
-  { q: "Are HASARA perfumes suitable for gifting?", a: "Yes. HASARA fragrances make excellent gifts for birthdays, anniversaries, Eid, weddings, graduations, and all memorable occasions." },
-  { q: "How should I store my perfume?", a: "Store in a cool, dry place away from direct sunlight, heat, and humidity to preserve quality and longevity." },
+  { q: "How can I choose the right parfum?", a: "Our website includes a filter system allowing you to browse by gender, season, time of day, occasion, and scent notes — making it easy to find your perfect match." },
+  { q: "Are HASARA parfums suitable for daily wear?", a: "Absolutely. Our collection includes parfums for everyday use, office settings, casual outings, special occasions, and evening wear." },
+  { q: "Are HASARA parfums suitable for gifting?", a: "Yes. HASARA parfums make excellent gifts for birthdays, anniversaries, Eid, weddings, graduations, and all memorable occasions." },
+  { q: "How should I store my parfum?", a: "Store in a cool, dry place away from direct sunlight, heat, and humidity to preserve quality and longevity." },
   { q: "How can I contact HASARA Parfums?", a: "Reach us anytime via WhatsApp or through our Instagram and Facebook pages. We're always happy to help with recommendations, orders, or general support." },
 ];
 

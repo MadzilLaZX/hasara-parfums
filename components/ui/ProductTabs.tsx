@@ -21,11 +21,11 @@ function AccordBar({ accord, intensity, index }: { accord: string; intensity: nu
     <div>
       <div className="flex items-center justify-between mb-2.5">
         <span className="font-sans text-primary-text text-sm tracking-wide">{accord}</span>
-        <span className="font-serif text-champagne-gold text-base font-light">{intensity}%</span>
+        <span className="font-sans text-champagne-gold text-sm font-medium">{intensity}%</span>
       </div>
-      <div className="h-0.5 bg-stone-100 relative overflow-hidden rounded-full">
+      <div className="h-1.5 bg-[#1c1c1c] relative overflow-hidden rounded-full">
         <div
-          className="absolute top-0 left-0 h-full bg-gradient-to-r from-champagne-gold/50 to-champagne-gold rounded-full"
+          className="absolute top-0 left-0 h-full bg-champagne-gold rounded-full"
           style={{
             width: `${width}%`,
             transition: `width 1.1s cubic-bezier(0.16,1,0.3,1)`,
@@ -65,7 +65,7 @@ function SeasonBar({ season, active }: { season: string; active: boolean }) {
 }
 
 function LongevityBar({ longevity }: { longevity: string }) {
-  const target = longevity.includes("12+") ? 95 : longevity.includes("10-12") ? 80 : longevity.includes("8-10") ? 65 : 50;
+  const target = longevity.includes("12+") ? 95 : longevity.includes("10") ? 80 : longevity.includes("8") ? 65 : 50;
   const [width, setWidth] = useState(0);
 
   useEffect(() => {
@@ -356,7 +356,7 @@ export default function ProductTabs({ product }: { product: Fragrance }) {
                 Longevity
               </p>
               <div className="flex items-center gap-5">
-                <span className="font-serif text-primary-text text-2xl font-light flex-shrink-0">{product.longevity}</span>
+                <span className="font-sans text-primary-text text-2xl font-medium flex-shrink-0">{product.longevity}</span>
                 <LongevityBar longevity={product.longevity} />
               </div>
               <p className="font-sans text-secondary-text text-xs mt-2 tracking-wide">Extrait de Parfum concentration for maximum longevity</p>

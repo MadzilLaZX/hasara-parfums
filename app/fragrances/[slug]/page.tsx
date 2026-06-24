@@ -52,7 +52,7 @@ export default function ProductPage({ params }: Props) {
             className="inline-flex items-center gap-2 text-champagne-white/50 hover:text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans transition-colors duration-300"
           >
             <ArrowLeft size={12} />
-            All Fragrances
+            All Parfums
           </Link>
         </div>
       </div>

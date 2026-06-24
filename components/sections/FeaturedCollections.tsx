@@ -31,7 +31,7 @@ export default function FeaturedCollections() {
             href="/fragrances"
             className="flex items-center gap-2 text-secondary-text hover:text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans transition-colors duration-300 self-start lg:self-auto"
           >
-            View All Fragrances
+            View All Parfums
             <ArrowRight size={14} />
           </Link>
         </motion.div>

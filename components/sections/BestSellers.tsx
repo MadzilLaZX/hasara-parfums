@@ -39,7 +39,7 @@ export default function BestSellers() {
             href="/fragrances"
             className="flex items-center gap-2 text-secondary-text hover:text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans transition-colors duration-300 self-start lg:self-auto"
           >
-            View All Fragrances
+            View All Parfums
             <ArrowRight size={14} />
           </Link>
         </motion.div>
@@ -83,7 +83,7 @@ export default function BestSellers() {
                 </Link>
 
                 {/* Dynamic price */}
-                <p className="font-serif text-champagne-gold text-2xl lg:text-3xl font-light tracking-wide mt-1.5 mb-1 transition-all duration-300">
+                <p className="font-sans text-champagne-gold text-2xl lg:text-3xl font-medium tracking-wide mt-1.5 mb-1 transition-all duration-300">
                   ৳{selectedSizeObj.price.toLocaleString()}
                 </p>
 

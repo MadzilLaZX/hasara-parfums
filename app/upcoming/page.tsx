@@ -53,7 +53,7 @@ function UpcomingCard({ fragrance }: { fragrance: (typeof upcomingFragrances)[0]
       </div>
 
       <p className="text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans mb-1">
-        {fragrance.gender === "men" ? "Men's Collection" : "Women's Collection"} · Upcoming
+        {fragrance.gender === "men" ? "Collection For Him" : "Collection For Her"} · Upcoming
       </p>
       <h3 className="font-serif text-primary-text text-xl font-medium mb-3 leading-tight">{fragrance.name}</h3>
 
@@ -117,7 +117,7 @@ export default function UpcomingPage() {
                 tab === t ? "bg-champagne-gold text-matte-black" : "text-secondary-text hover:text-primary-text"
               }`}
             >
-              {t === "all" ? `All (${upcomingFragrances.length})` : t === "men" ? `Men's (${upcomingMens.length})` : `Women's (${upcomingWomens.length})`}
+              {t === "all" ? `All (${upcomingFragrances.length})` : t === "men" ? `For Him (${upcomingMens.length})` : `For Her (${upcomingWomens.length})`}
             </button>
           ))}
         </div>

@@ -79,7 +79,7 @@ export default function UpcomingDetailClient({ fragrance }: { fragrance: Upcomin
               className="lg:pt-8"
             >
               <p className="font-sans text-champagne-gold text-xs tracking-[0.4em] uppercase mb-4">
-                {fragrance.gender === "men" ? "Men's Collection" : "Women's Collection"} · Upcoming
+                {fragrance.gender === "men" ? "Collection For Him" : "Collection For Her"} · Upcoming
               </p>
 
               <h1 className="font-serif text-champagne-white text-5xl lg:text-6xl font-light tracking-wide leading-tight mb-6">

@@ -52,7 +52,7 @@ export default function WishlistPage() {
       <section className="bg-matte-black pt-44 pb-16 px-6 lg:px-12">
         <div className="max-w-7xl mx-auto">
           <Link href="/fragrances" className="inline-flex items-center gap-2 text-champagne-white/40 hover:text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans transition-colors mb-8">
-            <ArrowLeft size={12} /> Back to Fragrances
+            <ArrowLeft size={12} /> Back to Parfums
           </Link>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
             <div>
@@ -96,7 +96,7 @@ export default function WishlistPage() {
               <p className="font-sans text-secondary-text text-sm mb-8">Browse our collection and tap the heart icon to save your favourites.</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/fragrances" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-champagne-gold text-matte-black text-xs tracking-[0.25em] uppercase font-sans font-medium hover:bg-champagne-gold/90 transition-colors rounded-full">
-                  Browse Fragrances
+                  Browse Parfums
                 </Link>
                 <Link href="/upcoming" className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-stone-300 text-secondary-text text-xs tracking-[0.25em] uppercase font-sans hover:border-champagne-gold hover:text-champagne-gold transition-colors rounded-full">
                   View Upcoming
@@ -139,7 +139,7 @@ export default function WishlistPage() {
                             ))}
                           </div>
                           <p className="font-sans text-secondary-text text-xs tracking-wide">
-                            <span className="font-serif text-primary-text text-lg font-medium">৳{selectedSizeObj.price.toLocaleString()}</span>
+                            <span className="font-sans text-primary-text text-lg font-medium">৳{selectedSizeObj.price.toLocaleString()}</span>
                           </p>
                         </div>
                       );
@@ -171,7 +171,7 @@ export default function WishlistPage() {
                             <Trash size={13} />
                           </button>
                         </Link>
-                        <p className="text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans mb-1">Upcoming · {fragrance.gender === "men" ? "Men's" : "Women's"}</p>
+                        <p className="text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans mb-1">Upcoming · {fragrance.gender === "men" ? "For Him" : "For Her"}</p>
                         <Link href={`/upcoming/${fragrance.slug}`}>
                           <h3 className="font-serif text-primary-text text-xl font-medium hover:text-champagne-gold transition-colors duration-300 cursor-pointer mb-1">{fragrance.name}</h3>
                         </Link>

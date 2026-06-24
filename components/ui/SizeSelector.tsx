@@ -56,7 +56,7 @@ export default function SizeSelector({ productName, productSlug, productImage, s
                 <span className={`w-3.5 h-3.5 rounded-full border flex-shrink-0 transition-all duration-200 ${isSelected ? "border-champagne-gold bg-champagne-gold" : "border-champagne-white/30"}`} />
                 <span className={`font-sans text-sm tracking-[0.1em] transition-colors duration-200 ${isSelected ? "text-champagne-white" : "text-champagne-white/55"}`}>{size.ml}ml</span>
               </div>
-              <span className={`font-serif text-xl font-light transition-colors duration-200 ${isSelected ? "text-champagne-gold" : "text-champagne-white/40"}`}>৳{size.price.toLocaleString()}</span>
+              <span className={`font-sans text-xl font-medium transition-colors duration-200 ${isSelected ? "text-champagne-gold" : "text-champagne-white/40"}`}>৳{size.price.toLocaleString()}</span>
             </button>
           );
         })}
@@ -83,7 +83,7 @@ export default function SizeSelector({ productName, productSlug, productImage, s
         </div>
         <div className="flex items-center gap-2">
           <TestTube size={13} className={isTester ? "text-champagne-gold" : "text-champagne-white/25"} />
-          <span className={`font-serif text-xl font-light transition-colors duration-200 ${isTester ? "text-champagne-gold" : "text-champagne-white/40"}`}>৳220</span>
+          <span className={`font-sans text-xl font-medium transition-colors duration-200 ${isTester ? "text-champagne-gold" : "text-champagne-white/40"}`}>৳220</span>
         </div>
       </button>
 
@@ -98,7 +98,7 @@ export default function SizeSelector({ productName, productSlug, productImage, s
             <Minus size={16} />
           </button>
           <div className="flex-1 flex flex-col items-center justify-center py-2">
-            <span className="font-serif text-champagne-gold text-2xl font-light leading-none">{qty}</span>
+            <span className="font-sans text-champagne-gold text-2xl font-medium leading-none">{qty}</span>
             <span className="font-sans text-champagne-white/30 text-[10px] tracking-[0.2em] uppercase mt-0.5">in cart</span>
           </div>
           <button

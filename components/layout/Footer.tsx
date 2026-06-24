@@ -61,7 +61,7 @@ export default function Footer() {
               Collections
             </p>
             <ul className="space-y-3">
-              {["Men's Collection", "Women's Collection", "Unisex Collection"].map(
+              {["Collection For Him", "Collection For Her", "Collection For All"].map(
                 (col) => (
                   <li key={col}>
                     <Link
