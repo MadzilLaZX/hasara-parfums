@@ -138,7 +138,7 @@ export default function ProductPage({ params }: Props) {
                   <div className="relative aspect-[3/4] overflow-hidden bg-stone-900 mb-4 rounded-2xl">
                     <Image src={r.image} alt={r.name} fill className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" sizes="33vw" />
                   </div>
-                  <p className="text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans mb-1">
+                  <p className="text-stone-500 text-xs tracking-[0.2em] uppercase font-sans mb-1">
                     Collection For{" "}
                     <span className="font-bold tracking-[0.35em]" style={{ WebkitTextStroke: "0.6px #000", color: "#C8A96B" }}>
                       {r.collectionLabel.replace("Collection For ", "")}

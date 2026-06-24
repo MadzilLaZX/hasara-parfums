@@ -58,21 +58,29 @@ export default function Footer() {
           {/* Collections */}
           <div>
             <p className="text-champagne-white/40 text-xs tracking-[0.2em] uppercase mb-6 font-sans">
-              Collections
+              Our Collections
             </p>
             <ul className="space-y-3">
-              {["Collection For Him", "Collection For Her", "Collection For All"].map(
-                (col) => (
-                  <li key={col}>
-                    <Link
-                      href="/fragrances"
-                      className="text-champagne-white/70 hover:text-champagne-gold text-sm font-sans transition-colors duration-300"
-                    >
-                      {col}
-                    </Link>
-                  </li>
-                )
-              )}
+              <li>
+                <Link href="/fragrances?collection=mens" className="text-champagne-white/70 hover:text-champagne-gold text-sm font-sans transition-colors duration-300">
+                  Collection For Him
+                </Link>
+              </li>
+              <li>
+                <Link href="/fragrances?collection=womens" className="text-champagne-white/70 hover:text-champagne-gold text-sm font-sans transition-colors duration-300">
+                  Collection For Her
+                </Link>
+              </li>
+              <li>
+                <Link href="/fragrances?collection=unisex" className="text-champagne-white/70 hover:text-champagne-gold text-sm font-sans transition-colors duration-300">
+                  Collection For All
+                </Link>
+              </li>
+              <li>
+                <Link href="/fragrances?collection=upcoming" className="text-champagne-white/70 hover:text-champagne-gold text-sm font-sans transition-colors duration-300">
+                  Upcoming Releases
+                </Link>
+              </li>
             </ul>
           </div>
 
