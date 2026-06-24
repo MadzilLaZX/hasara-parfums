@@ -71,7 +71,7 @@ export default function FeaturedCollections() {
                     {col.description}
                   </p>
                   <p className="font-serif text-4xl lg:text-5xl font-light tracking-widest uppercase">
-                    <span className="text-champagne-white/50">For </span>
+                    <span className="text-champagne-white">For </span>
                     <span
                       className="font-bold"
                       style={{

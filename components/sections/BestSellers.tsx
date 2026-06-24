@@ -71,9 +71,11 @@ export default function BestSellers() {
                 </Link>
 
                 {/* Collection label */}
-                <p className="text-xs tracking-[0.2em] uppercase font-sans mb-1">
-                  <span className="text-champagne-gold/40">Collection For </span>
-                  <span className="text-champagne-gold font-bold tracking-[0.35em]">{product.collectionLabel.replace("Collection For ", "")}</span>
+                <p className="text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans mb-1">
+                  Collection For{" "}
+                  <span className="font-bold tracking-[0.35em]" style={{ WebkitTextStroke: "0.6px #000", color: "#C8A96B" }}>
+                    {product.collectionLabel.replace("Collection For ", "")}
+                  </span>
                 </p>
 
                 {/* Fragrance name */}
