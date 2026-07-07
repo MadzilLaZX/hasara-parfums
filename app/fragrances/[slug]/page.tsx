@@ -64,11 +64,8 @@ export default function ProductPage({ params }: Props) {
 
             <div className="lg:pt-8">
               <p className="mb-3">
-                <span className="inline-flex items-center gap-1 px-3 py-[3px] border border-champagne-gold/30 bg-champagne-gold/10 rounded-full font-sans text-[10px] tracking-[0.2em] uppercase">
-                  <span className="text-champagne-gold/60">Collection For</span>
-                  <span className="font-bold tracking-[0.3em]" style={{ WebkitTextStroke: "1px #C8A96B", color: "transparent" }}>
-                    {product.collectionLabel.replace("Collection For ", "")}
-                  </span>
+                <span className="inline-flex items-center px-3 py-[3px] border border-champagne-gold/30 bg-champagne-gold/10 rounded-full font-sans text-[10px] tracking-[0.12em] text-champagne-gold/60">
+                  {product.collectionLabel}
                 </span>
               </p>
               <div className="flex items-start justify-between gap-4 mb-2">
@@ -141,16 +138,18 @@ export default function ProductPage({ params }: Props) {
                     <Image src={r.image} alt={r.name} fill className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" sizes="33vw" />
                   </div>
                   <p className="mb-2">
-                    <span className="inline-flex items-center gap-1 px-3 py-[3px] border border-champagne-gold/50 bg-champagne-gold/[0.07] rounded-full font-sans text-[10px] tracking-[0.2em] uppercase">
-                      <span className="text-stone-500">Collection For</span>
-                      <span className="font-bold tracking-[0.3em]" style={{ WebkitTextStroke: "0.6px #000", color: "#C8A96B" }}>
-                        {r.collectionLabel.replace("Collection For ", "")}
-                      </span>
+                    <span className="inline-flex items-center px-3 py-[3px] border border-champagne-gold/50 bg-champagne-gold/[0.07] rounded-full font-sans text-[10px] tracking-[0.12em] text-stone-500">
+                      {r.collectionLabel}
                     </span>
                   </p>
                   <p className="font-serif text-primary-text text-xl font-medium group-hover:text-champagne-gold transition-colors duration-300">{r.name}</p>
                   <p className="font-sans text-secondary-text text-xs tracking-wide mt-0.5 italic">Inspired by {r.inspiredBy}</p>
-                  <p className="font-sans text-secondary-text text-xs tracking-wide mt-1">From ৳{r.sizes[0].price.toLocaleString()}</p>
+                  <p className="font-sans text-xs tracking-wide mt-1">
+                    {r.sizes[0].originalPrice && (
+                      <span className="text-stone-400 line-through mr-1">৳{r.sizes[0].originalPrice.toLocaleString()}</span>
+                    )}
+                    <span className="text-champagne-gold">৳{r.sizes[0].price.toLocaleString()}</span>
+                  </p>
                 </Link>
               ))}
             </div>

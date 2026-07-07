@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { X, CopySimple, CheckCircle } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "motion/react";
 
-const DISCOUNT_CODE = "HASARA10";
+const DISCOUNT_CODE = "HASARA30";
 const SESSION_KEY = "hasara_scratch_seen";
 
 export default function ScratchCard() {
@@ -154,7 +154,7 @@ export default function ScratchCard() {
                 {/* Revealed content */}
                 <div className="bg-champagne-gold/8 border border-champagne-gold/20 p-7 text-center rounded-xl">
                   <p className="font-sans text-champagne-white/50 text-[10px] tracking-[0.4em] uppercase mb-2">You&apos;ve unlocked</p>
-                  <p className="font-sans text-champagne-gold text-7xl font-light leading-none mb-1">10%</p>
+                  <p className="font-sans text-champagne-gold text-7xl font-light leading-none mb-1">30%</p>
                   <p className="font-sans text-champagne-white text-xs tracking-[0.3em] mb-5">OFF YOUR ORDER</p>
                   {/* Code box with one-click copy */}
                   <button

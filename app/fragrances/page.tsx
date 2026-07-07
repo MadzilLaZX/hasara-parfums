@@ -314,11 +314,8 @@ function FragrancesPage() {
                         </Link>
 
                         <p className="mb-2">
-                          <span className="inline-flex items-center gap-1 px-3 py-[3px] border border-champagne-gold/50 bg-champagne-gold/[0.07] rounded-full font-sans text-[10px] tracking-[0.2em] uppercase">
-                            <span className="text-stone-500">Collection For</span>
-                            <span className="font-bold tracking-[0.3em]" style={{ WebkitTextStroke: "0.6px #000", color: "#C8A96B" }}>
-                              {product.collectionLabel.replace("Collection For ", "")}
-                            </span>
+                          <span className="inline-flex items-center px-3 py-[3px] border border-champagne-gold/50 bg-champagne-gold/[0.07] rounded-full font-sans text-[10px] tracking-[0.12em] text-stone-500">
+                            {product.collectionLabel}
                           </span>
                         </p>
 
@@ -328,9 +325,11 @@ function FragrancesPage() {
                           </h2>
                         </Link>
 
-                        <p className="font-sans text-champagne-gold text-2xl lg:text-3xl font-medium tracking-wide mt-1.5 mb-1 transition-all duration-300">
-                          ৳{selectedSizeObj.price.toLocaleString()}
-                        </p>
+                        <div className="mt-1.5 mb-1">
+                          <p className="font-sans text-champagne-gold text-2xl lg:text-3xl font-medium tracking-wide transition-all duration-300">
+                            ৳{selectedSizeObj.price.toLocaleString()}
+                          </p>
+                        </div>
 
                         <p className="text-secondary-text text-xs font-sans mb-4 italic">
                           Inspired by {product.inspiredBy}

@@ -7,6 +7,14 @@ import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 
 const TABS = [
   {
+    id: "experience",
+    label: "Customer Experience",
+    src: "/video/video-shoumik.mp4",
+    cover: "/images/cover-customer.jpg",
+    coverPosition: "20% center",
+    caption: "First impressions with Shoumik Ahmed",
+  },
+  {
     id: "details",
     label: "Product Details",
     src: "/video/video-don.mp4",
@@ -21,14 +29,6 @@ const TABS = [
     cover: "/images/cover-signature.jpg",
     coverPosition: "center center",
     caption: "The Hasara experience in everyday life",
-  },
-  {
-    id: "experience",
-    label: "Customer Experience",
-    src: "/video/video-shoumik.mp4",
-    cover: "/images/cover-customer.jpg",
-    coverPosition: "20% center",
-    caption: "First impressions with Shoumik Ahmed",
   },
 ];
 

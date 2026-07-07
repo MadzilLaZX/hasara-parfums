@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Tag, X, CopySimple, CheckCircle } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "motion/react";
 
-const DISCOUNT_CODE = "HASARA10";
+const DISCOUNT_CODE = "HASARA30";
 
 export default function FloatingCoupon() {
   const [visible, setVisible] = useState(false);
@@ -64,7 +64,7 @@ export default function FloatingCoupon() {
                   </div>
 
                   <div className="mb-3 text-center">
-                    <p className="font-sans text-champagne-gold text-3xl font-light leading-none mb-0.5">10%</p>
+                    <p className="font-sans text-champagne-gold text-3xl font-light leading-none mb-0.5">30%</p>
                     <p className="font-sans text-champagne-white/50 text-[9px] tracking-[0.3em] uppercase">OFF YOUR ORDER</p>
                   </div>
 

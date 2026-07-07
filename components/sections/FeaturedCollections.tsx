@@ -72,14 +72,7 @@ export default function FeaturedCollections() {
                   </p>
                   <p className="font-serif text-4xl lg:text-5xl font-light tracking-widest uppercase">
                     <span className="text-champagne-white">For </span>
-                    <span
-                      className="font-bold"
-                      style={{
-                        WebkitTextStroke: "1.5px #C8A96B",
-                        color: "transparent",
-                        textShadow: "0 0 24px rgba(200,169,107,0.18)",
-                      }}
-                    >
+                    <span className="font-bold text-champagne-gold">
                       {col.label.split(" ")[1]}
                     </span>
                   </p>

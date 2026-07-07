@@ -2,13 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { X, Trash, WhatsappLogo, Tag, CheckCircle, Minus, Plus } from "@phosphor-icons/react";
+import { useRouter } from "next/navigation";
+import { X, Trash, ArrowRight, Tag, CheckCircle, Minus, Plus, TestTube } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "motion/react";
 import { useCart } from "@/context/CartContext";
-
-const WHATSAPP_NUMBER = "8801767067130";
-const VALID_CODE = "HASARA10";
-const DISCOUNT = 0.1;
+import { checkCoupon, computeDiscount } from "@/lib/coupon";
 
 interface Props {
   open: boolean;
@@ -16,36 +14,29 @@ interface Props {
 }
 
 export default function CartDrawer({ open, onClose }: Props) {
+  const router = useRouter();
   const { items, removeItem, updateQuantity, clearCart, total } = useCart();
   const [promoCode, setPromoCode] = useState("");
   const [promoApplied, setPromoApplied] = useState(false);
   const [promoError, setPromoError] = useState("");
 
-  const discountAmount = promoApplied ? Math.round(total * DISCOUNT) : 0;
+  const discountAmount = promoApplied ? computeDiscount(total, 0.3) : 0;
   const finalTotal = total - discountAmount;
 
   function applyPromo() {
-    if (promoCode.trim().toUpperCase() === VALID_CODE) {
+    const result = checkCoupon(promoCode);
+    if (result.valid) {
       setPromoApplied(true);
       setPromoError("");
     } else {
-      setPromoError("Invalid code. Try HASARA10.");
+      setPromoError("Invalid code. Try HASARA30.");
     }
   }
 
-  function checkout() {
+  function goToCheckout() {
     if (items.length === 0) return;
-    const lines = items.map(
-      (i) => `• ${i.quantity}× ${i.name} — ${i.ml}ml — ৳${(i.price * i.quantity).toLocaleString()}`
-    ).join("\n");
-    let msg = `Hello Hasara Parfums,\n\nI would like to place an order:\n\n${lines}\n\nSubtotal: ৳${total.toLocaleString()}`;
-    if (promoApplied) {
-      msg += `\nPromo Code: ${VALID_CODE} (10% OFF)\nDiscount: -৳${discountAmount.toLocaleString()}\nTotal: ৳${finalTotal.toLocaleString()}`;
-    } else {
-      msg += `\nTotal: ৳${total.toLocaleString()}`;
-    }
-    msg += `\n\nPlease confirm my order. Thank you!`;
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
+    onClose();
+    router.push("/checkout");
   }
 
   const totalUnits = items.reduce((sum, i) => sum + i.quantity, 0);
@@ -74,7 +65,7 @@ export default function CartDrawer({ open, onClose }: Props) {
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-champagne-gold/15">
               <div>
-                <p className="font-serif text-champagne-white text-xl font-light tracking-wide">Your Cart</p>
+                <p className="font-serif text-champagne-white text-xl font-light tracking-wide">Your Bag</p>
                 <p className="font-sans text-champagne-white/40 text-xs tracking-wider mt-0.5">
                   {totalUnits} unit{totalUnits !== 1 ? "s" : ""}
                 </p>
@@ -92,55 +83,91 @@ export default function CartDrawer({ open, onClose }: Props) {
                   <p className="font-sans text-champagne-white/20 text-xs tracking-wide">Add parfums to begin your order</p>
                 </div>
               ) : (
-                items.map((item, i) => (
-                  <div key={`${item.slug}-${item.ml}-${i}`} className="border border-champagne-gold/10 p-4 rounded-xl">
-                    <div className="flex gap-4">
-                      <div className="relative w-16 h-20 flex-shrink-0 overflow-hidden bg-stone-900 rounded-xl">
-                        <Image src={item.image} alt={item.name} fill className="object-cover" sizes="64px" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-serif text-champagne-white text-base font-light leading-snug">{item.name}</p>
-                        <p className="font-sans text-champagne-white/40 text-xs tracking-wider mt-1">{item.ml}ml</p>
-                        <p className="font-serif text-champagne-gold text-lg mt-1">
-                          ৳{(item.price * item.quantity).toLocaleString()}
-                        </p>
-                        {item.quantity > 1 && (
-                          <p className="font-sans text-champagne-white/25 text-[11px] mt-0.5">
-                            ৳{item.price.toLocaleString()} each
-                          </p>
-                        )}
-                      </div>
-                      <button
-                        onClick={() => removeItem(item.slug, item.ml)}
-                        className="text-champagne-white/20 hover:text-red-400 transition-colors cursor-pointer self-start mt-1 flex-shrink-0"
-                        aria-label="Remove item"
-                      >
-                        <Trash size={14} />
-                      </button>
-                    </div>
+                items.map((item, i) => {
+                  const isBundle = item.slug.startsWith("tester-bundle-");
+                  const bundleParts = isBundle ? item.name.split("::") : null;
+                  const displayName = bundleParts ? "Tester Bundle" : item.name;
+                  const bundleList = bundleParts?.[1] ?? "";
 
-                    {/* Quantity controls */}
-                    <div className="flex items-center gap-0 mt-3 border border-champagne-gold/20 rounded-full w-fit overflow-hidden">
-                      <button
-                        onClick={() => updateQuantity(item.slug, item.ml, item.quantity - 1)}
-                        className="w-9 h-9 flex items-center justify-center text-champagne-gold hover:bg-champagne-gold/10 transition-colors cursor-pointer border-r border-champagne-gold/20"
-                        aria-label="Decrease quantity"
-                      >
-                        <Minus size={13} />
-                      </button>
-                      <span className="w-10 text-center font-sans text-champagne-white text-sm">
-                        {item.quantity}
-                      </span>
-                      <button
-                        onClick={() => updateQuantity(item.slug, item.ml, item.quantity + 1)}
-                        className="w-9 h-9 flex items-center justify-center text-champagne-gold hover:bg-champagne-gold/10 transition-colors cursor-pointer border-l border-champagne-gold/20"
-                        aria-label="Increase quantity"
-                      >
-                        <Plus size={13} />
-                      </button>
+                  return (
+                    <div key={`${item.slug}-${item.ml}-${i}`} className={`border p-4 rounded-xl ${isBundle ? "border-champagne-gold/25 bg-champagne-gold/[0.03]" : "border-champagne-gold/10"}`}>
+                      <div className="flex gap-4">
+                        <div className="relative w-16 h-20 flex-shrink-0 overflow-hidden bg-stone-900 rounded-xl">
+                          <Image src={item.image} alt={displayName} fill className="object-cover" sizes="64px" />
+                          {isBundle && (
+                            <div className="absolute inset-0 bg-matte-black/40 flex items-center justify-center">
+                              <TestTube size={20} className="text-champagne-gold" />
+                            </div>
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-serif text-champagne-white text-base font-light leading-snug">{displayName}</p>
+                          {isBundle ? (
+                            <>
+                              <p className="font-sans text-champagne-white/40 text-xs tracking-wider mt-1">4×1ml Bundle</p>
+                              {bundleList && (
+                                <p className="font-sans text-champagne-white/30 text-[10px] tracking-wide mt-1 leading-relaxed line-clamp-2">
+                                  {bundleList}
+                                </p>
+                              )}
+                            </>
+                          ) : (
+                            <p className="font-sans text-champagne-white/40 text-xs tracking-wider mt-1">{item.ml}ml</p>
+                          )}
+                          <p className="font-serif text-champagne-gold text-lg mt-1">
+                            ৳{(item.price * item.quantity).toLocaleString()}
+                          </p>
+                          {!isBundle && item.quantity > 1 && (
+                            <p className="font-sans text-champagne-white/25 text-[11px] mt-0.5">
+                              ৳{item.price.toLocaleString()} each
+                            </p>
+                          )}
+                        </div>
+                        <button
+                          onClick={() => removeItem(item.slug, item.ml)}
+                          className="text-champagne-white/20 hover:text-red-400 transition-colors cursor-pointer self-start mt-1 flex-shrink-0"
+                          aria-label="Remove item"
+                        >
+                          <Trash size={14} />
+                        </button>
+                      </div>
+
+                      {/* Qty controls — regular items only */}
+                      {!isBundle && (
+                        <div className="flex items-center gap-0 mt-3 border border-champagne-gold/20 rounded-full w-fit overflow-hidden">
+                          <button
+                            onClick={() => updateQuantity(item.slug, item.ml, item.quantity - 1)}
+                            className="w-9 h-9 flex items-center justify-center text-champagne-gold hover:bg-champagne-gold/10 transition-colors cursor-pointer border-r border-champagne-gold/20"
+                            aria-label="Decrease quantity"
+                          >
+                            <Minus size={13} />
+                          </button>
+                          <span className="w-10 text-center font-sans text-champagne-white text-sm">
+                            {item.quantity}
+                          </span>
+                          <button
+                            onClick={() => updateQuantity(item.slug, item.ml, item.quantity + 1)}
+                            className="w-9 h-9 flex items-center justify-center text-champagne-gold hover:bg-champagne-gold/10 transition-colors cursor-pointer border-l border-champagne-gold/20"
+                            aria-label="Increase quantity"
+                          >
+                            <Plus size={13} />
+                          </button>
+                        </div>
+                      )}
+
+                      {/* Bundle remove label */}
+                      {isBundle && (
+                        <button
+                          onClick={() => removeItem(item.slug, item.ml)}
+                          className="mt-3 flex items-center gap-1.5 text-red-400/50 hover:text-red-400 text-[10px] tracking-[0.15em] uppercase font-sans transition-colors cursor-pointer"
+                        >
+                          <Trash size={10} />
+                          Remove bundle
+                        </button>
+                      )}
                     </div>
-                  </div>
-                ))
+                  );
+                })
               )}
             </div>
 
@@ -179,7 +206,7 @@ export default function CartDrawer({ open, onClose }: Props) {
                   </div>
                   {promoApplied && (
                     <p className="font-sans text-green-400 text-xs mt-1.5 flex items-center gap-1.5">
-                      <CheckCircle size={12} weight="fill" /> 10% discount applied!
+                      <CheckCircle size={12} weight="fill" /> 30% discount applied!
                     </p>
                   )}
                   {promoError && <p className="font-sans text-red-400 text-xs mt-1.5">{promoError}</p>}
@@ -193,7 +220,7 @@ export default function CartDrawer({ open, onClose }: Props) {
                   </div>
                   {promoApplied && (
                     <div className="flex justify-between text-green-400">
-                      <span>Discount (10%)</span>
+                      <span>Discount (30%)</span>
                       <span>-৳{discountAmount.toLocaleString()}</span>
                     </div>
                   )}
@@ -205,17 +232,17 @@ export default function CartDrawer({ open, onClose }: Props) {
 
                 {/* Checkout */}
                 <button
-                  onClick={checkout}
+                  onClick={goToCheckout}
                   className="w-full flex items-center justify-center gap-2.5 py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.25em] uppercase font-sans font-semibold transition-all duration-300 cursor-pointer rounded-full"
                 >
-                  <WhatsappLogo size={16} weight="fill" />
-                  Order via WhatsApp
+                  Continue to Checkout
+                  <ArrowRight size={16} />
                 </button>
                 <button
                   onClick={clearCart}
                   className="w-full text-champagne-white/25 hover:text-champagne-white/50 text-xs tracking-wider font-sans transition-colors cursor-pointer text-center"
                 >
-                  Clear cart
+                  Clear bag
                 </button>
               </div>
             )}

@@ -21,12 +21,18 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const handler = () => setCartOpen(true);
+    window.addEventListener("hasara:open-cart", handler);
+    return () => window.removeEventListener("hasara:open-cart", handler);
+  }, []);
+
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/fragrances", label: "Collections" },
     { href: "/upcoming", label: "Coming Soon" },
     { href: "/about", label: "Our Story" },
-    { href: "/#contact", label: "Contact" },
+    { href: "/contact", label: "Contact" },
   ];
 
   return (
@@ -93,7 +99,7 @@ export default function Navbar() {
             <Heart size={16} /> Wishlist
           </Link>
           <button onClick={() => { setMenuOpen(false); setCartOpen(true); }} className="flex items-center gap-2 text-champagne-white/60 hover:text-champagne-gold text-sm tracking-[0.2em] uppercase font-sans transition-colors cursor-pointer">
-            <ShoppingBag size={16} /> Cart {count > 0 && `(${count})`}
+            <ShoppingBag size={16} /> Bag {count > 0 && `(${count})`}
           </button>
         </div>
         <a href={getWhatsAppLink()} target="_blank" rel="noopener noreferrer" className="mt-1 flex items-center gap-2 px-8 py-3 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-sm tracking-[0.2em] uppercase font-sans transition-all duration-300 cursor-pointer rounded-full">

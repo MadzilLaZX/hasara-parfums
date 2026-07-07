@@ -8,6 +8,8 @@ export default function SmoothScroll() {
   const pathname = usePathname();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     const lenis = new Lenis({
       duration: 1.4,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

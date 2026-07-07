@@ -1,6 +1,7 @@
 export interface FragranceSize {
   ml: number;
   price: number;
+  originalPrice?: number;
 }
 
 export interface Fragrance {
@@ -32,8 +33,8 @@ export interface Fragrance {
 
 const SIZES: FragranceSize[] = [
   { ml: 15, price: 1200 },
-  { ml: 30, price: 2000 },
-  { ml: 50, price: 3000 },
+  { ml: 30, price: 2300 },
+  { ml: 50, price: 3700 },
 ];
 
 export const fragrances: Fragrance[] = [

@@ -1,6 +1,6 @@
 "use client";
 
-const SEGMENT = "✨    10% OFF TODAY ONLY    •    USE CODE HASARA10    •    LIMITED TIME OFFER    ";
+const SEGMENT = "✨    EXCLUSIVE 30% LAUNCH DISCOUNT    •    USE CODE HASARA30    •    LIMITED TIME OFFER    ";
 const REPEATED = Array(8).fill(SEGMENT).join("");
 
 export default function AnnouncementBar() {

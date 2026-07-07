@@ -7,7 +7,7 @@ import { getWhatsAppLink } from "@/data/products";
 export default function TesterSection() {
   const shouldReduce = useReducedMotion();
   const testerLink = `https://wa.me/8801767067130?text=${encodeURIComponent(
-    "Hello Hasara Parfums,\n\nI would like to try a 1ml tester before purchasing.\n\nCould you please help me with the available options?\n\nThank you."
+    "Hello Hasara Parfums,\n\nI would like to request a 1ml tester bundle before purchasing.\n\nCould you please help me with the available options?\n\nThank you."
   )}`;
 
   return (
@@ -28,7 +28,7 @@ export default function TesterSection() {
               </p>
             </div>
             <h2 className="font-display text-champagne-white text-5xl lg:text-6xl font-light tracking-wide leading-tight mb-6">
-              Try A 1ml Tester
+              Try A 1ml Tester Bundle
             </h2>
             <p className="font-sans text-champagne-white/60 text-sm leading-relaxed mb-8 max-w-md">
               Not sure which parfum speaks to you? Explore any scent from our collection with a 1ml tester before committing to a full bottle. Experience how it evolves on your skin throughout the day.
@@ -53,7 +53,7 @@ export default function TesterSection() {
               className="inline-flex items-center gap-3 px-8 py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.25em] uppercase font-sans font-medium transition-all duration-300 rounded-full"
             >
               <WhatsappLogo size={16} weight="fill" />
-              Request a Tester
+              Request a Tester Bundle
             </a>
           </motion.div>
 
@@ -68,7 +68,7 @@ export default function TesterSection() {
             {[
               { label: "Select your parfum", step: "01" },
               { label: "Contact us on WhatsApp", step: "02" },
-              { label: "Receive your 1ml tester", step: "03" },
+              { label: "Receive your 1ml tester bundle", step: "03" },
               { label: "Find your signature scent", step: "04" },
             ].map(({ label, step }) => (
               <div key={step} className="flex items-center gap-6 border border-champagne-gold/10 px-6 py-5 rounded-2xl">
