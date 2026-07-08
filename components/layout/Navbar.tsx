@@ -3,8 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { List, X, WhatsappLogo, ShoppingBag, Heart } from "@phosphor-icons/react";
-import { getWhatsAppLink } from "@/data/products";
+import { List, X, ShoppingBag, Heart, ArrowRight } from "@phosphor-icons/react";
 import AnnouncementBar from "@/components/ui/AnnouncementBar";
 import CartDrawer from "@/components/ui/CartDrawer";
 import { useCart } from "@/context/CartContext";
@@ -72,11 +71,11 @@ export default function Navbar() {
                 )}
               </button>
 
-              {/* WhatsApp — desktop only */}
-              <a href={getWhatsAppLink()} target="_blank" rel="noopener noreferrer" className="hidden lg:flex items-center gap-2 px-5 py-2.5 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-xs tracking-[0.15em] uppercase font-sans transition-all duration-300 rounded-full">
-                <WhatsappLogo size={14} weight="fill" />
-                WhatsApp
-              </a>
+              {/* Order Now — desktop only */}
+              <Link href="/fragrances" className="hidden lg:flex items-center gap-2 px-5 py-2.5 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-xs tracking-[0.15em] uppercase font-sans transition-all duration-300 rounded-full">
+                Order Now
+                <ArrowRight size={14} />
+              </Link>
 
               {/* Mobile menu toggle */}
               <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden text-champagne-white hover:text-champagne-gold transition-colors duration-300 cursor-pointer p-2" aria-label={menuOpen ? "Close menu" : "Open menu"}>
@@ -102,10 +101,10 @@ export default function Navbar() {
             <ShoppingBag size={16} /> Bag {count > 0 && `(${count})`}
           </button>
         </div>
-        <a href={getWhatsAppLink()} target="_blank" rel="noopener noreferrer" className="mt-1 flex items-center gap-2 px-8 py-3 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-sm tracking-[0.2em] uppercase font-sans transition-all duration-300 cursor-pointer rounded-full">
-          <WhatsappLogo size={16} weight="fill" />
-          Contact on WhatsApp
-        </a>
+        <Link href="/fragrances" onClick={() => setMenuOpen(false)} className="mt-1 flex items-center gap-2 px-8 py-3 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-sm tracking-[0.2em] uppercase font-sans transition-all duration-300 cursor-pointer rounded-full">
+          Order Now
+          <ArrowRight size={16} />
+        </Link>
       </div>
 
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />

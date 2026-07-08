@@ -22,7 +22,7 @@ const contactItems = [
     Icon: WhatsappLogo,
     iconWeight: "fill" as const,
     label: "WhatsApp",
-    value: "Order via WhatsApp",
+    value: "Customer Service",
     href: getWhatsAppLink(),
     external: true,
   },
@@ -66,9 +66,9 @@ export default function ContactSection() {
               Let's Connect
             </p>
             <p className="text-champagne-white/55 font-sans text-sm lg:text-base leading-relaxed max-w-md mb-10">
-              We are available on WhatsApp for personalised parfum
-              consultations, orders, gifting advice, and any questions you may
-              have about our collections.
+              Our customer service team is available on WhatsApp for
+              personalised parfum consultations, gifting advice, order
+              support, and any questions you may have about our collections.
             </p>
 
             <a
@@ -78,7 +78,7 @@ export default function ContactSection() {
               className="inline-flex items-center gap-3 px-10 py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-sm tracking-[0.2em] uppercase font-sans font-medium transition-all duration-300 cursor-pointer rounded-full"
             >
               <WhatsappLogo size={18} weight="fill" />
-              Order via WhatsApp
+              Chat with Customer Service
             </a>
           </motion.div>
 

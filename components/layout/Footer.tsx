@@ -9,6 +9,7 @@ import {
   FacebookLogo,
   EnvelopeSimple,
   Phone,
+  ArrowRight,
 } from "@phosphor-icons/react";
 import { getWhatsAppLink } from "@/data/products";
 
@@ -44,15 +45,13 @@ export default function Footer() {
               A luxury fragrance house dedicated to the art of scent. Each bottle
               holds a story of craftsmanship, identity, and presence.
             </p>
-            <a
-              href={getWhatsAppLink()}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/fragrances"
               className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.2em] uppercase font-sans font-medium transition-all duration-300 cursor-pointer rounded-full"
             >
-              <WhatsappLogo size={16} weight="fill" />
-              Order via WhatsApp
-            </a>
+              Order Now
+              <ArrowRight size={16} />
+            </Link>
           </div>
 
           {/* Collections */}
@@ -112,7 +111,7 @@ export default function Footer() {
                   className="flex items-center gap-2 text-champagne-white/70 hover:text-champagne-gold text-sm font-sans transition-colors duration-300"
                 >
                   <WhatsappLogo size={14} weight="fill" />
-                  WhatsApp Order
+                  Customer Service
                 </a>
               </li>
               <li>
@@ -179,7 +178,7 @@ export default function Footer() {
             href={getWhatsAppLink()}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Contact on WhatsApp"
+            aria-label="Customer Service on WhatsApp"
             className="text-champagne-white/40 hover:text-champagne-gold transition-colors duration-300"
           >
             <WhatsappLogo size={18} weight="fill" />

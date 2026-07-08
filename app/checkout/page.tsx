@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, PencilSimple } from "@phosphor-icons/react";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import { PencilSimple } from "@phosphor-icons/react";
+import CheckoutHeader from "@/components/checkout/CheckoutHeader";
 import CustomerForm from "@/components/checkout/CustomerForm";
 import AddressForm from "@/components/checkout/AddressForm";
 import OrderSummary, { type OrderTotals } from "@/components/checkout/OrderSummary";
@@ -112,25 +111,18 @@ export default function CheckoutPage() {
   if (completedOrder) {
     return (
       <main className="overflow-x-hidden w-full max-w-full bg-matte-black min-h-screen">
-        <Navbar />
+        <CheckoutHeader />
         <CheckoutSuccess order={completedOrder} />
-        <Footer />
       </main>
     );
   }
 
   return (
-    <main className="overflow-x-hidden w-full max-w-full bg-matte-black">
-      <Navbar />
+    <main className="overflow-x-hidden w-full max-w-full bg-matte-black min-h-screen">
+      <CheckoutHeader />
 
-      <section className="bg-matte-black pt-44 pb-12 px-6 lg:px-12 border-b border-champagne-gold/10">
+      <section className="bg-matte-black pt-16 lg:pt-20 pb-12 px-6 lg:px-12 border-b border-champagne-gold/10">
         <div className="max-w-7xl mx-auto">
-          <Link
-            href="/fragrances"
-            className="inline-flex items-center gap-2 text-champagne-white/40 hover:text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans transition-colors mb-8"
-          >
-            <ArrowLeft size={12} /> Continue Shopping
-          </Link>
           <p className="font-sans text-champagne-gold text-xs tracking-[0.4em] uppercase mb-4">Hasara Parfums</p>
           <h1 className="font-serif text-champagne-white text-6xl lg:text-7xl font-light tracking-wide leading-none">
             Checkout
@@ -248,8 +240,6 @@ export default function CheckoutPage() {
           )}
         </div>
       </section>
-
-      <Footer />
     </main>
   );
 }

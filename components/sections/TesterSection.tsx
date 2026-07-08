@@ -1,19 +1,18 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
-import { WhatsappLogo, TestTube } from "@phosphor-icons/react";
-import { getWhatsAppLink } from "@/data/products";
+import { useState } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
+import { TestTube, ShoppingBag } from "@phosphor-icons/react";
+import TesterBundleConfigurator from "@/components/ui/TesterBundleConfigurator";
 
 export default function TesterSection() {
   const shouldReduce = useReducedMotion();
-  const testerLink = `https://wa.me/8801767067130?text=${encodeURIComponent(
-    "Hello Hasara Parfums,\n\nI would like to request a 1ml tester bundle before purchasing.\n\nCould you please help me with the available options?\n\nThank you."
-  )}`;
+  const [open, setOpen] = useState(false);
 
   return (
     <section className="bg-matte-black py-24 lg:py-32 px-6 lg:px-12 overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           {/* Text */}
           <motion.div
             initial={shouldReduce ? false : { opacity: 0, x: -30 }}
@@ -38,7 +37,7 @@ export default function TesterSection() {
                 "Try any parfum from our full collection",
                 "Experience how it evolves on your skin",
                 "Available for all bottle sizes",
-                "Order via WhatsApp — quick and easy",
+                "Add straight to your bag — no waiting",
               ].map((point) => (
                 <li key={point} className="flex items-start gap-3 font-sans text-champagne-white/50 text-sm">
                   <span className="w-1 h-1 rounded-full bg-champagne-gold mt-2 flex-shrink-0" />
@@ -46,15 +45,32 @@ export default function TesterSection() {
                 </li>
               ))}
             </ul>
-            <a
-              href={testerLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.25em] uppercase font-sans font-medium transition-all duration-300 rounded-full"
-            >
-              <WhatsappLogo size={16} weight="fill" />
-              Request a Tester Bundle
-            </a>
+
+            {!open && (
+              <button
+                onClick={() => setOpen(true)}
+                className="inline-flex items-center gap-3 px-8 py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.25em] uppercase font-sans font-medium transition-all duration-300 rounded-full cursor-pointer"
+              >
+                <ShoppingBag size={16} />
+                Build Your Tester Bundle
+              </button>
+            )}
+
+            <AnimatePresence>
+              {open && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="overflow-hidden"
+                >
+                  <div className="pt-1">
+                    <TesterBundleConfigurator />
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
 
           {/* Visual */}
@@ -66,9 +82,9 @@ export default function TesterSection() {
             className="flex flex-col gap-4"
           >
             {[
-              { label: "Select your parfum", step: "01" },
-              { label: "Contact us on WhatsApp", step: "02" },
-              { label: "Receive your 1ml tester bundle", step: "03" },
+              { label: "Select up to 4 parfums", step: "01" },
+              { label: "Add the bundle to your bag", step: "02" },
+              { label: "Complete checkout", step: "03" },
               { label: "Find your signature scent", step: "04" },
             ].map(({ label, step }) => (
               <div key={step} className="flex items-center gap-6 border border-champagne-gold/10 px-6 py-5 rounded-2xl">
