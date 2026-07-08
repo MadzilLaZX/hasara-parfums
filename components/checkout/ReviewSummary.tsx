@@ -18,7 +18,12 @@ export default function ReviewSummary({ totals }: Props) {
         <p className="font-serif text-champagne-white text-xl font-light tracking-wide">Order Summary</p>
       </div>
 
-      <div className="px-6 py-4 space-y-4 max-h-[360px] overflow-y-auto">
+      <div
+        className="px-6 py-4 space-y-4 max-h-[360px] overflow-y-auto"
+        data-lenis-prevent
+        onWheel={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.stopPropagation()}
+      >
         {items.map((item, i) => {
           const isBundle = item.slug.startsWith("tester-bundle-");
           const bundleParts = isBundle ? item.name.split("::") : null;

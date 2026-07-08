@@ -1,17 +1,18 @@
 "use client";
 
-import { CheckCircle, WhatsappLogo } from "@phosphor-icons/react";
+import Link from "next/link";
+import { CheckCircle, WhatsappLogo, ArrowRight } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 import { WHATSAPP_NUMBER } from "@/data/products";
 import type { Order } from "@/lib/order";
-import { buildWhatsAppMessage } from "@/lib/order";
 
 interface Props {
   order: Order;
 }
 
 export default function CheckoutSuccess({ order }: Props) {
-  const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildWhatsAppMessage(order))}`;
+  const supportMessage = `Hello HASARA Parfums,\n\nI have a question about my order.\n\nOrder ID:\n${order.orderId}`;
+  const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(supportMessage)}`;
 
   return (
     <motion.div
@@ -44,14 +45,21 @@ export default function CheckoutSuccess({ order }: Props) {
         </div>
       </div>
 
+      <Link
+        href="/fragrances"
+        className="w-full flex items-center justify-center gap-2.5 py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.25em] uppercase font-sans font-semibold transition-all duration-300 cursor-pointer rounded-full"
+      >
+        Continue Shopping
+        <ArrowRight size={16} />
+      </Link>
       <a
         href={whatsappHref}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-full flex items-center justify-center gap-2.5 py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.25em] uppercase font-sans font-semibold transition-all duration-300 cursor-pointer rounded-full"
+        className="w-full flex items-center justify-center gap-2.5 py-4 mt-3 border border-champagne-gold/40 text-champagne-gold hover:bg-champagne-gold/10 text-xs tracking-[0.25em] uppercase font-sans font-semibold transition-all duration-300 cursor-pointer rounded-full"
       >
         <WhatsappLogo size={16} weight="fill" />
-        Continue on WhatsApp
+        Customer Service
       </a>
     </motion.div>
   );

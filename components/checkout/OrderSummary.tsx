@@ -52,7 +52,12 @@ export default function OrderSummary({ onTotalsChange }: Props) {
         <p className="font-serif text-champagne-white text-xl font-light tracking-wide">Order Summary</p>
       </div>
 
-      <div className="px-6 py-4 space-y-4 max-h-[420px] overflow-y-auto">
+      <div
+        className="px-6 py-4 space-y-4 max-h-[420px] overflow-y-auto"
+        data-lenis-prevent
+        onWheel={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.stopPropagation()}
+      >
         {items.length === 0 ? (
           <p className="font-sans text-champagne-white/30 text-sm py-6 text-center">Your bag is empty.</p>
         ) : (

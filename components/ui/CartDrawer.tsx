@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { X, Trash, ArrowRight, Tag, CheckCircle, Minus, Plus, TestTube } from "@phosphor-icons/react";
@@ -39,6 +39,15 @@ export default function CartDrawer({ open, onClose }: Props) {
     router.push("/checkout");
   }
 
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open]);
+
   const totalUnits = items.reduce((sum, i) => sum + i.quantity, 0);
 
   return (
@@ -75,8 +84,14 @@ export default function CartDrawer({ open, onClose }: Props) {
               </button>
             </div>
 
-            {/* Items */}
-            <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
+            {/* Items — data-lenis-prevent stops the global Lenis smooth-scroll from
+                hijacking wheel events here and scrolling the page behind the drawer */}
+            <div
+              className="flex-1 overflow-y-auto px-6 py-4 space-y-4"
+              data-lenis-prevent
+              onWheel={(e) => e.stopPropagation()}
+              onTouchMove={(e) => e.stopPropagation()}
+            >
               {items.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center">
                   <p className="font-serif text-champagne-white/30 text-2xl font-light mb-3">Your cart is empty</p>
