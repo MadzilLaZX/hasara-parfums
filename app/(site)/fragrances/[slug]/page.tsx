@@ -2,8 +2,6 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import SizeSelector from "@/components/ui/SizeSelector";
 import ProductGallery from "@/components/ui/ProductGallery";
@@ -43,7 +41,6 @@ export default function ProductPage({ params }: Props) {
 
   return (
     <main className="overflow-x-hidden w-full max-w-full bg-champagne-white">
-      <Navbar />
 
       <div className="bg-matte-black pt-28 pb-6 px-6 lg:px-12">
         <div className="max-w-7xl mx-auto">
@@ -157,7 +154,6 @@ export default function ProductPage({ params }: Props) {
         </section>
       )}
 
-      <Footer />
       <FloatingWhatsApp />
     </main>
   );

@@ -49,15 +49,22 @@ export default function Footer() {
               A luxury fragrance house dedicated to the art of scent. Each bottle
               holds a story of craftsmanship, identity, and presence.
             </p>
-            {!hideOrderNow && (
+            {/* Pure CSS transition — resilient to main-thread hydration jank during route changes */}
+            <div
+              aria-hidden={hideOrderNow}
+              className={`overflow-hidden transition-[max-height,opacity,margin-top] duration-500 ease-out ${
+                hideOrderNow ? "max-h-0 opacity-0 mt-0 pointer-events-none" : "max-h-24 opacity-100 mt-8"
+              }`}
+            >
               <Link
                 href="/fragrances"
-                className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.2em] uppercase font-sans font-medium transition-all duration-300 cursor-pointer rounded-full"
+                tabIndex={hideOrderNow ? -1 : undefined}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.2em] uppercase font-sans font-medium transition-colors duration-300 cursor-pointer rounded-full"
               >
                 Order Now
                 <ArrowRight size={16} />
               </Link>
-            )}
+            </div>
           </div>
 
           {/* Collections */}

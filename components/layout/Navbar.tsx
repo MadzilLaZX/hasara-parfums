@@ -86,13 +86,24 @@ export default function Navbar() {
                 )}
               </button>
 
-              {/* Order Now — desktop only, hidden on the collections page itself */}
-              {!hideOrderNow && (
-                <Link href="/fragrances" className="hidden lg:flex items-center gap-2 px-5 py-2.5 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-xs tracking-[0.15em] uppercase font-sans transition-all duration-300 rounded-full">
+              {/* Order Now — desktop only, hidden on the collections page itself.
+                  Pure CSS transition (not framer/JS) so it stays smooth even while
+                  the destination route is doing heavy client-side hydration. */}
+              <div
+                aria-hidden={hideOrderNow}
+                className={`hidden lg:flex overflow-hidden transition-[max-width,opacity] duration-500 ease-out ${
+                  hideOrderNow ? "max-w-0 opacity-0 pointer-events-none" : "max-w-[200px] opacity-100"
+                }`}
+              >
+                <Link
+                  href="/fragrances"
+                  tabIndex={hideOrderNow ? -1 : undefined}
+                  className="flex items-center gap-2 px-5 py-2.5 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-xs tracking-[0.15em] uppercase font-sans transition-colors duration-300 rounded-full whitespace-nowrap"
+                >
                   Order Now
                   <ArrowRight size={14} />
                 </Link>
-              )}
+              </div>
 
               {/* Mobile menu toggle */}
               <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden text-champagne-white hover:text-champagne-gold transition-colors duration-300 cursor-pointer p-2" aria-label={menuOpen ? "Close menu" : "Open menu"}>
@@ -126,12 +137,22 @@ export default function Navbar() {
             <ShoppingBag size={16} /> Bag {count > 0 && `(${count})`}
           </button>
         </div>
-        {!hideOrderNow && (
-          <Link href="/fragrances" onClick={() => setMenuOpen(false)} className="mt-1 flex items-center gap-2 px-8 py-3 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-sm tracking-[0.2em] uppercase font-sans transition-all duration-300 cursor-pointer rounded-full">
+        <div
+          aria-hidden={hideOrderNow}
+          className={`overflow-hidden transition-[max-height,opacity,margin-top] duration-500 ease-out flex items-center justify-center ${
+            hideOrderNow ? "max-h-0 opacity-0 mt-0 pointer-events-none" : "max-h-24 opacity-100 mt-1"
+          }`}
+        >
+          <Link
+            href="/fragrances"
+            onClick={() => setMenuOpen(false)}
+            tabIndex={hideOrderNow ? -1 : undefined}
+            className="flex items-center gap-2 px-8 py-3 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-sm tracking-[0.2em] uppercase font-sans transition-colors duration-300 cursor-pointer rounded-full"
+          >
             Order Now
             <ArrowRight size={16} />
           </Link>
-        )}
+        </div>
       </div>
 
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />

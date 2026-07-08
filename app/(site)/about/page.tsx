@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 
 export const metadata: Metadata = {
@@ -12,7 +10,6 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className="overflow-x-hidden w-full max-w-full bg-champagne-white">
-      <Navbar />
 
       {/* Hero */}
       <section className="bg-matte-black pt-44 pb-20 px-6 lg:px-12">
@@ -124,7 +121,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <Footer />
       <FloatingWhatsApp />
     </main>
   );

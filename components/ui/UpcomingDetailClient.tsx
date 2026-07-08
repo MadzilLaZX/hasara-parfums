@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { ArrowLeft, Heart, WhatsappLogo, Sparkle } from "@phosphor-icons/react";
 import { motion } from "motion/react";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import { useWishlist } from "@/context/WishlistContext";
 import type { UpcomingFragrance } from "@/data/upcoming";
@@ -22,7 +20,6 @@ export default function UpcomingDetailClient({ fragrance }: { fragrance: Upcomin
 
   return (
     <main className="overflow-x-hidden w-full max-w-full bg-champagne-white">
-      <Navbar />
 
       <div className="bg-matte-black pt-28 pb-6 px-6 lg:px-12">
         <div className="max-w-7xl mx-auto">
@@ -151,7 +148,6 @@ export default function UpcomingDetailClient({ fragrance }: { fragrance: Upcomin
         </div>
       </section>
 
-      <Footer />
       <FloatingWhatsApp />
     </main>
   );

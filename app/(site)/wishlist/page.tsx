@@ -4,8 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Heart, Trash, WhatsappLogo, ArrowLeft, Question } from "@phosphor-icons/react";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import { useWishlist } from "@/context/WishlistContext";
 import { fragrances } from "@/data/products";
@@ -46,7 +44,6 @@ export default function WishlistPage() {
 
   return (
     <main className="overflow-x-hidden w-full max-w-full bg-champagne-white">
-      <Navbar />
 
       {/* Header */}
       <section className="bg-matte-black pt-44 pb-16 px-6 lg:px-12">
@@ -205,7 +202,6 @@ export default function WishlistPage() {
         </div>
       </section>
 
-      <Footer />
       <FloatingWhatsApp />
     </main>
   );

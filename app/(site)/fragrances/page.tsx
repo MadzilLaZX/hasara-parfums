@@ -7,8 +7,6 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { useReducedMotion } from "motion/react";
 import { SlidersHorizontal, X, Heart, WhatsappLogo } from "@phosphor-icons/react";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import WishlistButton from "@/components/ui/WishlistButton";
 import { fragrances } from "@/data/products";
@@ -120,7 +118,6 @@ function FragrancesPage() {
 
   return (
     <main className="overflow-x-hidden w-full max-w-full bg-champagne-white">
-      <Navbar />
 
       {/* Page Header */}
       <section className="bg-matte-black pt-44 pb-16 px-6 lg:px-12">
@@ -390,7 +387,6 @@ function FragrancesPage() {
         </div>
       </section>
 
-      <Footer />
       <FloatingWhatsApp />
     </main>
   );

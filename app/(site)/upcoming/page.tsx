@@ -4,8 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { Heart, WhatsappLogo, ArrowLeft } from "@phosphor-icons/react";
 import { motion } from "motion/react";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import { upcomingFragrances, upcomingMens, upcomingWomens } from "@/data/upcoming";
 import { useWishlist } from "@/context/WishlistContext";
@@ -80,7 +78,6 @@ export default function UpcomingPage() {
 
   return (
     <main className="overflow-x-hidden w-full max-w-full bg-champagne-white">
-      <Navbar />
 
       <section className="bg-matte-black pt-44 pb-16 px-6 lg:px-12">
         <div className="max-w-7xl mx-auto">
@@ -147,7 +144,6 @@ export default function UpcomingPage() {
         </div>
       </section>
 
-      <Footer />
       <FloatingWhatsApp />
     </main>
   );

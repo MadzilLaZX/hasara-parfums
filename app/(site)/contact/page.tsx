@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import ContactSection from "@/components/sections/ContactSection";
 
@@ -12,7 +10,6 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <main className="overflow-x-hidden w-full max-w-full bg-matte-black">
-      <Navbar />
 
       {/* Header */}
       <section className="bg-matte-black pt-44 pb-12 px-6 lg:px-12 border-b border-champagne-gold/10">
@@ -28,7 +25,6 @@ export default function ContactPage() {
       {/* Contact details — reuse existing section */}
       <ContactSection />
 
-      <Footer />
       <FloatingWhatsApp />
     </main>
   );
