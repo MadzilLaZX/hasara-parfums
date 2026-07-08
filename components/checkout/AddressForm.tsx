@@ -40,13 +40,22 @@ export default function AddressForm({ value, errors, onChange }: Props) {
         />
       </div>
 
-      <FormField
-        label="Address"
-        value={value.street}
-        error={errors.street}
-        onChange={(e) => set("street", e.target.value)}
-        placeholder="e.g. Gulshan Avenue"
-      />
+      <div className="grid grid-cols-2 gap-5">
+        <FormField
+          label="Address"
+          value={value.street}
+          error={errors.street}
+          onChange={(e) => set("street", e.target.value)}
+          placeholder="e.g. Gulshan Avenue"
+        />
+        <FormField
+          label="Flat / Apartment"
+          value={value.flat}
+          optional
+          onChange={(e) => set("flat", e.target.value)}
+          placeholder="e.g. Flat 4B"
+        />
+      </div>
 
       <div className="grid grid-cols-2 gap-5">
         <FormField

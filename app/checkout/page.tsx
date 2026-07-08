@@ -23,6 +23,7 @@ const EMPTY_ADDRESS: OrderAddress = {
   house: "",
   road: "",
   street: "",
+  flat: "",
   block: "",
   area: "",
   notes: "",
@@ -207,6 +208,7 @@ export default function CheckoutPage() {
                   </div>
                   <p className="font-sans text-champagne-white/70 text-sm leading-relaxed">
                     {address.house}, {address.road}, {address.street}
+                    {address.flat && `, ${address.flat}`}
                     {address.block && `, ${address.block}`}
                     <br />
                     {address.area && `${address.area}, `}{address.city}, {address.country}
