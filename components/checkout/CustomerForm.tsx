@@ -1,6 +1,7 @@
 "use client";
 
 import FormField from "@/components/checkout/FormField";
+import PhoneField from "@/components/checkout/PhoneField";
 import type { OrderCustomer } from "@/lib/order";
 
 interface Props {
@@ -26,14 +27,10 @@ export default function CustomerForm({ value, errors, onChange }: Props) {
         autoComplete="name"
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <FormField
-          label="Phone Number"
+        <PhoneField
           value={value.phone}
           error={errors.phone}
-          onChange={(e) => set("phone", e.target.value)}
-          placeholder="01XXXXXXXXX"
-          type="tel"
-          autoComplete="tel"
+          onChange={(next) => set("phone", next)}
         />
         <FormField
           label="Email Address"
