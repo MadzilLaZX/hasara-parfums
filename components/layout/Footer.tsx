@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
 import {
   WhatsappLogo,
@@ -14,6 +15,9 @@ import {
 import { getWhatsAppLink } from "@/data/products";
 
 export default function Footer() {
+  const pathname = usePathname();
+  const hideOrderNow = pathname === "/fragrances";
+
   return (
     <footer className="bg-matte-black text-champagne-white" id="contact">
 
@@ -45,13 +49,15 @@ export default function Footer() {
               A luxury fragrance house dedicated to the art of scent. Each bottle
               holds a story of craftsmanship, identity, and presence.
             </p>
-            <Link
-              href="/fragrances"
-              className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.2em] uppercase font-sans font-medium transition-all duration-300 cursor-pointer rounded-full"
-            >
-              Order Now
-              <ArrowRight size={16} />
-            </Link>
+            {!hideOrderNow && (
+              <Link
+                href="/fragrances"
+                className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.2em] uppercase font-sans font-medium transition-all duration-300 cursor-pointer rounded-full"
+              >
+                Order Now
+                <ArrowRight size={16} />
+              </Link>
+            )}
           </div>
 
           {/* Collections */}

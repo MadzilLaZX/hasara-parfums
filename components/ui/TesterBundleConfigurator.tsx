@@ -1,14 +1,26 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { ShoppingBag, CaretDown, CheckCircle, ArrowRight } from "@phosphor-icons/react";
+import { ShoppingBag, CaretDown, CheckCircle, Plus } from "@phosphor-icons/react";
 import Image from "next/image";
 import { fragrances } from "@/data/products";
-import { useCart } from "@/context/CartContext";
+import { useCart, type CartItem } from "@/context/CartContext";
 
 export const TESTER_PRICE = 100;
 export const TESTER_BUNDLE_SIZE = 4;
 export const BUNDLE_TOTAL = TESTER_PRICE * TESTER_BUNDLE_SIZE;
+
+function countTesterBundles(items: CartItem[]): number {
+  return items
+    .filter((i) => i.slug.startsWith("tester-bundle-"))
+    .reduce((sum, i) => sum + i.quantity, 0);
+}
+
+/** Cart-driven bundle count — usable anywhere a surface needs to know without mounting the configurator. */
+export function useTesterBundleCount(): number {
+  const { items } = useCart();
+  return countTesterBundles(items);
+}
 
 function TesterSlotPicker({
   value,
@@ -102,9 +114,12 @@ interface Props {
 }
 
 export default function TesterBundleConfigurator({ initialSlug, fallbackImage }: Props) {
-  const [testerSelections, setTesterSelections] = useState<string[]>([initialSlug ?? "", "", "", ""]);
-  const [bundleAdded, setBundleAdded] = useState(false);
-  const { addItem } = useCart();
+  const { items, addItem } = useCart();
+  const bundleCount = countTesterBundles(items);
+
+  const emptySelections = () => [initialSlug ?? "", "", "", ""];
+  const [testerSelections, setTesterSelections] = useState<string[]>(emptySelections);
+  const [configuring, setConfiguring] = useState(bundleCount === 0);
 
   const allTesterSelected = testerSelections.every((s) => s !== "");
 
@@ -126,12 +141,42 @@ export default function TesterBundleConfigurator({ initialSlug, fallbackImage }:
       ml: 1,
       price: BUNDLE_TOTAL,
     });
-    setBundleAdded(true);
-    setTimeout(() => setBundleAdded(false), 3500);
+    setTesterSelections(emptySelections());
+    setConfiguring(false);
+  }
+
+  function addAnotherBundle() {
+    setTesterSelections(emptySelections());
+    setConfiguring(true);
   }
 
   function openCartDrawer() {
     window.dispatchEvent(new CustomEvent("hasara:open-cart"));
+  }
+
+  if (!configuring && bundleCount > 0) {
+    return (
+      <div className="border border-champagne-gold/25 bg-champagne-gold/[0.04] p-5 rounded-xl space-y-3">
+        <div className="flex items-center gap-2.5 text-champagne-gold font-sans text-sm tracking-wide">
+          <CheckCircle size={18} weight="fill" />
+          {bundleCount} Tester Bundle{bundleCount > 1 ? "s" : ""} Added
+        </div>
+        <button
+          onClick={openCartDrawer}
+          className="w-full flex items-center justify-center gap-2.5 py-3.5 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.2em] uppercase font-sans font-semibold transition-all duration-300 rounded-xl cursor-pointer"
+        >
+          <ShoppingBag size={14} />
+          View My Bag
+        </button>
+        <button
+          onClick={addAnotherBundle}
+          className="w-full flex items-center justify-center gap-2 py-2 text-champagne-gold/70 hover:text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans transition-colors cursor-pointer"
+        >
+          <Plus size={12} />
+          Add Another Bundle
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -153,33 +198,18 @@ export default function TesterBundleConfigurator({ initialSlug, fallbackImage }:
         />
       ))}
 
-      {bundleAdded ? (
-        <div className="space-y-2">
-          <div className="w-full py-4 flex items-center justify-center gap-2.5 bg-green-500/15 border border-green-500/40 text-green-400 text-xs tracking-[0.2em] uppercase font-sans font-semibold rounded-xl">
-            <CheckCircle size={16} weight="fill" />
-            Tester Bundle Added to Cart!
-          </div>
-          <button
-            onClick={openCartDrawer}
-            className="w-full flex items-center justify-center gap-2 py-3 text-champagne-gold/80 hover:text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans transition-colors cursor-pointer"
-          >
-            View Bag <ArrowRight size={13} />
-          </button>
-        </div>
-      ) : (
-        <button
-          onClick={addTesterBundle}
-          disabled={!allTesterSelected}
-          className={`w-full py-4 text-xs tracking-[0.2em] uppercase font-sans font-semibold transition-all duration-300 rounded-xl flex items-center justify-center gap-2 ${
-            allTesterSelected
-              ? "bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 cursor-pointer"
-              : "bg-champagne-gold/15 text-champagne-gold/30 cursor-not-allowed"
-          }`}
-        >
-          <ShoppingBag size={14} />
-          Add Tester Bundle to Cart
-        </button>
-      )}
+      <button
+        onClick={addTesterBundle}
+        disabled={!allTesterSelected}
+        className={`w-full py-4 text-xs tracking-[0.2em] uppercase font-sans font-semibold transition-all duration-300 rounded-xl flex items-center justify-center gap-2 ${
+          allTesterSelected
+            ? "bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 cursor-pointer"
+            : "bg-champagne-gold/15 text-champagne-gold/30 cursor-not-allowed"
+        }`}
+      >
+        <ShoppingBag size={14} />
+        Add Tester Bundle to Cart
+      </button>
     </div>
   );
 }

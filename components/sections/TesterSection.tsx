@@ -3,11 +3,14 @@
 import { useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { TestTube, ShoppingBag } from "@phosphor-icons/react";
-import TesterBundleConfigurator from "@/components/ui/TesterBundleConfigurator";
+import TesterBundleConfigurator, { useTesterBundleCount } from "@/components/ui/TesterBundleConfigurator";
 
 export default function TesterSection() {
   const shouldReduce = useReducedMotion();
   const [open, setOpen] = useState(false);
+  const [revealed, setRevealed] = useState(false);
+  const bundleCount = useTesterBundleCount();
+  const showConfigurator = open || bundleCount > 0;
 
   return (
     <section className="bg-matte-black py-24 lg:py-32 px-6 lg:px-12 overflow-hidden">
@@ -46,7 +49,7 @@ export default function TesterSection() {
               ))}
             </ul>
 
-            {!open && (
+            {!showConfigurator && (
               <button
                 onClick={() => setOpen(true)}
                 className="inline-flex items-center gap-3 px-8 py-4 bg-champagne-gold text-matte-black hover:bg-champagne-gold/90 text-xs tracking-[0.25em] uppercase font-sans font-medium transition-all duration-300 rounded-full cursor-pointer"
@@ -56,14 +59,15 @@ export default function TesterSection() {
               </button>
             )}
 
-            <AnimatePresence>
-              {open && (
+            <AnimatePresence onExitComplete={() => setRevealed(false)}>
+              {showConfigurator && (
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="overflow-hidden"
+                  onAnimationComplete={() => setRevealed(true)}
+                  style={{ overflow: revealed ? "visible" : "hidden" }}
                 >
                   <div className="pt-1">
                     <TesterBundleConfigurator />

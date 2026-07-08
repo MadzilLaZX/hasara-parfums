@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { List, X, ShoppingBag, Heart, ArrowRight } from "@phosphor-icons/react";
 import AnnouncementBar from "@/components/ui/AnnouncementBar";
 import CartDrawer from "@/components/ui/CartDrawer";
@@ -13,6 +14,14 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const { count } = useCart();
+  const pathname = usePathname();
+
+  function isActive(href: string) {
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(`${href}/`);
+  }
+
+  const hideOrderNow = pathname === "/fragrances";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -48,7 +57,13 @@ export default function Navbar() {
             {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center gap-10">
               {navLinks.map((link) => (
-                <Link key={link.href} href={link.href} className="text-champagne-white/80 hover:text-champagne-gold text-xs tracking-[0.2em] uppercase font-sans transition-colors duration-300">
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`text-xs tracking-[0.2em] uppercase font-sans transition-colors duration-300 ${
+                    isActive(link.href) ? "text-champagne-gold" : "text-champagne-white/80 hover:text-champagne-gold"
+                  }`}
+                >
                   {link.label}
                 </Link>
               ))}
@@ -71,11 +86,13 @@ export default function Navbar() {
                 )}
               </button>
 
-              {/* Order Now — desktop only */}
-              <Link href="/fragrances" className="hidden lg:flex items-center gap-2 px-5 py-2.5 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-xs tracking-[0.15em] uppercase font-sans transition-all duration-300 rounded-full">
-                Order Now
-                <ArrowRight size={14} />
-              </Link>
+              {/* Order Now — desktop only, hidden on the collections page itself */}
+              {!hideOrderNow && (
+                <Link href="/fragrances" className="hidden lg:flex items-center gap-2 px-5 py-2.5 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-xs tracking-[0.15em] uppercase font-sans transition-all duration-300 rounded-full">
+                  Order Now
+                  <ArrowRight size={14} />
+                </Link>
+              )}
 
               {/* Mobile menu toggle */}
               <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden text-champagne-white hover:text-champagne-gold transition-colors duration-300 cursor-pointer p-2" aria-label={menuOpen ? "Close menu" : "Open menu"}>
@@ -89,7 +106,15 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <div className={`fixed inset-0 z-40 bg-matte-black transition-all duration-500 flex flex-col items-center justify-center gap-6 pt-20 pb-28 overflow-y-auto ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
         {navLinks.map((link, i) => (
-          <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)} className="font-serif text-champagne-white text-2xl tracking-widest uppercase hover:text-champagne-gold transition-colors duration-300" style={{ animationDelay: `${i * 80}ms` }}>
+          <Link
+            key={link.href}
+            href={link.href}
+            onClick={() => setMenuOpen(false)}
+            className={`font-serif text-2xl tracking-widest uppercase transition-colors duration-300 ${
+              isActive(link.href) ? "text-champagne-gold" : "text-champagne-white hover:text-champagne-gold"
+            }`}
+            style={{ animationDelay: `${i * 80}ms` }}
+          >
             {link.label}
           </Link>
         ))}
@@ -101,10 +126,12 @@ export default function Navbar() {
             <ShoppingBag size={16} /> Bag {count > 0 && `(${count})`}
           </button>
         </div>
-        <Link href="/fragrances" onClick={() => setMenuOpen(false)} className="mt-1 flex items-center gap-2 px-8 py-3 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-sm tracking-[0.2em] uppercase font-sans transition-all duration-300 cursor-pointer rounded-full">
-          Order Now
-          <ArrowRight size={16} />
-        </Link>
+        {!hideOrderNow && (
+          <Link href="/fragrances" onClick={() => setMenuOpen(false)} className="mt-1 flex items-center gap-2 px-8 py-3 border border-champagne-gold text-champagne-gold hover:bg-champagne-gold hover:text-matte-black text-sm tracking-[0.2em] uppercase font-sans transition-all duration-300 cursor-pointer rounded-full">
+            Order Now
+            <ArrowRight size={16} />
+          </Link>
+        )}
       </div>
 
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
