@@ -6,7 +6,7 @@ import type { OrderPaymentMethod } from "@/lib/order";
 const METHODS: { id: OrderPaymentMethod; label: string; description: string; available: boolean }[] = [
   { id: "cod", label: "Cash on Delivery", description: "Pay when your order arrives", available: true },
   { id: "sslcommerz", label: "Card / Mobile Banking", description: "Coming soon", available: false },
-  { id: "stripe", label: "International Card", description: "Coming soon", available: false },
+  { id: "stripe", label: "Online Payment", description: "bKash, Nagad, Rocket, Debit/Credit Cards — Coming Soon", available: false },
 ];
 
 interface Props {

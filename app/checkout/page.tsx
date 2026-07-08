@@ -56,8 +56,7 @@ export default function CheckoutPage() {
     const nextAddressErrors: AddressErrors = {};
     if (!isNonEmpty(address.house)) nextAddressErrors.house = "House number is required.";
     if (!isNonEmpty(address.road)) nextAddressErrors.road = "Road number is required.";
-    if (!isNonEmpty(address.street)) nextAddressErrors.street = "Street name is required.";
-    if (!isNonEmpty(address.area)) nextAddressErrors.area = "Area / Thana is required.";
+    if (!isNonEmpty(address.street)) nextAddressErrors.street = "Address is required.";
 
     setCustomerErrors(nextCustomerErrors);
     setAddressErrors(nextAddressErrors);
@@ -198,7 +197,7 @@ export default function CheckoutPage() {
 
                 <div className="border border-champagne-gold/15 rounded-2xl px-6 py-5">
                   <div className="flex items-center justify-between mb-4">
-                    <h2 className="font-serif text-champagne-white text-xl font-light tracking-wide">Delivery Address</h2>
+                    <h2 className="font-serif text-champagne-white text-xl font-light tracking-wide">Shipment Address</h2>
                     <button
                       onClick={backToDetails}
                       className="flex items-center gap-1.5 text-champagne-gold/70 hover:text-champagne-gold text-xs tracking-wider uppercase font-sans transition-colors cursor-pointer"
@@ -210,7 +209,7 @@ export default function CheckoutPage() {
                     {address.house}, {address.road}, {address.street}
                     {address.block && `, ${address.block}`}
                     <br />
-                    {address.area}, {address.city}, {address.country}
+                    {address.area && `${address.area}, `}{address.city}, {address.country}
                     {address.notes && (
                       <>
                         <br />

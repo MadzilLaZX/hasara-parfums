@@ -16,7 +16,7 @@ export default function AddressForm({ value, errors, onChange }: Props) {
 
   return (
     <div className="space-y-5">
-      <h2 className="font-serif text-champagne-white text-2xl font-light tracking-wide">Delivery Address</h2>
+      <h2 className="font-serif text-champagne-white text-2xl font-light tracking-wide">Shipment Address</h2>
 
       <div className="grid grid-cols-2 gap-5">
         <FormField label="Country" value={value.country} disabled className="opacity-50 cursor-not-allowed" />
@@ -41,7 +41,7 @@ export default function AddressForm({ value, errors, onChange }: Props) {
       </div>
 
       <FormField
-        label="Street Name"
+        label="Address"
         value={value.street}
         error={errors.street}
         onChange={(e) => set("street", e.target.value)}
@@ -53,6 +53,7 @@ export default function AddressForm({ value, errors, onChange }: Props) {
           label="Area / Thana"
           value={value.area}
           error={errors.area}
+          optional
           onChange={(e) => set("area", e.target.value)}
           placeholder="e.g. Gulshan"
         />

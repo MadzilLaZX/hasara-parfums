@@ -103,7 +103,7 @@ export default function OrderSummary({ onTotalsChange }: Props) {
                     ) : (
                       <span />
                     )}
-                    <p className="font-serif text-champagne-gold text-sm">৳{(item.price * item.quantity).toLocaleString()}</p>
+                    <p className="font-sans text-champagne-gold text-sm">৳{(item.price * item.quantity).toLocaleString()}</p>
                   </div>
                 </div>
                 <button
@@ -171,7 +171,7 @@ export default function OrderSummary({ onTotalsChange }: Props) {
             )}
             <div className="flex justify-between text-champagne-gold font-medium pt-2 border-t border-champagne-gold/15">
               <span className="font-serif text-base">Total</span>
-              <span className="font-serif text-xl">৳{finalTotal.toLocaleString()}</span>
+              <span className="font-sans text-xl">৳{finalTotal.toLocaleString()}</span>
             </div>
           </div>
         </div>

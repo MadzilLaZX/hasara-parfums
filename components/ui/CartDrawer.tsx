@@ -129,7 +129,7 @@ export default function CartDrawer({ open, onClose }: Props) {
                           ) : (
                             <p className="font-sans text-champagne-white/40 text-xs tracking-wider mt-1">{item.ml}ml</p>
                           )}
-                          <p className="font-serif text-champagne-gold text-lg mt-1">
+                          <p className="font-sans text-champagne-gold text-lg mt-1">
                             ৳{(item.price * item.quantity).toLocaleString()}
                           </p>
                           {!isBundle && item.quantity > 1 && (
@@ -241,7 +241,7 @@ export default function CartDrawer({ open, onClose }: Props) {
                   )}
                   <div className="flex justify-between text-champagne-gold font-medium pt-2 border-t border-champagne-gold/15">
                     <span className="font-serif text-base">Total</span>
-                    <span className="font-serif text-xl">৳{finalTotal.toLocaleString()}</span>
+                    <span className="font-sans text-xl">৳{finalTotal.toLocaleString()}</span>
                   </div>
                 </div>
 

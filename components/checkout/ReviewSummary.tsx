@@ -45,7 +45,7 @@ export default function ReviewSummary({ totals }: Props) {
                   {isBundle ? "4×1ml Bundle" : `${item.ml}ml`} · Qty {item.quantity}
                 </p>
               </div>
-              <p className="font-serif text-champagne-gold text-sm">৳{(item.price * item.quantity).toLocaleString()}</p>
+              <p className="font-sans text-champagne-gold text-sm">৳{(item.price * item.quantity).toLocaleString()}</p>
             </div>
           );
         })}
@@ -64,7 +64,7 @@ export default function ReviewSummary({ totals }: Props) {
         )}
         <div className="flex justify-between text-champagne-gold font-medium pt-2 border-t border-champagne-gold/15">
           <span className="font-serif text-base">Total</span>
-          <span className="font-serif text-xl">৳{totals.total.toLocaleString()}</span>
+          <span className="font-sans text-xl">৳{totals.total.toLocaleString()}</span>
         </div>
       </div>
     </div>

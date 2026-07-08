@@ -41,7 +41,7 @@ export default function CheckoutSuccess({ order }: Props) {
         </div>
         <div className="flex justify-between text-xs font-sans">
           <span className="text-champagne-white/40 tracking-wider uppercase">Estimated Delivery</span>
-          <span className="text-champagne-white/70">3–14 Business Days</span>
+          <span className="text-champagne-white/70">2–5 Business Days</span>
         </div>
       </div>
 
