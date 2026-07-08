@@ -24,6 +24,7 @@ export interface OrderAddress {
   house: string;
   road: string;
   street: string;
+  flat: string;
   block: string;
   area: string;
   notes: string;
