@@ -8,6 +8,8 @@ export interface OrderProduct {
   price: number;
   lineTotal: number;
   isTester: boolean;
+  /** For tester bundles: the individual fragrance names the customer picked for each slot. */
+  testerNames?: string[];
 }
 
 export interface OrderCustomer {
@@ -63,15 +65,20 @@ export function generateOrderId(now: Date): string {
 }
 
 export function cartItemsToOrderProducts(items: CartItem[]): OrderProduct[] {
-  return items.map((item) => ({
-    slug: item.slug,
-    name: item.slug.startsWith("tester-bundle-") ? item.name.split("::")[0] : item.name,
-    ml: item.ml,
-    quantity: item.quantity,
-    price: item.price,
-    lineTotal: item.price * item.quantity,
-    isTester: item.slug.startsWith("tester-bundle-"),
-  }));
+  return items.map((item) => {
+    const isTester = item.slug.startsWith("tester-bundle-");
+    const [label, namesPart] = item.name.split("::");
+    return {
+      slug: item.slug,
+      name: isTester ? label : item.name,
+      ml: item.ml,
+      quantity: item.quantity,
+      price: item.price,
+      lineTotal: item.price * item.quantity,
+      isTester,
+      testerNames: isTester && namesPart ? namesPart.split(", ").filter(Boolean) : undefined,
+    };
+  });
 }
 
 export function buildOrder(params: {
