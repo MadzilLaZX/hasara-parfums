@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle, Money, CreditCard } from "@phosphor-icons/react";
+import { CheckCircle, Money, CreditCard, DeviceMobile } from "@phosphor-icons/react";
 import type { OrderPaymentMethod } from "@/lib/order";
 
 const METHODS: { id: OrderPaymentMethod; label: string; description: string; available: boolean }[] = [
@@ -30,6 +30,8 @@ export default function PaymentMethodSelector({ value }: Props) {
             <div className="flex items-center gap-3">
               {method.id === "cod" ? (
                 <Money size={20} className={selected ? "text-champagne-gold" : "text-champagne-white/40"} />
+              ) : method.id === "stripe" ? (
+                <DeviceMobile size={20} className="text-champagne-white/40" />
               ) : (
                 <CreditCard size={20} className="text-champagne-white/40" />
               )}
