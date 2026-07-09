@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Trash, Minus, Plus, Tag, CheckCircle, TestTube } from "@phosphor-icons/react";
 import { useCart } from "@/context/CartContext";
-import { checkCoupon, computeDiscount, type CouponResult } from "@/lib/coupon";
 
 export interface OrderTotals {
   subtotal: number;
@@ -18,13 +17,19 @@ interface Props {
 }
 
 export default function OrderSummary({ onTotalsChange }: Props) {
-  const { items, removeItem, updateQuantity, total: subtotal } = useCart();
+  const {
+    items,
+    removeItem,
+    updateQuantity,
+    total: subtotal,
+    appliedCoupon: applied,
+    couponError: promoError,
+    applyCoupon,
+    removeCoupon,
+    discount,
+    finalTotal,
+  } = useCart();
   const [promoCode, setPromoCode] = useState("");
-  const [applied, setApplied] = useState<CouponResult | null>(null);
-  const [promoError, setPromoError] = useState("");
-
-  const discount = applied ? computeDiscount(subtotal, applied.discountRate) : 0;
-  const finalTotal = subtotal - discount;
 
   useEffect(() => {
     onTotalsChange({
@@ -37,13 +42,7 @@ export default function OrderSummary({ onTotalsChange }: Props) {
   }, [subtotal, discount, applied, finalTotal]);
 
   function applyPromo() {
-    const result = checkCoupon(promoCode);
-    if (result.valid) {
-      setApplied(result);
-      setPromoError("");
-    } else {
-      setPromoError("Invalid code. Try HASARA30.");
-    }
+    applyCoupon(promoCode);
   }
 
   return (
@@ -128,7 +127,7 @@ export default function OrderSummary({ onTotalsChange }: Props) {
                 <input
                   type="text"
                   value={promoCode}
-                  onChange={(e) => { setPromoCode(e.target.value); setPromoError(""); }}
+                  onChange={(e) => setPromoCode(e.target.value)}
                   placeholder="Promo code"
                   disabled={!!applied}
                   className="w-full pl-9 pr-3 py-2.5 bg-white/5 border border-champagne-gold/20 rounded-full text-champagne-white text-xs tracking-[0.15em] uppercase font-sans placeholder:text-champagne-white/20 focus:outline-none focus:border-champagne-gold/50 disabled:opacity-50"
@@ -136,7 +135,7 @@ export default function OrderSummary({ onTotalsChange }: Props) {
               </div>
               {applied ? (
                 <button
-                  onClick={() => { setApplied(null); setPromoCode(""); }}
+                  onClick={() => { removeCoupon(); setPromoCode(""); }}
                   className="px-4 py-2.5 border border-red-500/40 text-red-400 text-xs tracking-[0.15em] uppercase font-sans hover:bg-red-500/10 transition-colors cursor-pointer rounded-full"
                 >
                   Remove

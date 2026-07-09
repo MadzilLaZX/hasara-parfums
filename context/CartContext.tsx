@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { checkCoupon, computeDiscount, type CouponResult } from "@/lib/coupon";
 
 export interface CartItem {
   slug: string;
@@ -19,6 +20,12 @@ interface CartContextType {
   clearCart: () => void;
   total: number;
   count: number;
+  appliedCoupon: CouponResult | null;
+  couponError: string;
+  applyCoupon: (code: string) => void;
+  removeCoupon: () => void;
+  discount: number;
+  finalTotal: number;
 }
 
 const CartContext = createContext<CartContextType>({
@@ -29,15 +36,25 @@ const CartContext = createContext<CartContextType>({
   clearCart: () => {},
   total: 0,
   count: 0,
+  appliedCoupon: null,
+  couponError: "",
+  applyCoupon: () => {},
+  removeCoupon: () => {},
+  discount: 0,
+  finalTotal: 0,
 });
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [appliedCoupon, setAppliedCoupon] = useState<CouponResult | null>(null);
+  const [couponError, setCouponError] = useState("");
 
   useEffect(() => {
     try {
       const stored = localStorage.getItem("hasara_cart");
       if (stored) setItems(JSON.parse(stored));
+      const storedCoupon = localStorage.getItem("hasara_coupon");
+      if (storedCoupon) setAppliedCoupon(JSON.parse(storedCoupon));
     } catch {}
   }, []);
 
@@ -75,13 +92,51 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   function clearCart() {
     persist([]);
+    setAppliedCoupon(null);
+    setCouponError("");
+    localStorage.removeItem("hasara_coupon");
+  }
+
+  function applyCoupon(code: string) {
+    const result = checkCoupon(code);
+    if (result.valid) {
+      setAppliedCoupon(result);
+      setCouponError("");
+      localStorage.setItem("hasara_coupon", JSON.stringify(result));
+    } else {
+      setCouponError("Invalid code. Try HASARA30.");
+    }
+  }
+
+  function removeCoupon() {
+    setAppliedCoupon(null);
+    setCouponError("");
+    localStorage.removeItem("hasara_coupon");
   }
 
   const total = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
   const count = items.reduce((sum, i) => sum + i.quantity, 0);
+  const discount = appliedCoupon ? computeDiscount(total, appliedCoupon.discountRate) : 0;
+  const finalTotal = total - discount;
 
   return (
-    <CartContext.Provider value={{ items, addItem, removeItem, updateQuantity, clearCart, total, count }}>
+    <CartContext.Provider
+      value={{
+        items,
+        addItem,
+        removeItem,
+        updateQuantity,
+        clearCart,
+        total,
+        count,
+        appliedCoupon,
+        couponError,
+        applyCoupon,
+        removeCoupon,
+        discount,
+        finalTotal,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );

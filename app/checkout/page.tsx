@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { PencilSimple } from "@phosphor-icons/react";
 import CheckoutHeader from "@/components/checkout/CheckoutHeader";
 import CustomerForm from "@/components/checkout/CustomerForm";
@@ -34,6 +35,7 @@ type AddressErrors = Partial<Record<keyof OrderAddress, string>>;
 type Step = "details" | "review";
 
 export default function CheckoutPage() {
+  const router = useRouter();
   const { items, clearCart } = useCart();
 
   const [step, setStep] = useState<Step>("details");
@@ -79,6 +81,14 @@ export default function CheckoutPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  function handleHeaderBack() {
+    if (step === "review") {
+      backToDetails();
+    } else {
+      router.back();
+    }
+  }
+
   async function handleConfirm() {
     if (items.length === 0 || status === "submitting") return;
 
@@ -119,7 +129,7 @@ export default function CheckoutPage() {
 
   return (
     <main className="overflow-x-hidden w-full max-w-full bg-matte-black min-h-screen">
-      <CheckoutHeader />
+      <CheckoutHeader onBack={handleHeaderBack} />
 
       <section className="bg-matte-black pt-16 lg:pt-20 pb-12 px-6 lg:px-12 border-b border-champagne-gold/10">
         <div className="max-w-7xl mx-auto">

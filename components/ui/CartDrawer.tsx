@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { X, Trash, ArrowRight, Tag, CheckCircle, Minus, Plus, TestTube } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "motion/react";
 import { useCart } from "@/context/CartContext";
-import { checkCoupon, computeDiscount } from "@/lib/coupon";
 
 interface Props {
   open: boolean;
@@ -15,22 +14,23 @@ interface Props {
 
 export default function CartDrawer({ open, onClose }: Props) {
   const router = useRouter();
-  const { items, removeItem, updateQuantity, clearCart, total } = useCart();
+  const {
+    items,
+    removeItem,
+    updateQuantity,
+    clearCart,
+    total,
+    appliedCoupon,
+    couponError,
+    applyCoupon,
+    removeCoupon,
+    discount: discountAmount,
+    finalTotal,
+  } = useCart();
   const [promoCode, setPromoCode] = useState("");
-  const [promoApplied, setPromoApplied] = useState(false);
-  const [promoError, setPromoError] = useState("");
-
-  const discountAmount = promoApplied ? computeDiscount(total, 0.3) : 0;
-  const finalTotal = total - discountAmount;
 
   function applyPromo() {
-    const result = checkCoupon(promoCode);
-    if (result.valid) {
-      setPromoApplied(true);
-      setPromoError("");
-    } else {
-      setPromoError("Invalid code. Try HASARA30.");
-    }
+    applyCoupon(promoCode);
   }
 
   function goToCheckout() {
@@ -197,15 +197,15 @@ export default function CartDrawer({ open, onClose }: Props) {
                       <input
                         type="text"
                         value={promoCode}
-                        onChange={(e) => { setPromoCode(e.target.value); setPromoError(""); }}
+                        onChange={(e) => setPromoCode(e.target.value)}
                         placeholder="Promo code"
-                        disabled={promoApplied}
+                        disabled={!!appliedCoupon}
                         className="w-full pl-9 pr-3 py-2.5 bg-white/5 border border-champagne-gold/20 rounded-full text-champagne-white text-xs tracking-[0.15em] uppercase font-sans placeholder:text-champagne-white/20 focus:outline-none focus:border-champagne-gold/50 disabled:opacity-50"
                       />
                     </div>
-                    {promoApplied ? (
+                    {appliedCoupon ? (
                       <button
-                        onClick={() => { setPromoApplied(false); setPromoCode(""); }}
+                        onClick={() => { removeCoupon(); setPromoCode(""); }}
                         className="px-4 py-2.5 border border-red-500/40 text-red-400 text-xs tracking-[0.15em] uppercase font-sans hover:bg-red-500/10 transition-colors cursor-pointer rounded-full"
                       >
                         Remove
@@ -219,12 +219,12 @@ export default function CartDrawer({ open, onClose }: Props) {
                       </button>
                     )}
                   </div>
-                  {promoApplied && (
+                  {appliedCoupon && (
                     <p className="font-sans text-green-400 text-xs mt-1.5 flex items-center gap-1.5">
-                      <CheckCircle size={12} weight="fill" /> 30% discount applied!
+                      <CheckCircle size={12} weight="fill" /> {Math.round(appliedCoupon.discountRate * 100)}% discount applied!
                     </p>
                   )}
-                  {promoError && <p className="font-sans text-red-400 text-xs mt-1.5">{promoError}</p>}
+                  {couponError && <p className="font-sans text-red-400 text-xs mt-1.5">{couponError}</p>}
                 </div>
 
                 {/* Totals */}
@@ -233,9 +233,9 @@ export default function CartDrawer({ open, onClose }: Props) {
                     <span>Subtotal</span>
                     <span>৳{total.toLocaleString()}</span>
                   </div>
-                  {promoApplied && (
+                  {appliedCoupon && (
                     <div className="flex justify-between text-green-400">
-                      <span>Discount (30%)</span>
+                      <span>Discount ({Math.round(appliedCoupon.discountRate * 100)}%)</span>
                       <span>-৳{discountAmount.toLocaleString()}</span>
                     </div>
                   )}

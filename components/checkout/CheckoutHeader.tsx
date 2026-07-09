@@ -4,7 +4,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, LockSimple } from "@phosphor-icons/react";
 
-export default function CheckoutHeader() {
+interface Props {
+  onBack?: () => void;
+}
+
+export default function CheckoutHeader({ onBack }: Props) {
   const router = useRouter();
 
   return (
@@ -12,7 +16,7 @@ export default function CheckoutHeader() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
         <div className="flex items-center gap-6">
           <button
-            onClick={() => router.back()}
+            onClick={onBack ?? (() => router.back())}
             aria-label="Go back"
             className="flex items-center gap-2 text-champagne-white/50 hover:text-champagne-gold text-xs tracking-[0.15em] uppercase font-sans transition-colors cursor-pointer"
           >
